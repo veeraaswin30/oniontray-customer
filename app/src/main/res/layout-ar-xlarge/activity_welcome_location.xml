@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/loc_selec_bg_without_logo"
+    android:fillViewport="true"
+    android:orientation="vertical"
+    android:scrollbars="none">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/foodboy_logo"
+                    android:visibility="invisible"
+                    tools:ignore="ContentDescription" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/activity_vertical_margin"
+                    android:gravity="center"
+                    android:text="@string/welcomename"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textColor="@color/white_color" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/activity_vertical_margin"
+                    android:gravity="center"
+                    android:textColor="@color/white_color"
+                    android:text="@string/welcome_text"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                <Button
+                    android:id="@+id/auto_detect"
+                    android:layout_width="match_parent"
+                    android:layout_height="?actionBarSize"
+                    android:layout_margin="@dimen/activity_vertical_margin"
+                    android:background="@drawable/signin_rounded_rectangle"
+                    android:gravity="center"
+                    android:text="@string/auto_detect_btn"
+                    android:textAllCaps="false"
+                    android:textAppearance="?android:textAppearanceLarge"
+                    android:textColor="@android:color/white" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="@string/or"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textColor="@color/white_color" />
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/activity_vertical_margin"
+                    android:padding="1sp">
+
+                    <Button
+                        android:id="@+id/manually_select"
+                        android:layout_width="match_parent"
+                        android:layout_height="?actionBarSize"
+                        android:background="@drawable/select_loc_manu_btn_bg"
+                        android:gravity="center"
+                        android:text="@string/manual_select"
+                        android:textAllCaps="false"
+                        android:textAppearance="?android:textAppearanceLarge"
+                        android:textColor="@color/text_color" />
+
+                </FrameLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</ScrollView>

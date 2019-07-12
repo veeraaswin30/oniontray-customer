@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:layoutDirection="rtl"
+    android:orientation="vertical"
+    android:paddingLeft="@dimen/activity_vertical_margin"
+    android:paddingRight="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/medium_margin"
+    android:paddingTop="@dimen/medium_margin">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:baselineAligned="false">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/inputradiovalue"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/smal_margin"
+                android:gravity="right"
+                android:textAppearance="?android:textAppearanceLarge"
+                android:textColor="@color/dark_txt_color"
+                tools:ignore="RtlHardcoded" />
+
+            <TextView
+                android:id="@+id/inputPersonName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:textAppearance="?android:textAppearanceMedium"
+                android:inputType="textMultiLine"
+                tools:ignore="RtlHardcoded" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginRight="@dimen/smal_margin"
+            android:gravity="center"
+            android:orientation="vertical"
+            tools:ignore="RtlHardcoded">
+
+            <ImageView
+                android:id="@+id/input_add_del"
+                android:layout_width="@dimen/addr_list_recyclebin_btn_size"
+                android:layout_height="@dimen/addr_list_recyclebin_btn_size"
+                android:layout_margin="@dimen/medium_margin"
+                android:src="@drawable/delete_icon"
+                tools:ignore="ContentDescription" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

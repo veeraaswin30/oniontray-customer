@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/base_menu_action_restaurant"
+        android:icon="@drawable/ic_base_menu_resta_selec_ic"
+        android:title="@string/base_menu_retaurants_txt" />
+
+    <item
+        android:id="@+id/base_menu_action_my_cart"
+        android:icon="@drawable/ic_base_menu_my_cart_selec_ic"
+        android:title="@string/base_menu_my_carts_txt"/>
+
+    <item
+        android:id="@+id/base_menu_action_my_order"
+        android:icon="@drawable/ic_base_menu_my_order_selec_ic"
+        android:title="@string/base_menu_my_orders_txt" />
+
+    <item
+        android:id="@+id/base_menu_action_account"
+        android:icon="@drawable/ic_base_menu_account_selec_ic"
+        android:title="@string/base_menu_my_account_txt" />
+
+
+</menu>

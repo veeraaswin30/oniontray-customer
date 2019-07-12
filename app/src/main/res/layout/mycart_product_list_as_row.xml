@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layoutDirection="locale"
+    android:background="@color/white_color"
+    android:orientation="vertical"
+    android:padding="@dimen/large_margin">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/large_margin"
+            android:gravity="center_vertical"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/my_cart_prod_img"
+                android:layout_width="@dimen/my_cart_list_item_row_img_height"
+                android:layout_height="@dimen/my_cart_list_item_row_img_height"
+                android:background="@color/app_background_color"
+                tools:ignore="RtlHardcoded" />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/my_cart_item_prod_name_txt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textDirection="locale"
+                    android:gravity="center_vertical"
+                    android:maxLines="2"
+                    android:ellipsize="end"
+                    android:textColor="@color/dark_txt_color"
+                    tools:ignore="HardcodedText" />
+
+                <TextView
+                    android:id="@+id/my_cart_ingredient_txt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textDirection="locale"
+                    android:gravity="center_vertical"
+                    android:maxLines="2"
+                    android:ellipsize="end"
+                    android:textColor="@color/disable_txt_color"
+                    android:textSize="@dimen/small_txt_appearence_size"
+                    tools:ignore="HardcodedText" />
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/my_cart_item_prod_price_txt"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:textDirection="locale"
+                android:layout_marginLeft="@dimen/medium_margin"
+                android:layout_marginRight="@dimen/medium_margin"
+                android:gravity="center"
+                android:textColor="@color/colorPrimary"
+                tools:ignore="HardcodedText" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="end"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/my_cart_item_decre_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/medium_margin"
+                    android:src="@drawable/ic_reduce_cart"
+                    tools:ignore="ContentDescription,NestedWeights" />
+
+                <TextView
+                    android:id="@+id/my_cart_item_prod_quantity_txt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textDirection="locale"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="@dimen/smal_margin"
+                    android:layout_marginRight="@dimen/smal_margin"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:textColor="@color/disable_txt_color"
+                    tools:ignore="HardcodedText" />
+
+                <ImageView
+                    android:id="@+id/my_cart_item_incre_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/medium_margin"
+                    android:src="@drawable/ic_add_cart"
+                    tools:ignore="ContentDescription" />
+
+            </LinearLayout>
+
+            <!--<ImageView-->
+            <!--android:id="@+id/my_cart_item_delete_btn"-->
+            <!--android:layout_marginLeft="@dimen/medium_margin"-->
+            <!--android:layout_width="15dp"-->
+            <!--android:layout_height="15dp"-->
+            <!--android:visibility="gone"-->
+            <!--android:src="@drawable/delete_icon"-->
+            <!--tools:ignore="RtlHardcoded" />-->
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

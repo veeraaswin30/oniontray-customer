@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layoutDirection="locale"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/app_background_color"
+    android:orientation="vertical">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/send_feed_back_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@android:color/white"
+        app:popupTheme="@style/AppTheme.PopupOverlay">
+
+        <TextView
+            android:id="@+id/feed_back_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textDirection="locale"
+            android:layout_gravity="center"
+            android:text="@string/send_feed_back_tit"
+            android:textAppearance="?android:textAppearanceMedium"
+            android:textColor="@color/colorPrimary" />
+
+    </androidx.appcompat.widget.Toolbar>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/home_store_list_item_devider_height"
+        android:background="@color/white_color"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/send_feed_name_txt_input_lay"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/big_margin"
+                android:textColor="@color/dark_txt_color"
+                app:errorTextAppearance="@style/error_appearance">
+
+                <EditText
+                    android:id="@+id/send_feed_name_edt_txt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textDirection="locale"
+                    android:digits="0123456789qwertyuiopasdfghjklzxcvbnm"
+                    android:hint="@string/send_feed_name_txt"
+                    android:inputType="textPersonName"
+                    android:maxLines="1"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:textColor="@color/dark_txt_color" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <Spinner
+                android:id="@+id/spinner"
+                android:layout_width="wrap_content"
+                android:layout_height="41dp"
+                android:background="@drawable/edit_box_drop_selector"
+                android:dropDownWidth="200dp" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/send_feed_mobile_txt_input_lay"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/big_margin"
+                android:textColor="@color/dark_txt_color"
+                app:errorTextAppearance="@style/error_appearance">
+
+                <EditText
+                    android:id="@+id/send_feed_mobile_edt_txt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textDirection="locale"
+                    android:hint="@string/send_feed_mobile_txt"
+                    android:inputType="phone"
+                    android:maxLines="1"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:textColor="@color/dark_txt_color" />
+
+                <!--android:digits="0123456789qwertyuiopasdfghjklzxcvbnm"-->
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            </LinearLayout>
+
+
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/send_feed_email_txt_input_lay"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/big_margin"
+                android:textColor="@color/dark_txt_color"
+                app:errorTextAppearance="@style/error_appearance">
+
+                <EditText
+                    android:id="@+id/send_feed_email_edt_txt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textDirection="locale"
+                    android:hint="@string/send_feed_email_txt"
+                    android:inputType="textEmailAddress"
+                    android:maxLines="1"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:textColor="@color/dark_txt_color" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <Spinner
+                android:id="@+id/send_feed_city_spinner"
+                android:layout_width="match_parent"
+                android:layout_height="?actionBarSize"
+                android:spinnerMode="dropdown"
+                android:layout_margin="@dimen/big_margin"
+                android:theme="@style/ThemeSpinner" />
+
+            <Spinner
+                android:id="@+id/send_feed_enquiry_type_spinner"
+                android:layout_width="match_parent"
+                android:layout_height="?actionBarSize"
+                android:spinnerMode="dropdown"
+                android:layout_margin="@dimen/big_margin"
+                android:theme="@style/ThemeSpinner" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/send_feed_description_txt_input_lay"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/big_margin"
+                android:textColor="@color/dark_txt_color"
+                app:errorTextAppearance="@style/error_appearance">
+
+                <EditText
+                    android:id="@+id/send_feed_description_edt_txt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textDirection="locale"
+                    android:minHeight="100dp"
+                    android:hint="@string/send_feed_description_txt"
+                    android:inputType="textImeMultiLine"
+                    android:maxLines="1"
+                    android:gravity="left|top"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:textColor="@color/dark_txt_color" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <Button
+                android:id="@+id/send_feed_send_btn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/big_margin"
+                android:textAllCaps="false"
+                android:background="@drawable/signin_rounded_rectangle"
+                android:text="@string/send_feed_send_btn_txt"
+                android:textColor="@android:color/white"/>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>

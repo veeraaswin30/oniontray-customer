@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layoutDirection="locale"
+    android:orientation="horizontal">
+
+    <TextView
+        android:id="@+id/my_cart_decrease"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textDirection="locale"
+        android:background="@drawable/left_my_cart"
+        android:paddingBottom="@dimen/smal_margin"
+        android:paddingEnd="@dimen/activity_vertical_margin"
+        android:paddingStart="@dimen/activity_vertical_margin"
+        android:paddingTop="@dimen/smal_margin"
+        android:text="-"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="@color/colorPrimary" />
+
+    <TextView
+        android:id="@+id/my_cart_quantity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textDirection="locale"
+        android:background="@drawable/center_my_cart"
+        android:paddingBottom="@dimen/smal_margin"
+        android:paddingEnd="@dimen/big_margin"
+        android:paddingStart="@dimen/big_margin"
+        android:paddingTop="@dimen/smal_margin"
+        android:text="0"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="@android:color/white" />
+
+    <TextView
+        android:id="@+id/my_cart_increase"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textDirection="locale"
+        android:background="@drawable/right_my_cart"
+        android:paddingBottom="@dimen/smal_margin"
+        android:paddingEnd="@dimen/activity_vertical_margin"
+        android:paddingStart="@dimen/activity_vertical_margin"
+        android:paddingTop="@dimen/smal_margin"
+        android:text="+"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="@color/colorPrimary" />
+
+
+</LinearLayout>

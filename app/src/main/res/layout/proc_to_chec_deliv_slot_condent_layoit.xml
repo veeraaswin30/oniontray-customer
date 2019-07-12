@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layoutDirection="locale"
+    android:background="@color/app_background_color"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/pro_to_check_line_height"
+        android:layout_marginLeft="@dimen/pro_to_check_line_height"
+        android:layout_marginRight="@dimen/pro_to_check_line_height"
+        android:background="@color/white_color"
+        android:gravity="center_vertical"
+        android:orientation="vertical">
+
+        <com.app.oniontray.CustomViews.ExpandableHeightListView
+            android:id="@+id/pro_expand_deli_slot_list_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white_color"
+            android:dividerHeight="@dimen/pro_to_check_line_height">
+
+        </com.app.oniontray.CustomViews.ExpandableHeightListView>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/proc_to_check_recy_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/app_background_color">
+
+        </androidx.recyclerview.widget.RecyclerView>
+
+    </LinearLayout>
+
+</LinearLayout>

@@ -1,0 +1,397 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/app_background_color"
+    android:orientation="vertical">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/order_confirmation_toolbar_id"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/home_mediam_line_height"
+        android:background="@color/white_color"
+        android:elevation="0dp"
+        android:paddingTop="@dimen/tool_bar_top_padding"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        app:theme="@style/ToolbarColoredBackArrow"
+        app:titleTextAppearance="?android:textAppearanceLarge"
+        tools:ignore="UnusedAttribute">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/nav_my_orders_conf"
+            android:textAppearance="?android:textAppearanceLarge"
+            android:textColor="@color/colorPrimary" />
+
+    </androidx.appcompat.widget.Toolbar>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/ord_confirm_line_height"
+                android:background="@color/white_color"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="@dimen/activity_vertical_margin">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/big_margin"
+                        android:gravity="center"
+                        android:text="@string/ord_confi_thank_you_txt"
+                        android:textAppearance="?android:textAppearanceLarge"
+                        android:textColor="@color/colorAccent" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="@string/ord_confi_orde_rec_success_txt"
+                        android:textAppearance="?android:textAppearanceLarge" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white_color"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/big_margin"
+                    android:gravity="center"
+                    android:text="@string/ord_confi_orde_summ_txt"
+                    android:textColor="@color/dark_txt_color"
+                    android:textSize="@dimen/large_txt_appearence_size" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/ord_confirm_line_height"
+                    android:background="@color/colorPrimaryDark" />
+
+            </LinearLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/ord_conf_prod_list_recy_view"
+                android:nestedScrollingEnabled="false"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/ord_confirm_line_height"
+                android:baselineAligned="false"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@color/white_color"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/medium_margin"
+                        android:gravity="center"
+                        android:text="@string/ord_confi_sub_total_txt"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:textColor="@color/light_grey_color" />
+
+                    <TextView
+                        android:id="@+id/order_conf_sub_tot"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/smal_margin"
+                        android:gravity="center"
+                        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/service_tax_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="@dimen/ord_confirm_line_height"
+                    android:layout_weight="1"
+                    android:background="@color/white_color"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/service_tax_label"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/medium_margin"
+                        android:gravity="center"
+                        android:text="@string/ord_confi_average_vat_txt"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:textColor="@color/light_grey_color" />
+
+                    <TextView
+                        android:id="@+id/order_conf_tax_tot"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/smal_margin"
+                        android:gravity="center"
+                        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/order_conf_deliv_charge_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="@dimen/ord_confirm_line_height"
+                    android:layout_weight="1"
+                    android:background="@color/white_color"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    tools:ignore="RtlHardcoded">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/small_margin"
+                        android:gravity="center"
+                        android:text="@string/ord_confi_deli_charges_txt"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:textColor="@color/light_grey_color" />
+
+                    <TextView
+                        android:id="@+id/order_conf_del_charge"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/smal_margin"
+                        android:gravity="center"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:textColor="@color/colorPrimary" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="@dimen/ord_confirm_line_height"
+                    android:layout_weight="1"
+                    android:background="@color/white_color"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    tools:ignore="RtlHardcoded">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/small_margin"
+                        android:gravity="center"
+                        android:text="@string/ord_confi_total_txt"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:textColor="@color/light_grey_color" />
+
+                    <TextView
+                        android:id="@+id/order_conf_tot"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/smal_margin"
+                        android:gravity="center"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:textColor="@color/colorPrimary" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white_color"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/big_margin"
+                    android:gravity="center"
+                    android:text="@string/ord_confi_deli_details_txt"
+                    android:textColor="@color/dark_txt_color"
+                    android:textSize="@dimen/large_txt_appearence_size" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/ord_confirm_line_height"
+                    android:background="@color/colorPrimaryDark" />
+
+            </LinearLayout>
+
+            <TableLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white_color"
+                android:padding="@dimen/activity_vertical_margin_mobile">
+
+                <TableRow
+                    android:id="@+id/order_conf_promo_code_table_row_lay"
+                    android:visibility="gone">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textAppearance="?android:textAppearanceMedium"
+                        android:text="@string/my_ord_det_promo_code_disc_txt" />
+
+                    <TextView
+                        android:id="@+id/order_conf_promo_code_txt"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:singleLine="false"
+                        android:textAppearance="?android:textAppearanceMedium"
+                        android:textColor="@color/colorPrimary" />
+
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="wrap_content"
+                    android:layout_marginTop="@dimen/big_margin">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textAppearance="?android:textAppearanceMedium"
+                        android:text="@string/ord_confi_pay_type_txt" />
+
+                    <TextView
+                        android:id="@+id/order_conf_delivery_pay_type"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textAppearance="?android:textAppearanceMedium"
+                        android:singleLine="false" />
+
+                </TableRow>
+
+
+                <TableRow
+                    android:id="@+id/order_conf_deliv_date_table_lay"
+                    android:layout_marginTop="@dimen/big_margin"
+                    android:visibility="gone">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textAppearance="?android:textAppearanceMedium"
+                        android:text="@string/my_ord_det_deli_date_txt" />
+
+                    <TextView
+                        android:id="@+id/order_conf_deliv_date_txt"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textAppearance="?android:textAppearanceMedium"
+                        android:singleLine="false" />
+
+                </TableRow>
+
+                <TableRow
+                    android:id="@+id/order_conf_deliv_slot_table_lay"
+                    android:layout_marginTop="@dimen/big_margin"
+                    android:visibility="gone">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textAppearance="?android:textAppearanceMedium"
+                        android:text="@string/ord_confi_deli_slot_txt" />
+
+                    <TextView
+                        android:id="@+id/order_conf_delivery_slot_time"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textAppearance="?android:textAppearanceMedium"
+                        android:singleLine="false" />
+
+                </TableRow>
+
+                <TableRow android:layout_marginTop="@dimen/big_margin">
+
+                    <TextView
+                        android:id="@+id/ord_conf_add_holder_txt_view"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textAppearance="?android:textAppearanceMedium"
+                        android:text="@string/ord_confi_deliv_addd_txt" />
+
+                    <TextView
+                        android:id="@+id/order_conf_del_contact_ad"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textAppearance="?android:textAppearanceMedium"
+                        android:singleLine="false" />
+
+                </TableRow>
+
+                <TableRow
+                    android:id="@+id/ord_conf_deliv_inst_table_lay"
+                    android:layout_marginTop="@dimen/big_margin">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textAppearance="?android:textAppearanceMedium"
+                        android:text="@string/ord_confi_deli_instu_txt" />
+
+                    <TextView
+                        android:id="@+id/order_conf_delivery_inst"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textAppearance="?android:textAppearanceMedium"
+                        android:singleLine="false"
+                        android:textColor="@color/disable_txt_color" />
+
+                </TableRow>
+
+            </TableLayout>
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</LinearLayout>

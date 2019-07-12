@@ -1,0 +1,325 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layoutDirection="locale"
+    android:background="@color/app_background_color"
+    android:orientation="vertical">
+
+    <androidx.appcompat.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/store_filter_tool_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white_color"
+        android:elevation="0dp"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        app:theme="@style/ToolbarColoredBackArrow"
+        app:titleTextAppearance="?android:textAppearanceMedium"
+        tools:ignore="UnusedAttribute">
+
+        <!--android:layout_marginBottom="@dimen/home_mediam_line_height"-->
+
+        <TextView
+            android:id="@+id/filter_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textDirection="locale"
+            android:text="@string/filter_page_name_txt"
+            android:textAppearance="?android:textAppearanceMedium"
+            android:textColor="@color/colorPrimary" />
+
+    </androidx.appcompat.widget.Toolbar>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@color/app_background_color"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/white_color"
+                android:orientation="vertical">
+
+                <!--android:layout_marginBottom="@dimen/filter_line_height"-->
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textDirection="locale"
+                    android:background="@color/app_background_color"
+                    android:padding="@dimen/big_margin"
+                    android:text="@string/filter_sort_by_txt"
+                    android:textColor="@color/dark_txt_color"
+                    android:textSize="@dimen/medium_txt_appearence_size" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="@dimen/small_margin">
+
+                    <!--<CheckBox-->
+                    <!--android:id="@+id/store_filter_relev_check_box"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="match_parent"-->
+                    <!--android:button="@android:color/transparent"-->
+                    <!--android:drawableTop="@drawable/filter_relevance_custom_check_box"-->
+                    <!--android:textColor="@drawable/filter_relevance_custom_check_box"-->
+                    <!--android:gravity="center"-->
+                    <!--android:text="@string/filter_relev_txt"-->
+                    <!--android:theme="@style/MyRadioButton"-->
+                    <!--tools:ignore="RtlHardcoded" />-->
+
+                    <RadioGroup
+                        android:id="@+id/store_filter_rat_deli_time_radio_group"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <RadioButton
+                            android:id="@+id/store_filter_recommended_radio_btn"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:button="@android:color/transparent"
+                            android:checked="true"
+                            android:drawableTop="@drawable/filter_recommended_custom_radio_btn"
+                            android:gravity="center_horizontal"
+                            android:text="@string/filter_relev_txt"
+                            android:textColor="@drawable/filter_recommended_custom_radio_btn"
+                            android:theme="@style/MyRadioButton"
+                            tools:ignore="RtlHardcoded" />
+
+                        <RadioButton
+                            android:id="@+id/store_filter_rating_radio_btn"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:button="@android:color/transparent"
+                            android:drawableTop="@drawable/filter_rating_custom_radio_btn"
+                            android:gravity="center_horizontal"
+                            android:text="@string/filter_ratting_txt"
+                            android:textColor="@drawable/filter_rating_custom_radio_btn"
+                            android:theme="@style/MyRadioButton"
+                            tools:ignore="RtlHardcoded" />
+
+                        <RadioButton
+                            android:id="@+id/store_filter_deli_time_radio_btn"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:button="@android:color/transparent"
+                            android:drawableTop="@drawable/filter_deliv_time_custom_radio_btn"
+                            android:gravity="center_horizontal"
+                            android:text="@string/filter_deliver_pick_up_time_txt"
+                            android:textColor="@drawable/filter_deliv_time_custom_radio_btn"
+                            android:theme="@style/MyRadioButton"
+                            tools:ignore="RtlHardcoded" />
+
+                        <RadioButton
+                            android:id="@+id/store_filter_deli_prize_radio_btn"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:button="@android:color/transparent"
+                            android:drawableTop="@drawable/filter_deliv_prize_custom_radio_btn"
+                            android:gravity="center_horizontal"
+                            android:text="@string/filter_deliver_min_ord_txt"
+                            android:textColor="@drawable/filter_deliv_prize_custom_radio_btn"
+                            android:theme="@style/MyRadioButton"
+                            tools:ignore="RtlHardcoded" />
+
+                    </RadioGroup>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white_color"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <!--android:layout_marginBottom="@dimen/filter_line_height"-->
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textDirection="locale"
+                    android:layout_marginBottom="@dimen/small_margin"
+                    android:background="@color/app_background_color"
+                    android:padding="@dimen/big_margin"
+                    android:text="@string/filter_pay_method_txt"
+                    android:textColor="@color/dark_txt_color"
+                    android:textSize="@dimen/medium_txt_appearence_size" />
+
+
+                <RadioGroup
+                    android:id="@+id/store_filter_pay_method_radio_group"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginEnd="@dimen/activity_horizontal_margin"
+                    android:layout_marginStart="@dimen/activity_horizontal_margin"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        android:id="@+id/store_filter_pay_meth_all_radio_btn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/lowest_margi"
+                        android:button="@android:color/transparent"
+                        android:checked="true"
+                        android:drawableTop="@drawable/filter_payment_all_radio_btn"
+                        android:gravity="center"
+                        android:text="@string/filter_all_txt"
+                        android:textColor="@drawable/filter_payment_all_radio_btn"
+                        android:theme="@style/MyRadioButton"
+                        tools:ignore="RtlHardcoded" />
+
+                    <RadioButton
+                        android:id="@+id/store_filter_pay_meth_cash_radio_btn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/lowest_margi"
+                        android:button="@android:color/transparent"
+                        android:drawableTop="@drawable/filter_payment_cash_radio_btn"
+                        android:gravity="center"
+                        android:text="@string/filter_cash_txt"
+                        android:textColor="@drawable/filter_payment_cash_radio_btn"
+                        android:theme="@style/MyRadioButton"
+                        tools:ignore="RtlHardcoded" />
+
+                    <RadioButton
+                        android:id="@+id/store_filter_pay_meth_card_radio_btn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/lowest_margi"
+                        android:button="@android:color/transparent"
+                        android:drawableTop="@drawable/filter_payment_cart_radio_btn"
+                        android:gravity="center"
+                        android:text="@string/filter_card_txt"
+                        android:textColor="@drawable/filter_payment_cart_radio_btn"
+                        android:theme="@style/MyRadioButton"
+                        tools:ignore="RtlHardcoded" />
+
+                </RadioGroup>
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white_color"
+                android:orientation="vertical">
+
+                <!--android:layout_marginBottom="@dimen/filter_line_height"-->
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textDirection="locale"
+                    android:layout_marginBottom="@dimen/small_margin"
+                    android:background="@color/app_background_color"
+                    android:padding="@dimen/big_margin"
+                    android:text="@string/filter_prize_filter_by_txt"
+                    android:textColor="@color/dark_txt_color"
+                    android:textSize="@dimen/medium_txt_appearence_size" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textDirection="locale"
+                    android:layout_marginBottom="@dimen/small_margin"
+                    android:padding="@dimen/small_txt_appearence_size"
+                    android:text="@string/filter_by_category"
+                    android:textColor="@color/dark_txt_color"
+                    android:textSize="@dimen/medium_txt_appearence_size"
+                    android:visibility="gone" />
+
+                <!--android:layout_margin="@dimen/small_margin"-->
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/filter_by_category_recycler_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/app_background_color"
+                    android:nestedScrollingEnabled="false" />
+
+                <!--android:paddingTop="@dimen/filter_line_height"-->
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white_color"
+                android:orientation="vertical">
+
+                <!--android:layout_marginBottom="@dimen/filter_line_height"-->
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textDirection="locale"
+                    android:layout_marginBottom="@dimen/small_margin"
+                    android:background="@color/app_background_color"
+                    android:padding="@dimen/big_margin"
+                    android:text="@string/filter_cuisines_filter_txt"
+                    android:textColor="@color/dark_txt_color"
+                    android:textSize="@dimen/medium_txt_appearence_size" />
+
+                <!--android:layout_margin="@dimen/small_margin"-->
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/cuisines_filter_recycler_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/app_background_color"
+                    android:nestedScrollingEnabled="false" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+    <LinearLayout
+        android:id="@+id/show_restaurant"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/colorAccent"
+        android:gravity="center">
+
+        <TextView
+            android:id="@+id/store_filter_done_txt_view_txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textDirection="locale"
+            android:drawablePadding="@dimen/medium_margin"
+            android:gravity="center"
+            android:text="@string/show_restaurents_txt"
+            android:textAllCaps="false"
+            android:textColor="@color/white_color"
+            android:textSize="@dimen/large_txt_appearence_size" />
+
+    </LinearLayout>
+
+
+</LinearLayout>

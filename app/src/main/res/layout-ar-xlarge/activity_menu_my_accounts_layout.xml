@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/app_background_color"
+    android:orientation="vertical">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/menu_accounts_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/home_mediam_line_height"
+        android:background="@android:color/white"
+        android:elevation="0dp"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        app:theme="@style/RestaToolbarColoredBackArrow"
+        app:titleTextAppearance="?android:textAppearanceMedium">
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/my_account"
+            android:textAppearance="?android:textAppearanceLarge"
+            android:textColor="@color/colorPrimary" />
+
+    </androidx.appcompat.widget.Toolbar>
+
+    <LinearLayout
+        android:id="@+id/user_details_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/medium_margin"
+        android:background="@color/white_color"
+        android:orientation="vertical"
+        android:padding="@dimen/activity_vertical_margin">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/my_accounts_name_txt_view"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="right"
+                android:textColor="@color/dark_txt_color"
+                android:textSize="@dimen/large_txt_appearence_size" />
+
+            <ImageView
+                android:id="@+id/my_accounts_edit_profile_btn"
+                android:layout_width="@dimen/addr_list_recyclebin_btn_size"
+                android:layout_height="@dimen/addr_list_recyclebin_btn_size"
+                android:src="@drawable/ic_my_accounts_edit_prof_ic" />
+            <com.sdsmdg.harjot.vectormaster.VectorMasterView
+                android:id="@+id/my_accounts_edit_profile_btnn"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                app:vector_src="@drawable/ic_my_accounts_edit_prof_ic" />
+
+
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/my_accounts_email_txt_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/smal_margin"
+            android:layout_marginTop="@dimen/smal_margin"
+            android:gravity="right"
+            android:textColor="@color/disable_txt_color"
+            android:textSize="@dimen/large_txt_appearence_size" />
+
+        <TextView
+            android:id="@+id/my_accounts_phone_no_txt_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/dark_txt_color"
+            android:textDirection="anyRtl"
+            android:gravity="right"
+            android:textSize="@dimen/large_txt_appearence_size" />
+
+    </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/my_account_recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="bottom">
+
+        <Button
+            android:id="@+id/account_login_btn"
+            android:layout_width="match_parent"
+            android:layout_height="?actionBarSize"
+            android:layout_margin="@dimen/activity_horizontal_margin"
+            android:layout_marginBottom="@dimen/activity_horizontal_margin"
+            android:background="@drawable/signin_rounded_rectangle"
+            android:elevation="0dp"
+            android:text="@string/log_in"
+            android:textAllCaps="false"
+            android:textAppearance="?android:textAppearanceLarge"
+            android:textColor="@android:color/white" />
+    </LinearLayout>
+
+
+</LinearLayout>

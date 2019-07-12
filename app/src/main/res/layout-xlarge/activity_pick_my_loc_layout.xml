@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/app_background_color"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:paddingLeft="@dimen/activity_vertical_margin"
+        android:paddingRight="@dimen/activity_vertical_margin"
+        android:background="@color/white_color"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/home_search_back_img"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_action_bar_en_back_ic"
+            android:layout_marginRight="@dimen/activity_vertical_margin"/>
+
+        <TextView
+            android:id="@+id/ic_pic_my_loc_search_edt_txt_view"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="@drawable/store_list_search_view_bg"
+            android:drawablePadding="@dimen/smal_margin"
+            android:drawableStart="@drawable/places_ic_search"
+            android:gravity="center_vertical"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:layout_marginEnd="@dimen/activity_vertical_margin"
+            android:textSize="@dimen/medium_txt_appearence_size"
+            android:hint="@string/pic_my_loc_search_txt_hint"
+            android:textColor="@color/disable_txt_color" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_marginTop="@dimen/ho_search_divider_line_size">
+
+        <TextView
+            android:id="@+id/pick_my_loc_use_my_loca_txt_view"
+            android:layout_width="match_parent"
+            android:layout_height="?actionBarSize"
+            android:drawableLeft="@drawable/ic_pic_my_loc_red_ic"
+            android:drawablePadding="@dimen/big_margin"
+            android:padding="@dimen/big_margin"
+            android:gravity="center|start"
+            android:background="@color/white_color"
+            android:textSize="@dimen/medium_txt_appearence_size"
+            android:textAppearance="?android:textAppearanceLarge"
+            android:text="@string/pic_my_curr_loc_txt"
+            android:textColor="@color/colorAccent"
+            tools:ignore="RtlHardcoded" />
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginTop="@dimen/ho_search_divider_line_size">
+
+            <LinearLayout
+                android:id="@+id/pic_my_loc_saved_addr_root_layout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:text="@string/pic_my_loc_saved_address_txt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:textAppearanceLarge"
+                    android:padding="@dimen/big_margin"/>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/pick_my_loc_saved_addre_recycler_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"/>
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/saved_address_emty_txt_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:visibility="gone"
+                android:textAppearance="?android:textAppearanceLarge"
+                android:background="@color/white_color"
+                android:text="@string/pic_my_loc_no_saved_add_found_txt"
+                android:textColor="@color/disable_txt_color"/>
+
+        </FrameLayout>
+
+        <Button
+            android:id="@+id/pic_my_loc_change_country_btn"
+            android:layout_width="match_parent"
+            android:layout_height="?actionBarSize"
+            android:textAllCaps="false"
+            android:background="@color/app_color"
+            android:textColor="@color/white_color"
+            android:textAppearance="?android:textAppearanceLarge"
+            android:text="@string/pic_my_loc_change_area_btn_txt"/>
+
+    </LinearLayout>
+
+
+
+
+</LinearLayout>

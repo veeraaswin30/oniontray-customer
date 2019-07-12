@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:background="@color/white_color"
+    android:paddingLeft="@dimen/small_txt_appearence_size"
+    android:paddingRight="@dimen/small_txt_appearence_size"
+    android:layout_marginTop="@dimen/big_margin">
+
+    <TextView
+        android:id="@+id/sto_info_take_way_hint_txt_view"
+        android:layout_width="0dp"
+        android:textAppearance="?android:textAppearanceLarge"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.5" />
+
+    <TextView
+        android:id="@+id/sto_info_take_way_value_txt_view"
+        android:layout_width="0dp"
+        android:textAppearance="?android:textAppearanceLarge"
+        android:layout_height="wrap_content"
+        android:layout_weight="1" />
+
+</LinearLayout>

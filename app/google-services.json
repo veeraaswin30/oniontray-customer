@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "19768710785",
+    "firebase_url": "https://oniontray-1562827300919.firebaseio.com",
+    "project_id": "oniontray-1562827300919",
+    "storage_bucket": "oniontray-1562827300919.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:19768710785:android:eeb7eb470d90b153",
+        "android_client_info": {
+          "package_name": "com.app.oniontray"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "19768710785-443v6v3994dqjroqhk4gnngitflums6d.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAzEJdu-e3Ej2zHIk_u-AZysc3uFOrp0_k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "19768710785-443v6v3994dqjroqhk4gnngitflums6d.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layoutDirection="locale"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white_color"
+        android:layout_marginBottom="@dimen/pro_to_check_line_height"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        tools:ignore="UselessParent">
+
+        <TextView
+            android:id="@+id/proc_to_chec_exp_row_item_date_txt"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textDirection="locale"
+            android:singleLine="true"
+            android:gravity="center"
+            android:layout_weight="1"
+            android:layout_marginBottom="@dimen/small_margin"
+            android:layout_marginTop="@dimen/small_margin"
+            android:textAppearance="?android:textAppearanceSmall"
+            android:textColor="@color/disable_txt_color"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/big_margin"
+            android:src="@drawable/ic_home_right_arrow_ic"/>
+
+    </LinearLayout>
+
+</LinearLayout>

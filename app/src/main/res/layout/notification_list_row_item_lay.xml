@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layoutDirection="locale"
+    android:background="@android:color/white"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/small_margin"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/notf_image"
+            android:layout_width="@dimen/notifi_list_row_img_size"
+            android:layout_height="@dimen/notifi_list_row_img_size"
+            android:layout_marginRight="@dimen/small_margin"
+            tools:ignore="RtlHardcoded" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="top"
+            android:layout_gravity="top"
+            android:orientation="horizontal"
+            android:baselineAligned="false">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/notf_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textDirection="locale"
+                    android:ellipsize="end"
+                    android:maxLines="2"
+                    android:textColor="@android:color/secondary_text_light" />
+
+                <TextView
+                    android:id="@+id/notf_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textDirection="locale"
+                    android:layout_below="@id/notf_title"
+                    android:layout_toRightOf="@id/notf_image"
+                    android:ellipsize="end"
+                    android:singleLine="true"
+                    android:textColor="@color/colorPrimary"
+                    android:textStyle="italic"
+                    tools:ignore="RtlHardcoded" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:visibility="gone"
+                android:layout_marginLeft="@dimen/small_margin"
+                android:orientation="vertical"
+                tools:ignore="RtlHardcoded">
+
+                <ImageView
+                    android:id="@+id/notifi_row_del_btn"
+                    android:layout_margin="@dimen/activity_vertical_margin"
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:src="@drawable/delete_icon" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

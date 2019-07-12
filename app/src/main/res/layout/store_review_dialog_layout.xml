@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layoutDirection="locale"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:padding="@dimen/small_margin"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textDirection="locale"
+        android:layout_margin="@dimen/big_margin"
+        android:gravity="center"
+        android:padding="@dimen/big_margin"
+        android:text="@string/sto_review_dialog_tit_txt"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="@color/dark_txt_color" />
+
+    <RatingBar
+        android:id="@+id/sto_review_dial_rating_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:numStars="5"
+        android:theme="@style/RatingBarBig" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/my_ord_det_update_comm_txt_in_lay"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/large_margin"
+        android:textColor="@android:color/white"
+        app:errorTextAppearance="@style/error_appearance">
+
+    <EditText
+        android:id="@+id/sto_review_dial_comm_edt_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textDirection="locale"
+        android:layout_marginBottom="@dimen/activity_vertical_margin"
+        android:gravity="top|left"
+        android:hint="@string/sto_reivew_comments_hint_txt"
+        android:minHeight="@dimen/my_order_det_update_comm_edt_txt_height"
+        android:padding="@dimen/big_margin"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textColor="@color/dark_txt_color"
+        tools:ignore="RtlHardcoded" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <Button
+        android:id="@+id/sto_rew_dial_done_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        android:text="@string/sto_review_done_btn_txt"
+        android:textAllCaps="false"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="@android:color/white" />
+
+</LinearLayout>

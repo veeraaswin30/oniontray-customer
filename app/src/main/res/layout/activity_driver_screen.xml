@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layoutDirection="locale"
+    android:layout_margin="@dimen/activity_vertical_margin"
+    android:background="@color/app_background_color"
+    android:orientation="vertical">
+
+    <!--<LinearLayout-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:orientation="vertical">-->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize"
+        android:background="@color/white_color"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/signin_verify_layout_tit_txt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textDirection="locale"
+            android:gravity="center"
+            android:text="@string/sign_in_verify_message_txt"
+            android:textAppearance="?android:textAppearanceMedium" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/ho_search_divider_line_size"
+        android:background="@color/white_color"
+        android:orientation="vertical"
+        android:padding="@dimen/activity_vertical_margin">
+
+        <TextView
+            android:id="@+id/signin_verify_error_msg_txt_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textDirection="locale"
+            android:gravity="center"
+            android:text="@string/order_delivered"
+            android:textAppearance="?android:textAppearanceSmall" />
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white_color"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/btn_ok"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/signin_rounded_rectangle"
+            android:text="@string/sign_in_verify_send_btn"
+            android:textAppearance="?android:textAppearanceLarge"
+            android:textColor="@color/white_color" />
+
+    </LinearLayout>
+
+    <!--</LinearLayout>-->
+
+
+</LinearLayout>

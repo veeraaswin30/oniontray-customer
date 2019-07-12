@@ -1,0 +1,610 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/app_background_color"
+    android:orientation="vertical">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/order_details_toolber"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/white_color"
+        android:elevation="0dp"
+        app:popupTheme="@style/AppTheme.PopupOverlay">
+
+        <TextView
+            android:id="@+id/vender_title_txt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="64dp"
+            android:gravity="center"
+            android:text="@string/nav_my_orders_txt"
+            android:textAppearance="?android:textAppearanceLarge"
+            android:textColor="@color/colorPrimary" />
+
+    </androidx.appcompat.widget.Toolbar>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="2dp"
+        android:layout_weight="1"
+        android:background="@android:color/white"
+        android:fillViewport="true"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@android:color/white"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/order_details_line_height"
+                android:orientation="horizontal"
+                android:visibility="gone">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"
+                    android:background="@drawable/layout_bottom_divider_xml_bg"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:padding="@dimen/medium_margin">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:srcCompat="@drawable/ic_pinl_color_bag_ic"
+                        tools:ignore="ContentDescription" />
+
+                    <TextView
+                        android:id="@+id/my_ord_details_bag_tit_txt_view"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/layout_bottom_divider_xml_bg"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:padding="@dimen/medium_margin">
+
+                    <LinearLayout
+                        android:layout_width="@dimen/my_order_list_row_img_width"
+                        android:layout_height="wrap_content"
+                        android:gravity="top|center_horizontal"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:id="@+id/my_ord_det_img_view"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/my_order_row_img_height"
+                            android:src="@color/app_background_color"
+                            tools:ignore="ContentDescription" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="@dimen/medium_margin"
+                        android:orientation="vertical"
+                        tools:ignore="RtlHardcoded">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginBottom="@dimen/item_offset"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:id="@+id/my_order_det_row_tit_txt_view"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginRight="@dimen/smal_margin"
+                                    android:layout_weight="1"
+                                    android:ellipsize="end"
+                                    android:maxLines="1"
+                                    android:gravity="right"
+                                    android:textAppearance="?android:attr/textAppearanceMedium"
+                                    android:textColor="@color/dark_txt_color"
+                                    tools:ignore="RtlHardcoded" />
+
+                                <TextView
+                                    android:id="@+id/my_ord_det_row_process_txt_view"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textAppearance="?android:attr/textAppearanceMedium"
+                                    android:textColor="@color/my_order_status_color_code" />
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                        <TextView
+                            android:id="@+id/my_ord_det_row_store_name_txt_view"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="@dimen/cardview_shadow_size"
+                            android:maxLines="1"
+                            android:gravity="right"
+                            android:textAppearance="?android:attr/textAppearanceMedium"
+                            android:textColor="@color/dark_txt_color" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginBottom="@dimen/smal_margin"
+                            android:orientation="horizontal">
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginBottom="@dimen/item_offset"
+                                    android:text="@string/orderd_on_txt"
+                                    android:gravity="right"
+                                    android:textColor="@color/disable_txt_color"
+                                    android:textSize="@dimen/medium_txt_appearence_size" />
+
+                                <TextView
+                                    android:id="@+id/my_ord_det_ord_on_txt_view"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:maxLines="1"
+                                    android:gravity="right"
+                                    android:textColor="@color/disable_txt_color"
+                                    android:textSize="@dimen/medium_txt_appearence_size" />
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="@drawable/layout_bott_pink_div_xml"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:textAppearance="?android:textAppearanceLarge"
+                    android:text="@string/my_ord_det_order_summary"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+            <com.app.oniontray.CustomViews.ExpandableHeightListView
+                android:id="@+id/order_sum_list"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/white" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/ord_details_recycler_view"
+                android:background="@color/app_background_color"
+                android:nestedScrollingEnabled="false"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/layout_top_bott_divider_xml_bg"
+                android:baselineAligned="false"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/layout_right_divider_xml_bg"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/small_margin"
+                        android:layout_marginTop="@dimen/small_margin"
+                        android:gravity="center"
+                        android:text="@string/my_ord_det_sub_total_txt"
+                        android:textColor="@color/light_grey_color"
+                        android:textSize="@dimen/medium_txt_appearence_size" />
+
+                    <TextView
+                        android:id="@+id/my_ord_det_sub_total_txt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/small_margin"
+                        android:gravity="center"
+                        android:textSize="@dimen/medium_txt_appearence_size" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/ord_det_service_tax_lay"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/layout_right_divider_xml_bg"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/ord_det_service_tax_lable_view"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/small_margin"
+                        android:layout_marginTop="@dimen/small_margin"
+                        android:gravity="center"
+                        android:text="@string/my_ord_det_service_tax_txt"
+                        android:textColor="@color/light_grey_color"
+                        android:textSize="@dimen/medium_txt_appearence_size" />
+
+                    <TextView
+                        android:id="@+id/my_ord_det_ser_tax_txt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/small_margin"
+                        android:gravity="center"
+                        android:textSize="@dimen/medium_txt_appearence_size" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/my_ord_det_deliv_charge_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/layout_right_divider_xml_bg"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/small_margin"
+                        android:layout_marginLeft="@dimen/smal_margin"
+                        android:layout_marginRight="@dimen/smal_margin"
+                        android:layout_marginTop="@dimen/small_margin"
+                        android:ellipsize="end"
+                        android:gravity="center"
+                        android:text="@string/my_ord_det_deli_changes_txt"
+                        android:textColor="@color/light_grey_color"
+                        android:textSize="@dimen/medium_txt_appearence_size" />
+
+                    <TextView
+                        android:id="@+id/my_ord_det_deli_charges_txt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/small_margin"
+                        android:gravity="center"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="@dimen/medium_txt_appearence_size" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/layout_right_divider_xml_bg"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/small_margin"
+                        android:layout_marginTop="@dimen/small_margin"
+                        android:gravity="center"
+                        android:text="@string/my_ord_det_total_txt"
+                        android:textColor="@color/light_grey_color"
+                        android:textSize="@dimen/medium_txt_appearence_size" />
+
+                    <TextView
+                        android:id="@+id/my_ord_det_total_txt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/small_margin"
+                        android:gravity="center"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="@dimen/medium_txt_appearence_size" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="@drawable/layout_bott_pink_div_xml"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:textAppearance="?android:textAppearanceLarge"
+                    android:text="@string/my_ord_det_deli_det_txt"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+            <TableLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/medium_margin"
+                android:layout_marginTop="1dp">
+
+                <TableRow
+                    android:id="@+id/my_ord_det_promo_code_table_row_lay"
+                    android:layout_width="wrap_content"
+                    android:layout_marginTop="@dimen/big_margin"
+                    android:visibility="gone">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.6"
+                        android:gravity="right"
+                        android:textAppearance="?android:textAppearanceMedium"
+                        android:text="@string/my_ord_det_promo_code_disc_txt" />
+
+                    <TextView
+                        android:id="@+id/my_ord_det_promo_code_amt_txt_view"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="right"
+                        android:textAppearance="?android:textAppearanceMedium"
+                        android:singleLine="false"
+                        android:textColor="@color/disable_txt_color" />
+
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="wrap_content"
+                    android:layout_marginTop="@dimen/big_margin">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.6"
+                        android:gravity="right"
+                        android:textAppearance="?android:textAppearanceMedium"
+                        android:text="@string/my_ord_det_pay_type_txt" />
+
+                    <TextView
+                        android:id="@+id/my_ord_det_pay_type_txt_view"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="right"
+                        android:textAppearance="?android:textAppearanceMedium"
+                        android:singleLine="false"
+                        android:textColor="@color/disable_txt_color" />
+
+                </TableRow>
+
+
+                <TableRow
+                    android:id="@+id/my_ord_det_del_date_table_row_lay"
+                    android:layout_width="wrap_content"
+                    android:layout_marginTop="@dimen/big_margin">
+
+                    <TextView
+                        android:id="@+id/my_ord_det_deliv_date_holder_txt_view"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.6"
+                        android:gravity="right"
+                        android:textAppearance="?android:textAppearanceMedium"
+                        android:text="@string/my_ord_det_deli_date_txt" />
+
+                    <TextView
+                        android:id="@+id/my_ord_det_deliv_date_txt_view"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="right"
+                        android:singleLine="false"
+                        android:textAppearance="?android:textAppearanceMedium"
+                        android:textColor="@color/disable_txt_color" />
+
+                </TableRow>
+
+                <TableRow
+                    android:id="@+id/my_ord_det_del_slot_table_row_lay"
+                    android:layout_width="wrap_content"
+                    android:layout_marginTop="@dimen/big_margin"
+                    android:visibility="gone">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.6"
+                        android:gravity="right"
+                        android:textAppearance="?android:textAppearanceMedium"
+                        android:text="@string/delivery_slot" />
+
+                    <TextView
+                        android:id="@+id/my_ord_det_deliv_slot_txt_view"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="right"
+                        android:singleLine="false"
+                        android:textAppearance="?android:textAppearanceMedium"
+                        android:textColor="@color/disable_txt_color" />
+
+                </TableRow>
+
+                <TableRow
+                    android:id="@+id/my_ord_det_del_addr_table_row_lay"
+                    android:layout_marginTop="@dimen/big_margin">
+
+                    <TextView
+                        android:id="@+id/my_ord_det_deli_add_holder_txt_view"
+                        android:layout_width="0dp"
+                        android:gravity="right"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:textAppearanceMedium"
+                        android:layout_weight="0.6" />
+
+                    <TextView
+                        android:id="@+id/my_ord_det_deli_add_txt_view"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="right"
+                        android:textAppearance="?android:textAppearanceMedium"
+                        android:textColor="@color/disable_txt_color" />
+
+                </TableRow>
+
+                <TableRow
+                    android:id="@+id/my_ord_det_deliv_instru_table_row_lay"
+                    android:layout_marginBottom="@dimen/activity_vertical_margin"
+                    android:layout_marginTop="@dimen/big_margin">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.6"
+                        android:gravity="right"
+                        android:textAppearance="?android:textAppearanceMedium"
+                        android:text="@string/my_ord_det_deli_inst_txt" />
+
+                    <TextView
+                        android:id="@+id/my_ord_det_deli_instu_txt_view"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="right"
+                        android:singleLine="false"
+                        android:textAppearance="?android:textAppearanceMedium"
+                        android:textColor="@color/disable_txt_color" />
+
+                </TableRow>
+
+            </TableLayout>
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/my_ord_det_can_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="?actionBarSize"
+            android:layout_weight="1"
+            android:background="@color/ord_det_cancel_btn_color"
+            android:text="@string/my_ord_det_cancel_btn"
+            android:textAllCaps="false"
+            android:textAppearance="?android:textAppearanceLarge"
+            android:textColor="@android:color/white"
+            android:visibility="gone" />
+
+        <Button
+            android:id="@+id/my_ord_det_ret_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="?actionBarSize"
+            android:layout_weight="1"
+            android:background="@color/ord_det_return_btn_color"
+            android:text="@string/my_ord_det_return_btn"
+            android:textAllCaps="false"
+            android:textAppearance="?android:textAppearanceLarge"
+            android:textColor="@android:color/white"
+            android:visibility="gone" />
+
+        <Button
+            android:id="@+id/my_ord_det_invoice_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="?actionBarSize"
+            android:layout_weight="1"
+            android:background="@color/ord_det_invoice_btn_color"
+            android:text="@string/my_ord_det_invoice_btn"
+            android:textAllCaps="false"
+            android:textAppearance="?android:textAppearanceLarge"
+            android:textColor="@android:color/white" />
+
+        <Button
+            android:id="@+id/my_ord_det_review_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="?actionBarSize"
+            android:layout_weight="1"
+            android:background="@color/ord_det_review_btn_color"
+            android:text="@string/my_ord_det_review_btn"
+            android:textAllCaps="false"
+            android:textAppearance="?android:textAppearanceLarge"
+            android:textColor="@android:color/white"
+            android:visibility="gone" />
+
+        <Button
+            android:id="@+id/my_ord_det_re_order_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="?actionBarSize"
+            android:layout_weight="1"
+            android:background="@color/colorAccent"
+            android:text="@string/my_ord_det_reorder_btn"
+            android:textAllCaps="false"
+            android:textAppearance="?android:textAppearanceLarge"
+            android:textColor="@android:color/white"
+            android:visibility="gone" />
+
+        <Button
+            android:id="@+id/my_ord_det_deli_track_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@color/ord_det_return_btn_color"
+            android:text="@string/my_ord_det_track_btn"
+            android:visibility="gone"
+            android:textAllCaps="false"
+            android:textColor="@android:color/white" />
+
+    </LinearLayout>
+
+
+</LinearLayout>

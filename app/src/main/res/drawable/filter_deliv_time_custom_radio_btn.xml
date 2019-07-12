@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:drawable="@drawable/ic_time_de_select"
+        android:state_checked="false" android:color="@color/dark_txt_color"/>
+    <item android:drawable="@drawable/ic_time_select"
+        android:state_checked="true" android:color="@color/colorPrimary"/>
+    <item android:drawable="@drawable/ic_time_de_select" android:color="@color/colorPrimary"/>
+</selector>

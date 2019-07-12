@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/app_background_color"
+    android:orientation="vertical">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/my_settings_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@android:color/white"
+        app:popupTheme="@style/AppTheme.PopupOverlay">
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/my_account_Settings"
+            android:textAppearance="?android:textAppearanceLarge"
+            android:textColor="@color/colorPrimary" />
+
+    </androidx.appcompat.widget.Toolbar>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/ho_search_divider_line_size"
+        android:background="@color/white_color"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:paddingRight="@dimen/activity_horizontal_margin"
+            android:paddingTop="@dimen/activity_horizontal_margin">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/nav_language_txt"
+                android:textColor="@color/dark_txt_color"
+                android:textSize="@dimen/large_txt_appearence_size" />
+
+            <RadioGroup
+                android:id="@+id/sett_lang_radio_group"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/medium_margin"
+                android:layout_marginTop="@dimen/medium_margin"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/sett_eng_radio_btn"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:checked="true"
+                    android:text="@string/btn_english"
+                    android:textColor="@drawable/sett_language_radio_btn_selector"
+                    android:textSize="@dimen/medium_txt_appearence_size" />
+
+                <RadioButton
+                    android:id="@+id/sett_arabic_radio_btn"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/btn_arabic"
+                    android:textColor="@drawable/sett_language_radio_btn_selector"
+                    android:textSize="@dimen/medium_txt_appearence_size" />
+
+            </RadioGroup>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white_color"
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/activity_horizontal_margin"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:paddingRight="@dimen/activity_horizontal_margin">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/country"
+                android:textColor="@color/dark_txt_color"
+                android:textSize="@dimen/large_txt_appearence_size" />
+
+            <TextView
+                android:id="@+id/sett_country_txt_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/medium_margin"
+                android:textColor="@color/colorAccent"
+                android:textSize="@dimen/medium_txt_appearence_size" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

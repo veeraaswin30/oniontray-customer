@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="300dp"
+    android:layout_height="wrap_content"
+    android:paddingLeft="@dimen/big_margin"
+    android:paddingTop="@dimen/medium_margin"
+    android:paddingBottom="@dimen/medium_margin"
+    android:layoutDirection="rtl"
+    android:orientation="horizontal"
+    tools:ignore="RtlHardcoded">
+
+    <RadioGroup
+        android:id="@+id/nav_menu_sele_lag_group"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+       android:gravity="start"
+        android:orientation="horizontal">
+
+    <RadioButton
+        android:id="@+id/nav_menu_check_box_eng"
+        android:layout_marginLeft="@dimen/medium_margin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/nav_lang_name_eng_txt"
+        android:textAppearance="?android:textAppearanceLarge"
+        style="@style/Checkbox.Default"/>
+
+    <RadioButton
+        android:id="@+id/nav_menu_check_box_arabic"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/nav_lang_name_arabic_txt"
+        android:textAppearance="?android:textAppearanceLarge"
+        style="@style/Checkbox.Default"/>
+
+    </RadioGroup>
+
+</LinearLayout>

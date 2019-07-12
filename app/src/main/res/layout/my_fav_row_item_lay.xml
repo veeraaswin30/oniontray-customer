@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layoutDirection="locale"
+    android:background="@color/white_color">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        tools:ignore="UselessParent">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/my_fav_list_item_row_img_height">
+
+            <ImageView
+                android:id="@+id/my_fav_sto_image"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/app_background_color"
+                android:scaleType="centerCrop" />
+
+            <ToggleButton
+                android:id="@+id/my_fav_fav_toogle_btn"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_gravity="right|top"
+                android:layout_margin="@dimen/medium_margin"
+                android:textOff=""
+                android:textOn=""
+                tools:ignore="RtlHardcoded" />
+
+            <Button
+                android:id="@+id/my_fav_deli_time_dura_btn"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center_vertical|right"
+                android:background="@drawable/green_square_en"
+                android:textAllCaps="false"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/small_txt_appearence_size"
+                tools:ignore="RtlHardcoded" />
+
+        </FrameLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="@dimen/smal_margin">
+
+            <TextView
+                android:id="@+id/my_fav_sto_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textDirection="locale"
+                android:singleLine="true"
+                android:ellipsize="end"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:textColor="@color/dark_txt_color" />
+
+            <TextView
+                android:id="@+id/my_fav_catego_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textDirection="locale"
+                android:singleLine="true"
+                android:ellipsize="end"
+                android:textColor="@color/disable_txt_color"
+                android:textSize="@dimen/small_txt_appearence_size" />
+
+            <LinearLayout
+                android:id="@+id/linearLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical">
+
+                <RatingBar
+                    android:id="@+id/my_fav_ratting_bar"
+                    style="@style/RatingBar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/left_rating_margin"
+                    android:layout_marginRight="@dimen/right_rating_margin"
+                    android:isIndicator="true"
+                    android:scaleX="0.5"
+                    android:scaleY="0.5"
+                    tools:ignore="RtlHardcoded" />
+
+                <TextView
+                    android:id="@+id/my_fav_ratting_value_txt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textDirection="locale"
+                    android:textColor="@color/disable_txt_color"
+                    android:textSize="@dimen/small_txt_appearence_size"/>
+
+                <TextView
+                    android:id="@+id/my_fav_deli_dura_txt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textDirection="locale"
+                    android:layout_marginLeft="@dimen/big_margin"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="@dimen/small_txt_appearence_size"
+                    tools:ignore="RtlHardcoded" />
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/my_fav_min_deli_coast_txt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textDirection="locale"
+                android:ellipsize="end"
+                android:singleLine="true"
+                android:textColor="@color/disable_txt_color"
+                android:textSize="@dimen/small_txt_appearence_size" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

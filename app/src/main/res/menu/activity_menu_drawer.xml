@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <group android:checkableBehavior="none">
+
+        <item
+            android:id="@+id/nav_kuwait_city"
+            android:icon="@drawable/ic_nav_location_pin_ic"
+            android:title="@string/nav_city_name_txt"
+            app:actionLayout="@layout/menu_city_item_layout" />
+
+        <item
+            android:id="@+id/nav_stores"
+            android:icon="@drawable/ic_nav_stores_ic"
+            android:title="@string/nav_restaurants_txt"
+            app:actionViewClass="android.widget.TextView" />
+
+    </group>
+
+
+    <item android:title="@string/nav_my_informations_txt">
+        <menu>
+            <item
+                android:id="@+id/nav_my_profile"
+                android:icon="@drawable/ic_nav_menu_profile_ic"
+                android:title="@string/nav_my_profile_txt"
+                app:actionViewClass="android.widget.TextView" />
+            <item
+                android:id="@+id/nav_my_address"
+                android:icon="@drawable/ic_nav_my_addresses_ic"
+                android:title="@string/nav_my_address_txt"
+                app:actionViewClass="android.widget.TextView" />
+            <item
+                android:id="@+id/nav_my_orders"
+                android:icon="@drawable/ic_nav_my_orders_ic"
+                android:title="@string/nav_my_orders_txt"
+                app:actionViewClass="android.widget.TextView" />
+            <item
+                android:id="@+id/nav_my_cart"
+                android:icon="@drawable/ic_nav_my_cart_ic"
+                android:title="@string/nav_my_carts_txt"
+                app:actionViewClass="android.widget.TextView" />
+            <item
+                android:id="@+id/nav_my_favorutes"
+                android:icon="@drawable/ic_nav_my_favourites_ic"
+                android:title="@string/nav_my_favourites_txt"
+                app:actionViewClass="android.widget.TextView" />
+        </menu>
+
+    </item>
+
+
+    <item android:title="@string/nav_others_txt">
+
+        <menu>
+            <item
+                android:id="@+id/nav_offers"
+                android:icon="@drawable/ic_nav_offers_ic"
+                android:title="@string/nav_offers_txt" />
+            <item
+                android:id="@+id/nav_notification"
+                android:icon="@drawable/ic_nav_notifications_ic"
+                android:title="@string/nav_notifications_txt"
+                app:actionViewClass="android.widget.TextView" />
+            <item
+                android:id="@+id/nav_help_support"
+                android:icon="@drawable/ic_nav_help_ic"
+                android:title="@string/nav_help_support_txt" />
+            <item
+                android:id="@+id/nav_rate_us"
+                android:icon="@drawable/ic_nav_rate_ic"
+                android:title="@string/nav_rate_us_txt" />
+            <item
+                android:id="@+id/nav_about_us"
+                android:icon="@drawable/ic_nav_about_us_ic"
+                android:title="@string/nav_about_us_txt" />
+        </menu>
+
+    </item>
+
+    <!--<group android:checkableBehavior="none" >-->
+
+    <!--</group>-->
+
+    <item android:title="@string/nav_language_txt">
+        <menu>
+            <item
+                android:id="@+id/nav_language_selection"
+                android:title=""
+                app:actionLayout="@layout/menu_language_check_box__layout" />
+        </menu>
+    </item>
+
+</menu>

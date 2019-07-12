@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layoutDirection="rtl"
+    android:background="@color/white_color">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        tools:ignore="UselessParent">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/store_list_item_row_img_height">
+
+            <ImageView
+                android:id="@+id/store_item_row_img"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/image_bg_color"
+                android:scaleType="centerCrop"
+                tools:ignore="ContentDescription" />
+
+            <Button
+                android:id="@+id/sto_item_row_del_time_btn"
+                android:layout_width="?actionBarSize"
+                android:layout_height="?actionBarSize"
+                android:layout_gravity="center_vertical|end"
+                android:background="@drawable/green_square_ar"
+                android:textAllCaps="false"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/medium_txt_appearence_size" />
+
+        </FrameLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="@dimen/smal_margin">
+
+            <TextView
+                android:id="@+id/sto_item_row_store_name_txt_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:singleLine="true"
+                android:gravity="right"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textColor="@color/dark_txt_color"
+                tools:ignore="RtlHardcoded" />
+
+            <TextView
+                android:id="@+id/sto_item_row_short_desc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:singleLine="true"
+                android:gravity="right"
+                android:textColor="@color/disable_txt_color"
+                android:textSize="@dimen/medium_txt_appearence_size"
+                tools:ignore="RtlHardcoded" />
+
+            <LinearLayout
+                android:id="@+id/linearLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <RatingBar
+                    android:id="@+id/sto_item_row_ratingBar"
+                    style="@style/StarRatingBar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="@dimen/left_rating_margin"
+                    android:layout_marginLeft="@dimen/right_rating_margin"
+                    android:isIndicator="false"
+                    android:scaleX="0.8"
+                    android:scaleY="0.8"
+                    tools:ignore="RtlHardcoded" />
+
+                <TextView
+                    android:id="@+id/sto_item_row_rating_txt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:textColor="@color/disable_txt_color"
+                    android:textSize="@dimen/medium_txt_appearence_size"
+                    android:visibility="visible" />
+
+                <TextView
+                    android:id="@+id/sto_item_row_duration_txt"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="0.05"
+                    android:paddingRight="@dimen/large_margin"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="@dimen/medium_txt_appearence_size"
+                    tools:ignore="RtlHardcoded" />
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/sto_list_row_mini_del_cost"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:visibility="gone"
+                android:singleLine="true"
+                android:gravity="right"
+                android:textColor="@color/disable_txt_color"
+                android:textSize="@dimen/medium_txt_appearence_size"
+                tools:ignore="RtlHardcoded" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

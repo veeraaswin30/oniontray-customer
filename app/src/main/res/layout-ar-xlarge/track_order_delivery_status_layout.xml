@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white_color"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <FrameLayout
+            android:id="@+id/track_order_map_root_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@+id/track_order_content_layout">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <androidx.appcompat.widget.Toolbar
+                    android:id="@+id/track_order_toolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="?actionBarSize"
+                    android:fitsSystemWindows="true"
+                    android:background="@color/white_color"
+                    app:titleTextAppearance="?android:textAppearanceMedium"
+                    app:theme="@style/ToolbarColoredBackArrow"
+                    app:titleTextColor="@color/colorAccent" />
+
+                <fragment
+                    android:id="@+id/track_order_map"
+                    class="com.app.oniontray.CustomViews.WorkaroundMapFragment"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+
+            </LinearLayout>
+
+        </FrameLayout>
+
+
+        <LinearLayout
+            android:id="@+id/track_order_content_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/track_order_prof_img_margin_size"
+                android:orientation="vertical"
+                android:paddingBottom="@dimen/big_margin"
+                android:paddingLeft="@dimen/activity_vertical_margin"
+                android:paddingRight="@dimen/activity_vertical_margin"
+                android:paddingTop="@dimen/big_margin">
+
+                <TextView
+                    android:id="@+id/track_order_states_msg_txt_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:gravity="center"
+                    android:textAppearance="?android:textAppearanceMedium"
+                    android:textColor="@color/disable_txt_color" />
+
+            </LinearLayout>
+
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/small_margin"
+                android:background="@color/white_color"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_gravity="center_vertical"
+                    android:background="@color/app_background_color"
+                    android:orientation="vertical" />
+
+                <FrameLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center">
+
+                    <com.app.oniontray.CustomViews.CircleImageView
+                        android:layout_width="@dimen/track_order_prof_img_size"
+                        android:layout_height="@dimen/track_order_prof_img_size"
+                        android:background="@color/white_color"
+                        android:scaleType="centerCrop"
+                        android:src="@color/white_color"
+                        app:civ_border_color="@color/app_background_color"
+                        app:civ_border_width="1dp" />
+
+                    <ImageView
+                        android:id="@+id/track_order_msg_ic_img_view"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:src="@drawable/ic_track_order_msg_ic" />
+
+                </FrameLayout>
+
+            </FrameLayout>
+
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:paddingBottom="@dimen/big_margin"
+                android:paddingLeft="@dimen/activity_vertical_margin"
+                android:paddingRight="@dimen/activity_vertical_margin"
+                android:paddingTop="@dimen/big_margin">
+
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left"
+                    android:gravity="left"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="left"
+                        android:text="@string/no_of_items_txt"
+                        android:textAppearance="?android:textAppearanceMedium"
+                        android:textColor="@color/disable_txt_color" />
+
+                    <TextView
+                        android:id="@+id/track_order_items_count_txt_view"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="left"
+                        android:layout_marginTop="@dimen/small_margin"
+                        android:textAppearance="?android:textAppearanceMedium"
+                        android:textColor="@color/dark_txt_color" />
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="@string/eta_txt"
+                        android:textAppearance="?android:textAppearanceMedium"
+                        android:textColor="@color/disable_txt_color" />
+
+                    <TextView
+                        android:id="@+id/track_order_delv_time_txt_view"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:layout_marginTop="@dimen/small_margin"
+                        android:textAppearance="?android:textAppearanceMedium"
+                        android:textColor="@color/dark_txt_color" />
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:gravity="right"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="right"
+                        android:text="@string/payable_amount_txt"
+                        android:textAppearance="?android:textAppearanceMedium"
+                        android:textColor="@color/disable_txt_color" />
+
+                    <TextView
+                        android:id="@+id/track_order_payable_amt_txt_view"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="right"
+                        android:layout_marginTop="@dimen/small_margin"
+                        android:textAppearance="?android:textAppearanceMedium"
+                        android:textColor="@color/colorAccent" />
+
+                </LinearLayout>
+
+
+            </FrameLayout>
+
+
+        </LinearLayout>
+
+
+        <com.app.oniontray.CustomViews.CircleImageView
+            android:id="@+id/track_order_driver_pic_cir_img_view"
+            android:layout_width="@dimen/track_order_prof_img_size"
+            android:layout_height="@dimen/track_order_prof_img_size"
+            android:layout_above="@+id/track_order_content_layout"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="@dimen/track_order_prof_img_divider_size"
+            android:scaleType="centerCrop"
+            app:civ_border_color="@color/app_background_color"
+            app:civ_border_width="1dp" />
+
+        <!--android:src="@drawable/f094"-->
+
+
+    </RelativeLayout>
+
+
+</LinearLayout>

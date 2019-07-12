@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="app_background_color">#1201</color>
+
+    <color name="colorPrimary">#dd0014</color>
+    <color name="colorPrimaryDark">#c60012</color>
+    <color name="colorAccent">#c60012</color>
+ 
+
+    <!--welcome_page-->
+    <color name="app_color">#FF7133</color>
+    <color name="view_cart">#CCdd353d</color>
+    <color name="text_color">#3e3e3e</color>
+    <color name="gray_color">#f0f0f0</color>
+    <color name="tint_color">#e2e1e1</color>
+    <color name="brown_text">#7a3d25</color>
+
+    <color name="cart_count_view_color">#FF7133</color>
+    <color name="cart_view_color">#FF7133</color>
+
+    <color name="green_color">#FF7133</color>
+
+    <color name="close_store_color">#bdbdbd</color>
+
+    <!--Store list-->
+    <color name="store_list_search_bg_color">#ebebeb</color>
+
+
+    <color name="color_green">#FF7133</color>
+
+    <color name="white_color">@android:color/white</color>
+    <color name="screen_bg_color">#fbfbfb</color>
+    <color name="dark_txt_color">#151515</color>
+    <color name="disable_txt_color">#999999</color>
+    <color name="light_grey_color">#777777</color>
+    <color name="recycler_view_bg">#efeaea</color>
+    <color name="offer_text_background">#40000000</color>
+    <color name="tab_background_color">#f4f4f4</color>
+    <color name="rating_bar_color">#ffda44</color>
+    <color name="close_background">#e1e1e1</color>
+
+    <color name="image_bg_color">#1201</color>
+
+    <color name="my_order_status_color_code">#00c5f4</color>
+
+    <color name="facebook_color">#3b5998</color>
+    <color name="spinner_background">#000000</color>
+    <color name="transparent">#45000000</color>
+    <color name="green_btn">#FF7133</color>
+
+    <!-- dots inactive colors -->
+    <color name="dot_dark_screen1">@android:color/white</color>
+    <color name="dot_dark_screen2">@android:color/white</color>
+    <color name="dot_dark_screen3">@android:color/white</color>
+    <color name="dot_dark_screen4">@android:color/white</color>
+
+    <!-- dots active colors -->
+    <color name="dot_light_screen1">@android:color/darker_gray</color>
+    <color name="dot_light_screen2">@android:color/darker_gray</color>
+    <color name="dot_light_screen3">@android:color/darker_gray</color>
+    <color name="dot_light_screen4">@android:color/darker_gray</color>
+
+
+    <!--Order Details colors-->
+    <color name="ord_det_cancel_btn_color">#1201</color>
+    <color name="ord_det_return_btn_color">#b4b0b0</color>
+    <color name="ord_det_invoice_btn_color">#978e8e</color>
+    <color name="ord_det_review_btn_color">#bab0b0</color>
+
+    <array name="array_dot_active">
+        <item>@color/dot_dark_screen1</item>
+        <item>@color/dot_dark_screen2</item>
+        <item>@color/dot_dark_screen3</item>
+        <item>@color/dot_dark_screen4</item>
+    </array>
+
+    <array name="array_dot_inactive">
+
+        <item>@color/dot_light_screen1</item>
+        <item>@color/dot_light_screen2</item>
+        <item>@color/dot_light_screen3</item>
+        <item>@color/dot_light_screen4</item>
+    </array>
+
+
+    <!--Promo code box colors-->
+    <color name="copoun_code_box_solid_color">#25660011</color>
+    <color name="copoun_code_box_stroke_color">#24220011</color>
+
+
+    <!--&lt;!&ndash;county&ndash;&gt;-->
+    <!--<color name="test">#221224</color>-->
+    <!--<color name="defaultContentColor">@android:color/black</color>-->
+    <!--&lt;!&ndash;&ndash;&gt;-->
+
+
+</resources>

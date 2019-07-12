@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@android:color/white"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/big_margin"
+    android:paddingLeft="@dimen/activity_vertical_margin"
+    android:paddingRight="@dimen/activity_vertical_margin"
+    android:paddingTop="@dimen/big_margin">
+
+    <TextView
+        android:id="@+id/restaurant_review_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:textAppearanceLarge"
+        android:textColor="@color/dark_txt_color" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/smal_margin"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <RatingBar
+            android:id="@+id/restaurant_review_ratingBar"
+            style="@style/RatingBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="-10dp"
+            android:isIndicator="true"
+            android:scaleX="0.85"
+            android:scaleY="0.85" />
+
+        <TextView
+            android:id="@+id/restaurant_review_date_and_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textAppearance="?android:textAppearanceLarge"
+            android:textColor="@color/disable_txt_color" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/restaurant_review_description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/smal_margin"
+        android:textAppearance="?android:textAppearanceLarge"
+        android:textColor="@color/disable_txt_color" />
+
+</LinearLayout>

@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layoutDirection="locale"
+    android:background="@android:color/white"
+    android:orientation="vertical"
+    android:padding="@dimen/medium_margin">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:padding="@dimen/medium_margin"
+        tools:ignore="UselessParent">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/order_conf_prod_image"
+                android:layout_width="@dimen/my_cart_list_item_row_img_height"
+                android:layout_height="@dimen/my_cart_list_item_row_img_height"
+                android:background="@color/app_background_color" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:layout_marginLeft="@dimen/medium_margin"
+            android:orientation="vertical">
+
+            <!--android:layout_weight="1"-->
+
+            <TextView
+                android:id="@+id/order_conf_prod_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textDirection="locale"
+                android:layout_gravity="center"
+                android:maxLines="2"
+                android:ellipsize="end"
+                android:textColor="@color/dark_txt_color"
+                tools:ignore="RtlHardcoded" />
+
+            <!--android:layout_marginLeft="@dimen/medium_margin"-->
+
+            <TextView
+                android:id="@+id/del_product_ingredient"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textDirection="locale"
+                android:ellipsize="end"
+                android:maxLines="2"
+                android:textColor="@color/disable_txt_color"
+                android:textSize="@dimen/small_txt_appearence_size"
+                tools:ignore="RtlHardcoded" />
+
+            <!--android:layout_marginLeft="@dimen/medium_margin"-->
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/order_conf_prod_quan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textDirection="locale"
+            android:layout_gravity="center"
+            android:layout_margin="@dimen/big_margin"
+            android:textColor="@color/dark_txt_color" />
+
+        <TextView
+            android:id="@+id/order_conf_prod_amt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textDirection="locale"
+            android:layout_gravity="center"
+            android:textColor="@color/colorAccent" />
+
+    </LinearLayout>
+
+</LinearLayout>

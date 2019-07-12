@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/app_background_color"
+    android:orientation="vertical">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/my_wallet_toolber"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:layout_marginBottom="@dimen/my_wallet_devider_line_size"
+        android:background="@color/white_color"
+        android:elevation="0dp"
+        app:popupTheme="@style/AppTheme.PopupOverlay">
+
+        <TextView
+            android:id="@+id/my_wallet_title_txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/my_wallet_foodboy_tit_txt"
+            android:textAppearance="?android:textAppearanceLarge"
+            android:textColor="@color/colorPrimary" />
+
+    </androidx.appcompat.widget.Toolbar>
+
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white_color"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:padding="@dimen/small_margin">
+                
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingBottom="@dimen/medium_margin"
+                        android:paddingTop="@dimen/big_margin"
+                        android:text="@string/my_wallet_Your_wallet_balance_txt"
+                        android:textAllCaps="true"
+                        android:textAppearance="?android:textAppearanceLarge"/>
+
+                    <TextView
+                        android:id="@+id/my_wallet_amt_txt_view"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/big_margin"
+                        android:layout_marginTop="@dimen/big_margin"
+                        android:paddingBottom="@dimen/medium_margin"
+                        android:paddingTop="@dimen/medium_margin"
+                        android:textAppearance="?android:textAppearanceLarge"
+                        android:textColor="@android:color/black" />
+
+                </LinearLayout>
+
+                <Button
+                    android:id="@+id/my_wallet_add_money_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/big_margin"
+                    android:layout_marginTop="@dimen/big_margin"
+                    android:textAppearance="?android:textAppearanceLarge"
+                    android:background="@drawable/my_wallet_add_credit_btn_selector"
+                    android:paddingLeft="@dimen/activity_vertical_margin"
+                    android:paddingRight="@dimen/activity_vertical_margin"
+                    android:text="@string/my_wallet_add_credit_txt"
+                    android:textAllCaps="false"
+                    android:textColor="@color/colorAccent" />
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/my_wallet_history_txt"
+                android:textAllCaps="true"
+                android:layout_margin="@dimen/activity_vertical_margin_mobile"
+                android:textAppearance="?android:textAppearanceLarge"
+                android:textColor="@android:color/black" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:layout_marginTop="@dimen/my_wallet_devider_line_size"
+                android:background="@color/white_color"
+                android:visibility="gone"
+                android:gravity="center"
+                android:padding="@dimen/small_margin">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/my_wallet_history_txt"
+                        android:textAllCaps="true"
+                        android:textAppearance="?android:textAppearanceMedium"
+                        android:textColor="@android:color/black" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginTop="@dimen/my_wallet_devider_line_size"
+                        android:background="@android:color/black" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white_color"
+                android:gravity="center_horizontal"
+                android:padding="@dimen/medium_margin">
+
+                <RadioGroup
+                    android:id="@+id/my_wallet_type_radio_group"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/medium_txt_appearence_size"
+                    android:layout_marginBottom="@dimen/medium_txt_appearence_size"
+                    android:layout_marginEnd="?attr/actionBarSize"
+                    android:layout_marginStart="?attr/actionBarSize"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        android:id="@+id/my_wallet_added_radio_btn"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/btn_selector_for_login"
+                        android:button="@null"
+                        android:gravity="center"
+                        android:paddingBottom="@dimen/big_margin"
+                        android:paddingTop="@dimen/big_margin"
+                        android:textAppearance="?android:textAppearanceLarge"
+                        android:text="@string/my_wallet_added_txt"
+                        android:textColor="@drawable/btn_selector_for_login"
+                        tools:ignore="HardcodedText" />
+
+                    <!--android:checked="true"-->
+
+                    <RadioButton
+                        android:id="@+id/my_wallet_deducted_radio_btn"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/btn_selector_for_sign_up"
+                        android:button="@null"
+                        android:gravity="center"
+                        android:paddingBottom="@dimen/big_margin"
+                        android:paddingTop="@dimen/big_margin"
+                        android:text="@string/my_wallet_deducted_txt"
+                        android:textAppearance="?android:textAppearanceLarge"
+                        android:textColor="@drawable/btn_selector_for_sign_up"
+                        tools:ignore="HardcodedText" />
+
+                </RadioGroup>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/my_wallet_history_view_layout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/my_wallet_devider_line_size"
+                android:background="@color/white_color"
+                android:orientation="vertical">
+
+                <FrameLayout
+                    android:id="@+id/my_wallet_history_content_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"/>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/my_wallet_history_recycler_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    android:background="@color/app_background_color" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</LinearLayout>

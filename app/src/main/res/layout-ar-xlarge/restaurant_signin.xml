@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/activity_vertical_margin"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/medium_margin"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:visibility="visible">
+
+                <Button
+                    android:id="@+id/btnFacebookLogin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginEnd="@dimen/activity_horizontal_margin"
+                    android:layout_marginStart="@dimen/activity_horizontal_margin"
+                    android:background="@drawable/facebook_sign_in" />
+
+                <Button
+                    android:id="@+id/btnGooglePlus"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/activity_horizontal_margin"
+                    android:layout_marginStart="@dimen/activity_horizontal_margin"
+                    android:visibility="gone"
+                    android:layout_weight="1"
+                    android:background="@drawable/googleplus_sign_in" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/activity_horizontal_margin"
+                android:orientation="horizontal">
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_marginEnd="@dimen/activity_horizontal_margin"
+                    android:layout_marginStart="@dimen/activity_horizontal_margin"
+                    android:layout_marginTop="@dimen/big_margin"
+                    android:layout_weight="1"
+                    android:background="@color/disable_txt_color" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.2"
+                    android:gravity="center_horizontal|top"
+                    android:text="@string/or"
+                    android:textAllCaps="true"
+                    android:textAppearance="?android:attr/textAppearanceLarge" />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_marginEnd="@dimen/activity_horizontal_margin"
+                    android:layout_marginStart="@dimen/activity_horizontal_margin"
+                    android:layout_marginTop="@dimen/big_margin"
+                    android:layout_weight="1"
+                    android:background="@color/disable_txt_color" />
+
+            </LinearLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/input_layout_email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/big_margin"
+                android:textColor="@color/dark_txt_color"
+                app:hintTextAppearance="@style/HintTextLabel"
+                app:errorTextAppearance="@style/tab_error_appearance">
+
+                <EditText
+                    android:id="@+id/input_email"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="right"
+                    android:hint="@string/hint_email_and_phone_no"
+                    android:inputType="textEmailAddress"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textColor="@color/disable_txt_color" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/input_layout_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/big_margin"
+                android:textColor="@color/dark_txt_color"
+                app:hintTextAppearance="@style/HintTextLabel"
+                app:errorTextAppearance="@style/tab_error_appearance"
+                app:passwordToggleEnabled="false">
+
+                <RelativeLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <EditText
+                        android:id="@+id/input_password"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="right"
+                        android:hint="@string/hint_password"
+                        android:inputType="textPassword"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:textColor="@color/disable_txt_color" />
+
+                    <CheckBox
+                        android:id="@+id/show_password"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="10dp"
+                        android:button="@null"
+                        android:text="@string/hint_show_password"
+                        android:textColor="@color/colorPrimary"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:visibility="gone" />
+
+                </RelativeLayout>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <TextView
+                android:id="@+id/sign_in_reset_passsword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/big_margin"
+                android:textAppearance="?android:textAppearanceMedium"
+                android:text="@string/hint_reset_password"
+                android:textColor="@color/colorPrimary" />
+
+
+            <Button
+                android:id="@+id/sign_in_btn"
+                android:layout_width="match_parent"
+                android:layout_height="?actionBarSize"
+                android:layout_gravity="bottom"
+                android:layout_margin="@dimen/activity_vertical_margin"
+                android:background="@drawable/signin_rounded_rectangle"
+                android:padding="@dimen/big_margin"
+                android:text="@string/sign_in"
+                android:textAppearance="?android:textAppearanceLarge"
+                android:textAllCaps="false"
+                android:textColor="@android:color/white" />
+
+            <TextView
+                android:id="@+id/sign_in_condition"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:padding="@dimen/welcome_slide_height"
+                android:textAppearance="?android:textAppearanceLarge"
+                android:text="@string/hint_for_accept"
+                android:textColor="@color/disable_txt_color" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/express_checkout_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <TextView
+                android:id="@+id/OR"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:background="@color/app_background_color"
+                android:gravity="center"
+                android:paddingBottom="@dimen/big_margin"
+                android:paddingTop="@dimen/big_margin"
+                android:text="@string/hint_or"
+                android:textAppearance="?android:textAppearanceMedium"
+                android:textColor="@color/disable_txt_color" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:padding="@dimen/big_margin"
+                android:text="@string/hint_order_without_account"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="@color/dark_txt_color" />
+
+            <Button
+                android:id="@+id/express_checkout_btn"
+                android:layout_width="match_parent"
+                android:layout_height="?actionBarSize"
+                android:layout_gravity="bottom"
+                android:layout_margin="@dimen/activity_vertical_margin"
+                android:background="@drawable/express_check_out_btn_background"
+                android:padding="@dimen/big_margin"
+                android:text="@string/hint_express_checkout"
+                android:textAllCaps="false"
+                android:textAppearance="?android:textAppearanceLarge"
+                android:textColor="@android:color/white" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</androidx.core.widget.NestedScrollView>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:drawable="@drawable/relevance"
+        android:state_checked="false" android:color="@color/dark_txt_color"/>
+    <item android:drawable="@drawable/relevance_unselect"
+        android:state_checked="true" android:color="@color/colorPrimary"/>
+    <item android:drawable="@drawable/relevance" android:color="@color/dark_txt_color"/>
+</selector>

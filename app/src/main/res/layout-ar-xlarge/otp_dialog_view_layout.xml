@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="@dimen/big_margin"
+    android:gravity="center_horizontal">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/otp"
+            android:layout_gravity="center"
+            tools:ignore="ContentDescription" />
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/otp_dialog"
+        android:id="@+id/otp_dialog_title_txt_view"
+        android:textStyle="bold"
+        android:layout_margin="@dimen/big_margin"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@color/light_grey_color"
+        android:gravity="center_horizontal" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/otp_msg"
+        android:id="@+id/otp_dialog_content_txt_view"
+        android:gravity="center_horizontal"
+        android:visibility="gone" />
+
+    <RadioGroup
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="right"
+        android:layout_marginTop="@dimen/small_margin"
+        android:layout_marginBottom="@dimen/small_margin"
+        android:id="@+id/otp_dialog_radio_group"
+        tools:ignore="RtlHardcoded">
+
+        <!--android:theme="@style/Radiobuttonstyle"-->
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/otp_dialog_email_radioButton"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@color/light_grey_color"
+            android:layout_marginRight="@dimen/lowest_margi"
+            android:theme="@style/MyLocRadioButton"
+            android:text="@string/otp_dialog_email_txt"
+            tools:ignore="RtlHardcoded" />
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/otp_dialog_mobile_txt"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@color/light_grey_color"
+            android:layout_marginRight="@dimen/lowest_margi"
+            android:theme="@style/MyLocRadioButton"
+            android:id="@+id/otp_dialog_mobile_radioButton"
+            tools:ignore="RtlHardcoded" />
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/otp_diaog_both_txt"
+            android:id="@+id/otp_dialog_both_radioButton"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@color/light_grey_color"
+            android:theme="@style/MyLocRadioButton" />
+
+    </RadioGroup>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/abc_text_size_display_3_material"
+        android:id="@+id/otp_edt_txt_view"
+        android:hint="@string/otp_diaog_enter_your_otp_txt"
+        android:layout_marginTop="@dimen/small_margin"
+        android:layout_marginBottom="@dimen/activity_vertical_margin"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:inputType="number"
+        android:visibility="gone" />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/otp_dialog_resend_verify_btn_layout"
+        android:gravity="center_horizontal"
+        android:visibility="gone">
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/otp_dialog_re_send_btn"
+            android:layout_marginLeft="@dimen/big_margin"
+            android:id="@+id/otp_resend_btn"
+            android:background="@drawable/signin_rounded_rectangle"
+            android:textStyle="bold"
+            android:textAllCaps="true"
+            android:textColor="@android:color/white"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            tools:ignore="RtlHardcoded" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/otp_dialog_verify_txt"
+            android:layout_marginRight="@dimen/big_margin"
+            android:id="@+id/otp_verify_btn"
+            android:textAllCaps="true"
+            android:background="@drawable/signin_rounded_rectangle"
+            android:textColor="@android:color/white"
+            android:textStyle="bold"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            tools:ignore="RtlHardcoded" />
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/otp_dialog_back_send_btn_layout"
+        android:layout_marginTop="@dimen/small_margin"
+        android:gravity="center_horizontal">
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/otp_dialog_back_btn"
+            android:background="@drawable/signin_rounded_rectangle"
+            android:textStyle="bold"
+            android:textAllCaps="true"
+            android:textColor="@android:color/white"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:layout_marginLeft="@dimen/small_margin"
+            android:visibility="gone"
+            tools:ignore="RtlHardcoded" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/otp_dialog_send_btn"
+            android:id="@+id/otp_dialog_back_btn"
+            android:textAllCaps="true"
+            android:background="@drawable/signin_rounded_rectangle"
+            android:textColor="@android:color/white"
+            android:layout_marginRight="@dimen/small_margin"
+            android:textStyle="bold"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            tools:ignore="RtlHardcoded" />
+
+    </LinearLayout>
+
+
+</LinearLayout>

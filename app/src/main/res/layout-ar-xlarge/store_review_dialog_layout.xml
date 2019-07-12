@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/activity_vertical_margin"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/big_margin"
+        android:gravity="center"
+        android:padding="@dimen/big_margin"
+        android:text="@string/sto_review_dialog_tit_txt"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@color/dark_txt_color" />
+
+    <RatingBar
+        android:id="@+id/sto_review_dial_rating_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:numStars="5"
+        android:layout_marginBottom="@dimen/small_margin"
+        android:theme="@style/RatingBarBig" />
+
+    <EditText
+        android:id="@+id/sto_review_dial_comm_edt_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/activity_vertical_margin"
+        android:gravity="right|top"
+        android:hint="@string/sto_reivew_comments_hint_txt"
+        android:minHeight="150dp"
+        android:padding="@dimen/big_margin"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="@color/disable_txt_color"
+        tools:ignore="RtlHardcoded" />
+
+    <Button
+        android:id="@+id/sto_rew_dial_done_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        android:text="@string/sto_review_done_btn_txt"
+        android:textAllCaps="false"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@android:color/white" />
+
+</LinearLayout>

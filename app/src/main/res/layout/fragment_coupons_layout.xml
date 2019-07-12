@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layoutDirection="locale"
+    android:background="@color/app_background_color"
+    android:orientation="vertical">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/coupons_recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <TextView
+            android:id="@+id/coupons_empt_msg_txt_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textDirection="locale"
+            android:gravity="center"
+            android:text="@string/no_coupons_avail_txt"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textColor="@color/dark_txt_color"
+            android:visibility="gone" />
+
+    </FrameLayout>
+
+</LinearLayout>

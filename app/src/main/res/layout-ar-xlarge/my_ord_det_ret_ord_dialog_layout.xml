@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white_color"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:gravity="center"
+        android:text="@string/my_ord_det_return_ord_dialog_tit_txt"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@android:color/holo_red_dark" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="@dimen/large_margin">
+
+        <Spinner
+            android:id="@+id/my_ord_det_return_rec_spinner"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:layout_marginBottom="@dimen/medium_margin" />
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/my_ord_det_ret_ord_comm_txt_in_lay"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/large_margin"
+            android:textColor="@android:color/white"
+            app:errorTextAppearance="@style/error_appearance">
+
+            <EditText
+                android:id="@+id/my_ord_det_ret_ord_dia_comm_edt_txt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="right|top"
+                android:hint="@string/my_ord_det_ret_ord_dia_comm_txt"
+                android:inputType="textMultiLine"
+                android:minHeight="@dimen/ord_det_ret_ord_dialog_edt_height"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                tools:ignore="RtlHardcoded" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <Button
+            android:id="@+id/my_ord_det_ret_ord_dia_sub_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/signin_rounded_rectangle"
+            android:text="@string/my_ord_det_sub_btn"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="@color/white_color" />
+
+    </LinearLayout>
+
+</LinearLayout>

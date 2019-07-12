@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layoutDirection="locale"
+    android:background="@color/app_background_color"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/select_city_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:layout_alignParentTop="true"
+            android:background="@android:color/white"
+            app:popupTheme="@style/AppTheme.PopupOverlay">
+
+           <!-- <TextView
+                android:id="@+id/select_area"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/select_area_manulay_txt"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                />-->
+
+           <TextView
+                android:id="@+id/select_city"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+               android:textDirection="locale"
+                android:layout_gravity="center"
+                android:text="select city"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+
+                />
+
+
+        </androidx.appcompat.widget.Toolbar>
+
+        <TextView
+            android:id="@+id/select_city_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textDirection="locale"
+            android:layout_below="@+id/toolbar"
+            android:background="@color/app_background_color"
+            android:padding="@dimen/activity_vertical_margin"
+            android:textColor="@color/dark_txt_color" />
+
+        <!--android:layout_marginBottom="@dimen/home_mediam_line_height"-->
+        <!--android:layout_marginTop="@dimen/home_mediam_line_height"-->
+
+    </LinearLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/select_city_recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/select_location_title" />
+
+        <TextView
+            android:id="@+id/city_loc_empty_txt_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textDirection="locale"
+            android:background="@color/white_color"
+            android:gravity="center"
+            android:textColor="@color/dark_txt_color"
+            android:visibility="gone" />
+
+
+    </FrameLayout>
+
+    <Button
+        android:id="@+id/select_city_next_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@color/colorPrimary"
+        android:text="@string/auto_detect_btn"
+        android:textAllCaps="false"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/medium_txt_appearence_size"
+        android:textStyle="bold" />
+
+</LinearLayout>

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layoutDirection="locale"
+    android:background="@color/app_background_color"
+    android:orientation="vertical">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/sign_in_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@android:color/white"
+        app:popupTheme="@style/AppTheme.PopupOverlay">
+
+        <RadioGroup
+            android:id="@+id/radio_group"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="?attr/actionBarSize"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/login_btn"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_weight="1"
+                android:button="@null"
+                android:checked="true"
+                android:gravity="center"
+                android:paddingBottom="@dimen/big_margin"
+                android:paddingTop="@dimen/big_margin"
+                android:text="@string/log_in"
+                tools:ignore="HardcodedText" />
+
+            <RadioButton
+                android:id="@+id/sign_btn"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_weight="1"
+                android:button="@null"
+                android:gravity="center"
+                android:paddingBottom="@dimen/big_margin"
+                android:paddingTop="@dimen/big_margin"
+                android:text="@string/hint_signup"
+                tools:ignore="HardcodedText" />
+        </RadioGroup>
+
+
+    </androidx.appcompat.widget.Toolbar>
+
+    <!--<View-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="@dimen/home_mediam_line_height"-->
+        <!--android:background="@color/app_background_color" />-->
+
+    <FrameLayout
+        android:id="@+id/frameContainer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white_color"
+        android:layout_marginTop="@dimen/home_mediam_line_height">
+
+    </FrameLayout>
+
+</LinearLayout>

@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layoutDirection="locale"
+    android:orientation="vertical">
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:padding="@dimen/medium_margin"
+        tools:ignore="UselessParent">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/del_prod_image"
+                android:layout_width="@dimen/my_cart_list_item_row_img_height"
+                android:layout_height="@dimen/my_cart_list_item_row_img_height"
+                android:layout_marginLeft="@dimen/big_margin"
+                android:background="@color/app_background_color"
+                tools:ignore="RtlHardcoded" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:gravity="center_vertical"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/del_product_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textDirection="locale"
+                android:layout_marginLeft="@dimen/small_margin"
+                android:ellipsize="end"
+                android:maxLines="2"
+                android:textColor="@color/disable_txt_color"
+                tools:ignore="RtlHardcoded" />
+
+            <TextView
+                android:id="@+id/del_product_ingredient"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textDirection="locale"
+                android:layout_marginLeft="@dimen/small_margin"
+                android:ellipsize="end"
+                android:maxLines="2"
+                android:textColor="@color/disable_txt_color"
+                android:textSize="@dimen/small_txt_appearence_size"
+                tools:ignore="RtlHardcoded" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/del_product_quantity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textDirection="locale"
+            android:layout_marginLeft="@dimen/big_margin"
+            android:layout_marginRight="@dimen/big_margin"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/del_product_total"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textDirection="locale"
+            android:layout_marginRight="@dimen/big_margin"
+            android:textColor="@color/colorAccent"
+            tools:ignore="RtlHardcoded" />
+
+    </LinearLayout>
+
+</LinearLayout>

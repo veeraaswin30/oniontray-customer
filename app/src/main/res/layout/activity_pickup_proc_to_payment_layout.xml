@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layoutDirection="locale"
+    android:background="@color/app_background_color"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:layout_marginBottom="@dimen/pay_option_line_height"
+        android:background="@color/white_color"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:padding="@dimen/activity_vertical_margin">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textDirection="locale"
+            android:text="@string/amount_payable"
+            android:textColor="@color/dark_txt_color" />
+
+        <TextView
+            android:id="@+id/pay_opt_tit_tax_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textDirection="locale"
+            android:layout_marginLeft="@dimen/medium_margin"
+            android:layout_marginRight="@dimen/medium_margin" />
+
+        <TextView
+            android:id="@+id/pay_opt_tit_amount_txt"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textDirection="locale"
+            android:layout_weight="1"
+            android:textColor="@color/colorPrimary" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white_color"
+        android:orientation="horizontal"
+        android:baselineAligned="false">
+
+        <!-- our tablayout to display tabs  -->
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/pickup_pay_opt_tabLayout"
+            android:layout_width="0dp"
+            android:layout_height="?attr/actionBarSize"
+            android:layout_weight="1"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+            app:tabSelectedTextColor="@color/dark_txt_color"
+            app:tabTextColor="@color/light_grey_color" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="?attr/actionBarSize"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textDirection="locale"
+                android:gravity="center"
+                android:visibility="gone"
+                android:text="@string/tab_three_name"
+                android:textColor="@color/light_grey_color"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <!-- View pager to swipe views -->
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/pickup_pay_opt_view_pager"
+        android:layout_width="match_parent"
+        android:layout_height="fill_parent"
+        android:layout_marginTop="@dimen/pay_option_line_height"
+        android:background="@color/white_color" />
+
+
+</LinearLayout>

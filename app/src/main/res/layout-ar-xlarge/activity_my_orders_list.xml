@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/app_background_color"
+    android:orientation="vertical">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/myorders_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:layout_marginBottom="@dimen/my_order_list_line_height_size"
+        android:background="@android:color/white"
+        android:elevation="0dp"
+        app:popupTheme="@style/AppTheme.PopupOverlay">
+
+        <TextView
+            android:id="@+id/vender_title_txt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/nav_my_orders_txt"
+            android:textAppearance="?android:textAppearanceLarge"
+            android:textColor="@color/colorPrimary" />
+
+    </androidx.appcompat.widget.Toolbar>
+
+    <LinearLayout
+        android:id="@+id/my_order_list_deliv_food_lay"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:layout_marginBottom="@dimen/my_order_list_line_height_size"
+        android:background="@color/white_color"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:padding="@dimen/medium_margin"
+        android:visibility="gone">
+
+        <ImageView
+            android:id="@+id/my_ord_deli_tit_ic"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/ic_pinl_color_bag_ic"
+            tools:ignore="ContentDescription" />
+
+        <TextView
+            android:id="@+id/my_ord_list_deli_tit_txt_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textColor="@color/dark_txt_color"
+            android:textDirection="rtl"
+            tools:ignore="RtlHardcoded" />
+
+    </LinearLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/my_orders_list_recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+        <TextView
+            android:id="@+id/my_ord_list_empty_txt_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="@string/my_ord_list_empty_err_txt"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="@color/dark_txt_color"
+            android:visibility="gone" />
+
+    </FrameLayout>
+
+</LinearLayout>

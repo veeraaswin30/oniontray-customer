@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/app_background_color"
+    android:orientation="vertical">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/sign_in_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@android:color/white"
+        app:popupTheme="@style/AppTheme.PopupOverlay">
+
+        <RadioGroup
+            android:id="@+id/radio_group"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="?attr/actionBarSize"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/login_btn"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/btn_selector_for_login_ar"
+                android:button="@null"
+                android:checked="true"
+                android:gravity="center"
+                android:paddingBottom="@dimen/big_margin"
+                android:paddingTop="@dimen/big_margin"
+                android:text="@string/log_in"
+                android:textAppearance="?android:textAppearanceLarge"
+                android:textColor="@drawable/btn_selector_for_login_ar"
+                tools:ignore="HardcodedText" />
+
+            <RadioButton
+                android:id="@+id/sign_btn"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/btn_selector_for_sign_up_ar"
+                android:button="@null"
+                android:gravity="center"
+                android:paddingBottom="@dimen/big_margin"
+                android:paddingTop="@dimen/big_margin"
+                android:text="@string/hint_signup"
+                android:textAppearance="?android:textAppearanceLarge"
+                android:textColor="@drawable/btn_selector_for_sign_up_ar"
+                tools:ignore="HardcodedText" />
+        </RadioGroup>
+
+    </androidx.appcompat.widget.Toolbar>
+
+    <FrameLayout
+        android:id="@+id/frameContainer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/home_mediam_line_height"
+        android:background="@color/white_color">
+
+    </FrameLayout>
+
+</LinearLayout>

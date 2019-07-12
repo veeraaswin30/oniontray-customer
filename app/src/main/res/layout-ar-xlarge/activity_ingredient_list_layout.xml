@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/app_background_color"
+    android:orientation="vertical">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/ingredient_list_toolber"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/white_color"
+        android:elevation="0dp"
+        app:popupTheme="@style/AppTheme.PopupOverlay"
+        app:subtitleTextAppearance="@style/ToolbarSubtitleAppearance"
+        app:titleTextAppearance="@style/ToolbarTitleAppearance" />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="@dimen/sele_city_area_loc_item_devi_height_size"
+        android:layout_weight="1">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/ingredient_list_recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <TextView
+            android:id="@+id/ingredient_list_empty_txt_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="@string/ingred_list_empty_txt"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="@color/dark_txt_color"
+            android:visibility="gone" />
+
+    </FrameLayout>
+
+    <Button
+        android:id="@+id/ingredient_done_btn"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/colorPrimary"
+        android:text="@string/ingred_list_done_btn_txt"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@color/white_color"
+        android:textStyle="bold" />
+
+
+</LinearLayout>

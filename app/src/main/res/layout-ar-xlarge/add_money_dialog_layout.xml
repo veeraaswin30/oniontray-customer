@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/white_color"
+    android:orientation="vertical">
+
+    <!--<FrameLayout-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="?android:attr/actionBarSize"-->
+    <!--android:orientation="horizontal">-->
+
+    <!--<TextView-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:text="@string/my_wallet_add_money_txt"-->
+    <!--android:textAppearance="?android:textAppearanceLarge"-->
+    <!--android:textColor="@color/colorAccent"-->
+    <!--android:layout_gravity="center"/>-->
+
+    <!--<ImageView-->
+    <!--android:id="@+id/my_wall_add_money_dia_close_btn"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_gravity="right|top"-->
+    <!--android:layout_margin="@dimen/medium_margin"-->
+    <!--android:src="@drawable/close_ic" />-->
+
+    <!--</FrameLayout>-->
+
+    <!--<View-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="@dimen/my_wallet_devider_line_size"-->
+    <!--android:background="@color/app_background_color" />-->
+
+    <!--<LinearLayout-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_margin="@dimen/activity_vertical_margin"-->
+    <!--android:gravity="center"-->
+    <!--android:orientation="horizontal">-->
+
+    <!--<Button-->
+    <!--android:id="@+id/my_wall_add_money_dia_debt_btn"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_margin="@dimen/medium_margin"-->
+    <!--android:layout_weight="1"-->
+    <!--android:background="@drawable/drawable_selector_red_btn"-->
+    <!--android:text="@string/my_wallet_debit_card_txt"-->
+    <!--android:textAppearance="?android:textAppearanceLarge"-->
+    <!--android:textColor="@drawable/drawable_selector_red_btn" />-->
+
+    <!--<Button-->
+    <!--android:id="@+id/my_wall_add_money_dia_credit_btn"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_margin="@dimen/medium_margin"-->
+    <!--android:layout_weight="1"-->
+    <!--android:background="@drawable/drawable_selector_white_btn"-->
+    <!--android:text="@string/my_wallet_credit_card_txt"-->
+    <!--android:textAppearance="?android:textAppearanceLarge"-->
+    <!--android:textColor="@drawable/drawable_selector_white_btn" />-->
+
+    <!--</LinearLayout>-->
+
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="?android:attr/actionBarSize"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textAppearance="?android:textAppearanceLarge"
+            android:text="@string/my_wallet_add_money_txt"
+            android:textColor="@color/colorAccent" />
+
+        <ImageView
+            android:id="@+id/my_wall_add_money_dia_close_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left|top"
+            android:layout_margin="@dimen/medium_margin"
+            android:src="@drawable/ic_close_ic" />
+
+    </FrameLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/my_wallet_devider_line_size"
+        android:background="@color/app_background_color" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/activity_vertical_margin"
+        android:orientation="vertical">
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/my_wall_amount_txt_view_in_lay"
+            app:errorTextAppearance="@style/error_appearance"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/small_margin"
+            android:gravity="right"
+            android:textAppearance="?android:textAppearanceLarge"
+            android:textColor="@android:color/white">
+
+            <EditText
+                android:id="@+id/my_wall_amount_edt_txt_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:hint="@string/my_wallet_amount_hint_txt"
+                android:inputType="number"
+                android:maxLines="1"
+                android:textAppearance="?android:textAppearanceLarge"
+                android:textColor="@android:color/black" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/activity_vertical_margin"
+        android:layout_marginRight="@dimen/activity_vertical_margin"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/my_wall_add_money_ok_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/medium_margin"
+            android:layout_weight="1"
+            android:textAppearance="?android:textAppearanceLarge"
+            android:background="@drawable/drawable_selector_red_btn"
+            android:text="@string/my_wallet_ok_btn"
+            android:textColor="@drawable/drawable_selector_red_btn" />
+
+        <Button
+            android:id="@+id/my_wall_add_money_dia_debt_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/medium_margin"
+            android:layout_weight="1"
+            android:textAppearance="?android:textAppearanceLarge"
+            android:background="@drawable/drawable_selector_red_btn"
+            android:text="@string/my_wallet_debit_card_txt"
+            android:textColor="@drawable/drawable_selector_red_btn"
+            android:visibility="gone" />
+
+        <Button
+            android:id="@+id/my_wall_add_money_dia_credit_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/medium_margin"
+            android:layout_weight="1"
+            android:background="@drawable/drawable_selector_white_btn"
+            android:text="@string/my_wallet_credit_card_txt"
+            android:textColor="@drawable/drawable_selector_white_btn"
+            android:textAppearance="?android:textAppearanceLarge"
+            android:visibility="gone" />
+
+    </LinearLayout>
+
+
+</LinearLayout>

@@ -1,0 +1,347 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layoutDirection="locale"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/medium_margin"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:visibility="visible">
+
+            <Button
+                android:id="@+id/btnFacebookLogin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginEnd="@dimen/activity_horizontal_margin"
+                android:layout_marginStart="@dimen/activity_horizontal_margin"
+                android:background="@drawable/facebook_sign_in" />
+
+            <Button
+                android:id="@+id/btnGooglePlus"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/activity_horizontal_margin"
+                android:layout_marginStart="@dimen/activity_horizontal_margin"
+                android:visibility="gone"
+                android:layout_weight="1"
+                android:background="@drawable/googleplus_sign_in" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/activity_horizontal_margin"
+            android:orientation="horizontal">
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_marginEnd="@dimen/activity_horizontal_margin"
+                android:layout_marginStart="@dimen/activity_horizontal_margin"
+                android:layout_marginTop="@dimen/big_margin"
+                android:layout_weight="1"
+                android:background="@color/disable_txt_color" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textDirection="locale"
+                android:layout_weight="0.2"
+                android:gravity="center_horizontal|top"
+                android:text="@string/or"
+                android:textAllCaps="true"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_marginEnd="@dimen/activity_horizontal_margin"
+                android:layout_marginStart="@dimen/activity_horizontal_margin"
+                android:layout_marginTop="@dimen/big_margin"
+                android:layout_weight="1"
+                android:background="@color/disable_txt_color" />
+
+        </LinearLayout>
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/input_layout_first_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/big_margin"
+            android:textColor="@color/dark_txt_color"
+            app:errorTextAppearance="@style/error_appearance">
+
+            <EditText
+                android:id="@+id/input_first_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textDirection="locale"
+                android:digits="0123456789qwertyuiopasdfghjklzxcvbnm"
+                android:hint="@string/first_name_txt"
+                android:inputType="textPersonName"
+                android:maxLines="1"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:textColor="@color/disable_txt_color" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/input_layout_last_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/big_margin"
+            android:textColor="@color/dark_txt_color"
+            app:errorTextAppearance="@style/error_appearance">
+
+            <EditText
+                android:id="@+id/input_last_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textDirection="locale"
+                android:digits="0123456789qwertyuiopasdfghjklzxcvbnm"
+                android:hint="@string/last_name_txt"
+                android:inputType="textPersonName"
+                android:maxLines="1"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:textColor="@color/disable_txt_color" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/input_layout_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/big_margin"
+            android:textColor="@color/dark_txt_color"
+            app:errorTextAppearance="@style/error_appearance">
+
+            <EditText
+                android:id="@+id/input_email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textDirection="locale"
+                android:hint="@string/hint_email"
+                android:inputType="textEmailAddress"
+                android:maxLines="1"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:textColor="@color/disable_txt_color" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/input_layout_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/big_margin"
+            android:textColor="@color/dark_txt_color"
+            app:errorTextAppearance="@style/error_appearance"
+            app:passwordToggleEnabled="false">
+
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <EditText
+                    android:id="@+id/input_password"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textDirection="locale"
+                    android:hint="@string/hint_password"
+                    android:inputType="textPassword"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:textColor="@color/disable_txt_color" />
+
+                <CheckBox
+                    android:id="@+id/show_password"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="10dp"
+                    android:button="@null"
+                    android:text="@string/hint_show_password"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="18sp"
+                    android:visibility="gone" />
+
+            </RelativeLayout>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <Spinner
+                android:id="@+id/spinner"
+                android:layout_width="wrap_content"
+                android:layout_height="41dp"
+                android:background="@drawable/edit_box_drop_selector"
+                android:dropDownWidth="200dp" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/input_layout_phone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/big_margin"
+                android:textColor="@color/dark_txt_color"
+                app:errorTextAppearance="@style/error_appearance"
+                app:passwordToggleEnabled="false">
+
+                <!--<FrameLayout-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:orientation="horizontal">-->
+
+                <EditText
+                    android:id="@+id/input_phone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textDirection="locale"
+                    android:digits="0123456789+"
+                    android:hint="@string/hint_mobile_with_country_code"
+                    android:inputType="phone"
+                    android:maxLines="1"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:textColor="@color/disable_txt_color" />
+
+                <!--android:paddingLeft="40dp"-->
+
+                <!--</FrameLayout>-->
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/gender_layout"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/signup_gender_layout_height"
+            android:layout_marginBottom="@dimen/small_margin"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingStart="@dimen/activity_vertical_margin"
+            android:visibility="gone"
+            tools:ignore="PrivateResource">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textDirection="locale"
+                android:layout_marginRight="@dimen/big_margin"
+                android:maxLines="1"
+                android:text="@string/hint_gender"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                tools:ignore="RtlHardcoded" />
+
+            <RadioGroup
+                android:id="@+id/signup_gender_radio_group"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:orientation="horizontal"
+                android:theme="@style/Radiobuttonstyle">
+
+                <RadioButton
+                    android:id="@+id/signup_male_radio_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/small_margin"
+                    android:layout_marginRight="@dimen/small_margin"
+                    android:layout_weight="1"
+                    android:checked="true"
+                    android:text="@string/hint_male"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:textColor="@color/dark_txt_color" />
+
+                <RadioButton
+                    android:id="@+id/signup_female_radio_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/small_margin"
+                    android:layout_marginRight="@dimen/small_margin"
+                    android:layout_weight="1"
+                    android:text="@string/hint_female"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:textColor="@color/dark_txt_color" />
+
+            </RadioGroup>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/terms_and_condition_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/big_margin"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingStart="@dimen/activity_vertical_margin"
+            android:visibility="gone">
+
+            <CheckBox
+                android:id="@+id/input_i_agree"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="top|left"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                tools:ignore="RtlHardcoded" />
+
+            <TextView
+                android:id="@+id/terms_and_condition"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textDirection="locale"
+                android:layout_marginLeft="@dimen/small_margin"
+                android:layout_marginStart="@dimen/small_margin"
+                android:gravity="center_vertical"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                tools:ignore="RtlHardcoded" />
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/sign_in_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_margin="@dimen/activity_vertical_margin"
+            android:background="@drawable/signin_rounded_rectangle"
+            android:padding="@dimen/big_margin"
+            android:text="@string/hint_signup"
+            android:textAllCaps="false"
+            android:textColor="@android:color/white" />
+
+        <TextView
+            android:id="@+id/sign_in_condition"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textDirection="locale"
+            android:gravity="center"
+            android:padding="@dimen/welcome_slide_height"
+            android:text="@string/hint_for_accept"
+            android:textColor="@color/disable_txt_color" />
+
+    </LinearLayout>
+
+</androidx.core.widget.NestedScrollView>
+

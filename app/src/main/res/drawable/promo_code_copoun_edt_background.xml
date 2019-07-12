@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+
+    <solid android:color="@color/white_color" />
+
+    <!--<corners android:radius="@dimen/pro_to_check_line_height" />-->
+
+    <stroke
+        android:width="@dimen/pro_to_check_line_height"
+        android:color="@color/copoun_code_box_stroke_color" />
+
+    <padding
+        android:left="@dimen/small_margin"
+        android:right="@dimen/small_margin" />
+
+</shape>
