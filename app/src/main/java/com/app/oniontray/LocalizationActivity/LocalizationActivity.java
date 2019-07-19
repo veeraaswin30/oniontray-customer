@@ -14,14 +14,18 @@ import com.app.oniontray.AppControler.CustomFontStyle;
 import com.app.oniontray.DB.IngredientRepository;
 import com.app.oniontray.DB.ProductRespository;
 import com.app.oniontray.DotsProgressBar.DDProgressBarDialog;
+import com.app.oniontray.Interface.InternetConnectionListener;
 import com.app.oniontray.R;
 import com.app.oniontray.Utils.LoginPrefManager;
+import com.app.oniontray.Utils.NetworkStatus;
 import com.app.oniontray.WebService.Webdata;
 
 import java.util.Locale;
 
+import retrofit2.Retrofit;
 
-public abstract class LocalizationActivity extends AppCompatActivity implements OnLocaleChangedListener {
+
+public abstract class LocalizationActivity extends AppCompatActivity implements OnLocaleChangedListener, InternetConnectionListener {
 
         private LocalizationActivityDelegate localizationDelegate = new LocalizationActivityDelegate(this);
         public ProductRespository productRespository;
@@ -42,9 +46,18 @@ public abstract class LocalizationActivity extends AppCompatActivity implements 
 
             loginPrefManager = new LoginPrefManager(LocalizationActivity.this);
             progressDialog = Webdata.getProgressBarDialog(LocalizationActivity.this);
+
+            Webdata.setInternetConnectionListener(LocalizationActivity.this);
+
         }
 
-        @Override
+    @Override
+    protected void onPause() {
+        super.onPause();
+        Webdata.removeInternetConnectionListener();
+    }
+
+    @Override
         public void onResume() {
             super.onResume();
             localizationDelegate.onResume(this);
@@ -125,5 +138,41 @@ public abstract class LocalizationActivity extends AppCompatActivity implements 
         startActivity(signInIntent);
     }
 
+    @Override
+    public void onInternetUnavailable() {
+        runOnUiThread(new Runnable() {
+            public void run() {
+                AlertDialog.Builder alertDialog = new AlertDialog.Builder(LocalizationActivity.this, AlertDialog.THEME_DEVICE_DEFAULT_LIGHT);
+                alertDialog.setTitle("" + getString(R.string.no_internet));
+
+                alertDialog.setMessage("" + getString(R.string.no_internet_conn_msg_txt));
+
+                alertDialog.setNegativeButton("" + getString(R.string.ok_btn_txt), new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        if (NetworkStatus.getConnectivityStatusBoolean(LocalizationActivity.this)){
+                            dialog.dismiss();
+                            finish();
+                            overridePendingTransition(0, 0);
+                            startActivity(getIntent());
+                            overridePendingTransition(0, 0);
+
+                        }else{
+
+                        }
+                    }
+                });
+                alertDialog.show();
+
+            }
+
+        });
+    }
+
+    @Override
+    public void onCacheUnavailable() {
+
+
+
+    }
 }
 

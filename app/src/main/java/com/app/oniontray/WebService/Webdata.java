@@ -1,20 +1,28 @@
 package com.app.oniontray.WebService;
 
 import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.util.Log;
 
+import com.app.oniontray.AppControler.onionTray;
 import com.app.oniontray.DotsProgressBar.DDProgressBarDialog;
+import com.app.oniontray.Interface.InternetConnectionListener;
 import com.google.gson.Gson;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
+import okhttp3.Cache;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+
+import static com.facebook.FacebookSdk.getCacheDir;
 
 
 public class Webdata {
@@ -23,16 +31,20 @@ public class Webdata {
     private static DDProgressBarDialog ddProgressBarDialog = null;
 
 
-    public static String BaseUrl = "http://192.168.1.43:1016/api/";
-    private static String NbtBaseUrl = "http://192.168.1.43:1016/api/";
+//    public static String BaseUrl = "http://192.168.1.43:1016/api/";
+    public static String BaseUrl = "http://172.104.172.200/api/";
+//    private static String NbtBaseUrl = "http://192.168.1.43:1016/api/";
+    private static String NbtBaseUrl = "http://172.104.172.200/api/";
 
-    public static final String helpandSuppord_Url = "http://food.nbtdemo.com/mob-cms/faq";
-    public static final String aboutUS_Url = "http://food.nbtdemo.com/mob-cms/about-us";
-    public static final String term_condi_Url = "http://food.nbtdemo.com/mob-cms/terms-conditions";
-    public static final String privacy_policy_Url = "http://food.nbtdemo.com/mob-cms/privacy-policy";
+    public static final String helpandSuppord_Url = "http://172.104.172.200/mob-cms/faq";
+    public static final String aboutUS_Url = "http://172.104.172.200/mob-cms/about-us";
+    public static final String term_condi_Url = "http://172.104.172.200/mob-cms/terms-conditions";
+    public static final String privacy_policy_Url = "http://172.104.172.200/mob-cms/privacy-policy";
 
+    private static InternetConnectionListener mInternetConnectionListener;
 
     private static final String PayPalTokenUrl = "https://api.sandbox.paypal.com/v1/oauth2/";
+    public static final int DISK_CACHE_SIZE = 10 * 1024 * 1024; // 10 MB
 
 
     public static DDProgressBarDialog getProgressBarDialog(Context context) {
@@ -44,6 +56,30 @@ public class Webdata {
 
         OkHttpClient.Builder httpClient = new OkHttpClient.Builder().readTimeout(60, TimeUnit.SECONDS)
                 .connectTimeout(30, TimeUnit.SECONDS);
+        httpClient.cache(getCache());
+
+        httpClient.addInterceptor(new NetworkConnectionInterceptor() {
+            @Override
+            public boolean isInternetAvailable() {
+                return onionTray.isInternetAvailable();
+            }
+
+            @Override
+            public void onInternetUnavailable() {
+                if (mInternetConnectionListener != null) {
+                    mInternetConnectionListener.onInternetUnavailable();
+                }
+            }
+
+            @Override
+            public void onCacheUnavailable() {
+                if (mInternetConnectionListener != null) {
+                    mInternetConnectionListener.onCacheUnavailable();
+                }
+            }
+
+
+        });
 
         httpClient.addInterceptor(new Interceptor() {
             @Override
@@ -156,5 +192,19 @@ public class Webdata {
         return retrofit;
     }
 
+
+    public static void setInternetConnectionListener(InternetConnectionListener listener) {
+        mInternetConnectionListener = listener;
+    }
+
+    public static void removeInternetConnectionListener() {
+        mInternetConnectionListener = null;
+    }
+
+    public static Cache getCache() {
+        File cacheDir = new File(getCacheDir(), "cache");
+        Cache cache = new Cache(cacheDir, DISK_CACHE_SIZE);
+        return cache;
+    }
 
 }

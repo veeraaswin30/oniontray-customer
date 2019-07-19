@@ -77,4 +77,8 @@ public class NetworkStatus {
 //        return activeNetwork != null && activeNetwork.isConnectedOrConnecting();
     }
 
+
+
+
+
 }

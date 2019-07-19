@@ -9,6 +9,8 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Point;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import androidx.multidex.MultiDex;
 import android.view.Display;
@@ -78,6 +80,13 @@ public class onionTray extends Application implements Application.ActivityLifecy
 
     }
 
+    public static boolean isInternetAvailable() {
+        ConnectivityManager connectivityManager
+                = (ConnectivityManager)getContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
+    }
+
     public static Context getContext() {
         return applicationContext;
     }
@@ -94,34 +103,34 @@ public class onionTray extends Application implements Application.ActivityLifecy
     @Override
     public void onActivityResumed(Activity activity) {
 
-        if (current_activity == null) {
-
-            this.current_activity = activity;
-
-            CreateNetWorkAleartDialog(current_activity);
-
-            if (activity.getClass().getName().equals("com.app.oniontray.Activites.SplashScreen")) {
-                CallNetworkDialogMethod();
-            }
-
-        } else {
-
-            if (!activity.getClass().getName().equals("com.app.oniontray.Activites.BaseMenuTabActivity")) {
-
-                if (!this.current_activity.getClass().getName().equals("" + activity.getClass().getName())) {
-
-                    this.current_activity = activity;
-                    CreateNetWorkAleartDialog(current_activity);
-
-                }else{
-
-                    CallNetworkDialogMethod();
-
-                }
-
-            }
-
-        }
+//        if (current_activity == null) {
+//
+//            this.current_activity = activity;
+//
+//            CreateNetWorkAleartDialog(current_activity);
+//
+//            if (activity.getClass().getName().equals("com.app.oniontray.Activites.SplashScreen")) {
+//                CallNetworkDialogMethod();
+//            }
+//
+//        } else {
+//
+//            if (!activity.getClass().getName().equals("com.app.oniontray.Activites.BaseMenuTabActivity")) {
+//
+//                if (!this.current_activity.getClass().getName().equals("" + activity.getClass().getName())) {
+//
+//                    this.current_activity = activity;
+//                    CreateNetWorkAleartDialog(current_activity);
+//
+//                }else{
+//
+//                    CallNetworkDialogMethod();
+//
+//                }
+//
+//            }
+//
+//        }
 
     }
 
