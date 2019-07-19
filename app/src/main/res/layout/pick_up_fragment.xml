@@ -80,6 +80,7 @@
                         android:id="@+id/input_Layout_Delivery"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/medium_margin"
                         app:errorTextAppearance="@style/error_appearance">
 
                         <EditText

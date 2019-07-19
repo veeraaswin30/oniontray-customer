@@ -31,10 +31,10 @@ public class Webdata {
     private static DDProgressBarDialog ddProgressBarDialog = null;
 
 
-//    public static String BaseUrl = "http://192.168.1.43:1016/api/";
-    public static String BaseUrl = "http://172.104.172.200/api/";
-//    private static String NbtBaseUrl = "http://192.168.1.43:1016/api/";
-    private static String NbtBaseUrl = "http://172.104.172.200/api/";
+    public static String BaseUrl = "http://192.168.1.43:1016/api/";
+//    public static String BaseUrl = "http://172.104.172.200/api/";
+    private static String NbtBaseUrl = "http://192.168.1.43:1016/api/";
+//    private static String NbtBaseUrl = "http://172.104.172.200/api/";
 
     public static final String helpandSuppord_Url = "http://172.104.172.200/mob-cms/faq";
     public static final String aboutUS_Url = "http://172.104.172.200/mob-cms/about-us";

@@ -69,7 +69,7 @@ public class MenuRestaurantsActivity extends LocalizationActivity implements Sea
 
     private Toolbar toolbar;
 
-    private TextView menu_rest_title_txt;
+    private TextView menu_rest_title_txt,home_banner_search_txt_view;
 
     private SearchView restaurent_list_search_view;
 
@@ -120,6 +120,13 @@ public class MenuRestaurantsActivity extends LocalizationActivity implements Sea
             }
         });
 
+        home_banner_search_txt_view = (TextView) findViewById(R.id.home_banner_search_txt_view);
+        home_banner_search_txt_view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ClickSearchViewAction();
+            }
+        });
         menu_rest_title_txt = (TextView) findViewById(R.id.menu_rest_title_txt);
         menu_rest_title_txt.setTextColor(Color.parseColor(loginPrefManager.getThemeFontColor()));
 

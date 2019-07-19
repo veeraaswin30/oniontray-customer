@@ -18,13 +18,6 @@ import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.provider.Settings;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import com.google.android.material.textfield.TextInputLayout;
-import androidx.core.app.ActivityCompat;
-import androidx.localbroadcastmanager.content.LocalBroadcastManager;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.Menu;
@@ -39,6 +32,13 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.ActivityCompat;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import com.app.oniontray.LocalizationActivity.LanguageSetting;
 import com.app.oniontray.LocalizationActivity.LocalizationActivity;
@@ -76,6 +76,7 @@ import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.material.textfield.TextInputLayout;
 
 import java.io.IOException;
 import java.text.DateFormat;
@@ -208,7 +209,7 @@ public class AddAddressActivity extends LocalizationActivity implements View.OnC
 
         add_address_title = findViewById(R.id.add_address_title);
         add_address_title.setTextColor(Color.parseColor(loginPrefManager.getThemeFontColor()));
-        toolbar = (Toolbar) findViewById(R.id.My_add_toolbar_id);
+        toolbar = findViewById(R.id.My_add_toolbar_id);
         toolbar.setTitle("");
         toolbar.setTitleTextColor(getResources().getColor(R.color.colorPrimary));
         toolbar.setTitleTextColor(Color.parseColor(loginPrefManager.getThemeFontColor()));
@@ -253,12 +254,12 @@ public class AddAddressActivity extends LocalizationActivity implements View.OnC
             Toast.makeText(getApplicationContext(), "" + getApplicationContext().getString(R.string.no_internet), Toast.LENGTH_SHORT).show();
         }
 
-        input_Address = (Spinner) findViewById(R.id.inputAddress);
-        citySpinner = (Spinner) findViewById(R.id.city_spinner);
-        locationSpinner = (Spinner) findViewById(R.id.location_spinner);
+        input_Address = findViewById(R.id.inputAddress);
+        citySpinner = findViewById(R.id.city_spinner);
+        locationSpinner = findViewById(R.id.location_spinner);
 
-        input_layout_name = (TextInputLayout) findViewById(R.id.addr_input_layout);
-        addr_edt_txt = (EditText) findViewById(R.id.inputName);
+        input_layout_name = findViewById(R.id.addr_input_layout);
+        addr_edt_txt = findViewById(R.id.inputName);
         addr_edt_txt.addTextChangedListener(new MyTextWatcher(addr_edt_txt));
 
 
@@ -267,13 +268,13 @@ public class AddAddressActivity extends LocalizationActivity implements View.OnC
 //        build_name_edt_txt.addTextChangedListener(new MyTextWatcher(build_name_edt_txt));
 
 
-        building_name_txt_input_layout = (TextInputLayout) findViewById(R.id.building_name_txt_input_layout);
-        building_name_edt_txt = (EditText) findViewById(R.id.building_name_edt_txt);
+        building_name_txt_input_layout = findViewById(R.id.building_name_txt_input_layout);
+        building_name_edt_txt = findViewById(R.id.building_name_edt_txt);
         building_name_edt_txt.addTextChangedListener(new MyTextWatcher(building_name_edt_txt));
 
 
-        land_mark_txt_input_layout = (TextInputLayout) findViewById(R.id.land_mark_txt_input_layout);
-        land_mark_edt_txt = (EditText) findViewById(R.id.land_mark_edt_txt);
+        land_mark_txt_input_layout = findViewById(R.id.land_mark_txt_input_layout);
+        land_mark_edt_txt = findViewById(R.id.land_mark_edt_txt);
         land_mark_edt_txt.addTextChangedListener(new MyTextWatcher(land_mark_edt_txt));
 
 //        Mmap = ((MapFragment) getFragmentManager().findFragmentById(R.id.map)).getMap();
@@ -363,7 +364,7 @@ public class AddAddressActivity extends LocalizationActivity implements View.OnC
             public View getDropDownView(int position, View convertView, ViewGroup parent) {
                 // TODO Auto-generated method stub
                 View view = super.getView(position, convertView, parent);
-                TextView text = (TextView) view.findViewById(android.R.id.text1);
+                TextView text = view.findViewById(android.R.id.text1);
                 text.setText(addressType.get(position).getName());
 //                text.setTextAppearance(getApplicationContext(), android.R.attr.textAppearanceLarge);
                 if (isTablet(AddAddressActivity.this)) {
@@ -379,7 +380,7 @@ public class AddAddressActivity extends LocalizationActivity implements View.OnC
             public View getView(int position, View convertView, ViewGroup parent) {
                 // TODO Auto-generated method stub
                 View view = super.getView(position, convertView, parent);
-                TextView text = (TextView) view.findViewById(android.R.id.text1);
+                TextView text = view.findViewById(android.R.id.text1);
 
                 if (position == getCount()) {
                     text.setText(addressType.get(position).getName());
@@ -461,7 +462,7 @@ public class AddAddressActivity extends LocalizationActivity implements View.OnC
             public View getDropDownView(int position, View convertView, ViewGroup parent) {
                 // TODO Auto-generated method stub
                 View view = super.getView(position, convertView, parent);
-                TextView text = (TextView) view.findViewById(android.R.id.text1);
+                TextView text = view.findViewById(android.R.id.text1);
                 text.setText(cityList.get(position).getCityName());
 //                text.setTextAppearance(getApplicationContext(), android.R.attr.textAppearanceLarge);
                 if (isTablet(AddAddressActivity.this)) {
@@ -477,7 +478,7 @@ public class AddAddressActivity extends LocalizationActivity implements View.OnC
             public View getView(int position, View convertView, ViewGroup parent) {
                 // TODO Auto-generated method stub
                 View view = super.getView(position, convertView, parent);
-                TextView text = (TextView) view.findViewById(android.R.id.text1);
+                TextView text = view.findViewById(android.R.id.text1);
 
                 text.setText(cityList.get(position).getCityName());
                 if (isTablet(AddAddressActivity.this)) {
@@ -559,7 +560,7 @@ public class AddAddressActivity extends LocalizationActivity implements View.OnC
             @Override
             public View getDropDownView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
                 View view = super.getView(position, convertView, parent);
-                TextView text = (TextView) view.findViewById(android.R.id.text1);
+                TextView text = view.findViewById(android.R.id.text1);
                 text.setText(data.get(position).getZoneName());
 //                text.setTextAppearance(getApplicationContext(), android.R.attr.textAppearanceLarge);
                 text.setTextSize(14);
@@ -572,7 +573,7 @@ public class AddAddressActivity extends LocalizationActivity implements View.OnC
             public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
                 // TODO Auto-generated method stub
                 View view = super.getView(position, convertView, parent);
-                TextView text = (TextView) view.findViewById(android.R.id.text1);
+                TextView text = view.findViewById(android.R.id.text1);
 
                 text.setText(data.get(position).getZoneName());
                 text.setTextSize(14);
@@ -724,7 +725,8 @@ public class AddAddressActivity extends LocalizationActivity implements View.OnC
             public void onResponse(Call<Addaddress> call, Response<Addaddress> response) {
 
                 try {
-
+                    Intent intent = new Intent();
+                    setResult(RESULT_OK, intent);
                     progressDialog.dismiss();
                     if (response.body().getResponse().getHttpCode() == 200) {
 
@@ -955,9 +957,9 @@ public class AddAddressActivity extends LocalizationActivity implements View.OnC
 
             if (resultCode == RESULT_OK) {
 
-                 place = PlaceAutocomplete.getPlace(this, data);
-                 latitude=place.getLatLng().latitude;
-                 longitude=place.getLatLng().longitude;
+                place = PlaceAutocomplete.getPlace(this, data);
+                latitude = place.getLatLng().latitude;
+                longitude = place.getLatLng().longitude;
 
                 addr_edt_txt.setText(place.getAddress());
 
@@ -1252,9 +1254,7 @@ public class AddAddressActivity extends LocalizationActivity implements View.OnC
     private void hideKeyboard() {
         InputMethodManager inputMethodManager = (InputMethodManager) this.getSystemService(Activity.INPUT_METHOD_SERVICE);
         View focusedView = this.getCurrentFocus();
-        if (focusedView != null)
-
-        {
+        if (focusedView != null) {
             inputMethodManager.hideSoftInputFromWindow(focusedView.getWindowToken(), 0);
         }
     }

@@ -511,7 +511,7 @@ public class OrderDetailActivity extends LocalizationActivity implements
                     }
 
 
-                    Input_order_status.setTextColor(Color.parseColor(response.body().getResponse().getVendorInfo().get(0).getColorCode()));
+                    Input_order_status.setTextColor(Color.parseColor(response.body().getResponse().getVendorInfo().get(0).getColorCode().trim()));
 
 
                     // Created date & time added with cancel order time. Then compare with current date and time

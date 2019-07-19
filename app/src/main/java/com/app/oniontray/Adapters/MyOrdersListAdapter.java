@@ -70,7 +70,7 @@ public class MyOrdersListAdapter extends RecyclerView.Adapter<MyOrdersListAdapte
             holder.my_order_restaurant_status.setText("" + moContext.getString(R.string.order_states_canceld_txt));
         }
 
-        holder.my_order_restaurant_status.setTextColor(Color.parseColor("" + myOrdersArrayList.get(position).getColorCode()));
+        holder.my_order_restaurant_status.setTextColor(Color.parseColor("" + myOrdersArrayList.get(position).getColorCode().trim()));
 
 ////        if(myOrdersArrayList.get(position).getOrderType() == 2){
 ////            holder.my_ord_list_row_devider_deliv_slot_lay.setVisibility(View.GONE);

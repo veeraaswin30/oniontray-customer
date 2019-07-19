@@ -7,9 +7,6 @@ import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-import androidx.appcompat.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -17,8 +14,13 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.app.oniontray.Adapters.MycartAdapter;
+import com.app.oniontray.Fragments.DeliveryFragment;
+import com.app.oniontray.Fragments.PickUpFragment;
 import com.app.oniontray.LocalizationActivity.LanguageSetting;
 import com.app.oniontray.LocalizationActivity.LocalizationActivity;
 import com.app.oniontray.R;
@@ -51,6 +53,7 @@ public class RestaurantMycartActivity extends LocalizationActivity implements My
     private TextView restaurant_mycart_title, restaurant_subtotal, my_cart_empty_text_view;
 
     private Button restaurant_add_more, restaurant_check_out;
+    private Button restaurant_take_away, restaurant_self_pickup;
     private ArrayList<String> outletAndVendorID;
 
     private OutletDetails outletDetails;
@@ -74,12 +77,70 @@ public class RestaurantMycartActivity extends LocalizationActivity implements My
         AddMoreClickEvent();
 
         CheckOutClickEvent();
+
+        takeAwaySelfPickupClickEvent();
+    }
+
+    private void takeAwaySelfPickupClickEvent() {
+
+        restaurant_take_away.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                redirectInto("takeaway");
+            }
+        });
+
+        restaurant_self_pickup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                redirectInto("pickup");
+            }
+        });
+    }
+
+    private void redirectInto(String type) {
+        if (myCartAdapter != null && myCartAdapter.getItemCount() != 0) {
+            Float mtotal_value = Float.valueOf(productRespository.totalPrice());
+            Float min_order_amouont = Float.valueOf(mini_order_amt);
+
+            int mproduct_total_price = Math.round(mtotal_value);
+            int min_order_amt = Math.round(min_order_amouont);
+            if (min_order_amt > mproduct_total_price) {
+                showExitWarningDialog(RestaurantMycartActivity.this);
+            } else {
+
+                if (loginPrefManager.getStringValue("user_id").isEmpty()) {
+
+                    Intent signin_intent = new Intent(RestaurantMycartActivity.this, RestaurantSignInSignUpActivity.class);
+                    signin_intent.putExtra("proc_to_check", true);
+                    signin_intent.putExtra("outlet_details", outletDetails);
+                    signin_intent.putExtra("vendor_id", outletAndVendorID.get(0));
+                    signin_intent.putExtra("FromMycart", true);
+                    startActivity(signin_intent);
+
+                } else {
+                    Intent checkout;
+                    if (type.equals("takeaway"))
+                        checkout = new Intent(RestaurantMycartActivity.this, DeliveryActivity.class);
+                    else
+                        checkout = new Intent(RestaurantMycartActivity.this, PickUpActivity.class);
+                    checkout.putExtra("outlet_details", outletDetails);
+                    checkout.putExtra("vendor_id", outletAndVendorID.get(0));
+                    startActivity(checkout);
+
+                }
+
+            }
+
+        } else {
+            Toast.makeText(RestaurantMycartActivity.this, "" + getString(R.string.my_carts_err_msg_when_cart_empty_txt), Toast.LENGTH_SHORT).show();
+        }
     }
 
 
     private void intializeView() {
 
-        restaurant_mycart_toolbar = (Toolbar) findViewById(R.id.restaurant_mycart_toolbar);
+        restaurant_mycart_toolbar = findViewById(R.id.restaurant_mycart_toolbar);
 
         setSupportActionBar(restaurant_mycart_toolbar);
 
@@ -88,7 +149,7 @@ public class RestaurantMycartActivity extends LocalizationActivity implements My
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayUseLogoEnabled(true);
 
-           String language = String.valueOf(LanguageSetting.getLanguage(RestaurantMycartActivity.this));
+        String language = String.valueOf(LanguageSetting.getLanguage(RestaurantMycartActivity.this));
 
 
         if (language.equals("en")) {
@@ -103,29 +164,30 @@ public class RestaurantMycartActivity extends LocalizationActivity implements My
 
         outletAndVendorID = productRespository.getVendorID();
 
-        overallView = (LinearLayout) findViewById(R.id.overall_view);
-        my_cart_empty_text_view = (TextView) findViewById(R.id.my_cart_empty_text_view);
+        overallView = findViewById(R.id.overall_view);
+        my_cart_empty_text_view = findViewById(R.id.my_cart_empty_text_view);
 
-        restaurant_mycart_title = (TextView) findViewById(R.id.restaurant_mycart_title);
-        restaurant_subtotal = (TextView) findViewById(R.id.restaurant_subtotal);
+        restaurant_mycart_title = findViewById(R.id.restaurant_mycart_title);
+        restaurant_subtotal = findViewById(R.id.restaurant_subtotal);
 
 
-
-        restaurant_add_more = (Button) findViewById(R.id.restaurant_add_more);
-        restaurant_check_out = (Button) findViewById(R.id.restaurant_check_out);
+        restaurant_take_away = findViewById(R.id.restaurant_take_away);
+        restaurant_self_pickup = findViewById(R.id.restaurant_self_pickup);
+        restaurant_add_more = findViewById(R.id.restaurant_add_more);
+        restaurant_check_out = findViewById(R.id.restaurant_check_out);
         restaurant_check_out.setTextColor(Color.parseColor(loginPrefManager.getThemeColor()));
         restaurant_check_out.setBackgroundColor(Color.parseColor(loginPrefManager.getThemeFontColor()));
 
         review_title = findViewById(R.id.review_title);
         review_title.setTextColor(Color.parseColor(loginPrefManager.getThemeFontColor()));
 
-        restaurant_mycart_recycler_view = (RecyclerView) findViewById(R.id.restaurant_mycart_recycler_view);
+        restaurant_mycart_recycler_view = findViewById(R.id.restaurant_mycart_recycler_view);
 
         restaurant_mycart_recycler_view.setHasFixedSize(true);
         restaurant_mycart_recycler_view.setLayoutManager(new LinearLayoutManager(RestaurantMycartActivity.this));
         restaurant_mycart_recycler_view.addItemDecoration(new ProdListItemOffsetDecor(RestaurantMycartActivity.this, R.dimen.prod_list_item_row_line_height));
 
-        my_cart_add_more_check_out_layout = (LinearLayout) findViewById(R.id.my_cart_add_more_check_out_layout);
+        my_cart_add_more_check_out_layout = findViewById(R.id.my_cart_add_more_check_out_layout);
 
     }
 
@@ -211,7 +273,7 @@ public class RestaurantMycartActivity extends LocalizationActivity implements My
         APIService MyCartService = Webdata.getRetrofit().create(APIService.class);
 
         MyCartService.getOutletDetails("" + loginPrefManager.getStringValue("Lang_code"),
-                ""+outletAndVendorID.get(0), ""+outletAndVendorID.get(1), "" + loginPrefManager.getCityID(),
+                "" + outletAndVendorID.get(0), "" + outletAndVendorID.get(1), "" + loginPrefManager.getCityID(),
                 "" + loginPrefManager.getLocID()).enqueue(new Callback<VendorDetailForMyCart>() {
             @Override
             public void onResponse(Call<VendorDetailForMyCart> call, final Response<VendorDetailForMyCart> response) {

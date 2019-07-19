@@ -1,4 +1,4 @@
-package com.app.oniontray.Fragments;
+package com.app.oniontray.Activites;
 
 /**
  * Created by nextbrain on 2/1/18.
@@ -6,34 +6,37 @@ package com.app.oniontray.Fragments;
 
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-
 import android.text.Editable;
 import android.text.InputFilter;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.Button;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TableRow;
 import android.widget.TextView;
-import android.widget.TimePicker;
 import android.widget.Toast;
 
-
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.app.oniontray.Activites.PickUpProceedToPayment;
 import com.app.oniontray.Adapters.DelivFragProductAdapter;
 import com.app.oniontray.CustomViews.ExpandableHeightListView;
 import com.app.oniontray.DB.ProductRespository;
 import com.app.oniontray.DotsProgressBar.DDProgressBarDialog;
+import com.app.oniontray.LocalizationActivity.LanguageSetting;
+import com.app.oniontray.LocalizationActivity.LocalizationActivity;
 import com.app.oniontray.R;
 import com.app.oniontray.RecyclerView.NotificationListItemOffsetDecor;
 import com.app.oniontray.RequestModels.OutletDetails;
@@ -60,13 +63,12 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 
-public class PickUpFragment extends Fragment implements TimePickerDialog.OnTimeSetListener,
+public class PickUpActivity extends LocalizationActivity implements TimePickerDialog.OnTimeSetListener,
         DatePickerDialog.OnDateSetListener{
 
+    private Toolbar toolbar;
     private LoginPrefManager prefManager;
     private DDProgressBarDialog progressBarDialog;
-
-    private View pickUpView;
 
     private TextView pickup_outlet_add_txt;
     private TextInputLayout pickup_txt_input_layout;
@@ -135,57 +137,72 @@ public class PickUpFragment extends Fragment implements TimePickerDialog.OnTimeS
     String date_and_time;
     private TextView ed_date, ed_time;
     private DatePickerDialog dpd;
-    private com.wdullaer.materialdatetimepicker.time.TimePickerDialog tpd;
-    public PickUpFragment() {
+    private TimePickerDialog tpd;
+    public PickUpActivity() {
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setRetainInstance(false);
-    }
+        setContentView(R.layout.activity_pick_up);
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        pickUpView = inflater.inflate(R.layout.pick_up_fragment, container, false);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar.setTitle("");
+        toolbar.setTitleTextColor(getResources().getColor(R.color.colorPrimary));
+        setSupportActionBar(toolbar);
 
-        prefManager = new LoginPrefManager(getContext());
-        progressBarDialog = new DDProgressBarDialog(getContext());
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        String language = String.valueOf(LanguageSetting.getLanguage(PickUpActivity.this));
+
+
+        if (language.equals("en")) {
+            //getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_action_bar_en_back_ic);
+            final Drawable upArrow = getResources().getDrawable(R.drawable.ic_action_bar_en_back_ic);
+            upArrow.setColorFilter(Color.parseColor(loginPrefManager.getToolbarIconcolor()), PorterDuff.Mode.SRC_ATOP);
+            getSupportActionBar().setHomeAsUpIndicator(upArrow);
+        } else {
+/*
+            getSupportActionBar().setHomeAsUpIndicator(R.drawable.action_bar_ar_back_ic);
+*/
+        }
+
+        prefManager = new LoginPrefManager(this);
+        progressBarDialog = new DDProgressBarDialog(this);
 
         productRespository = new ProductRespository();
 
-        Bundle bundle = this.getArguments();
+        Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
             outletDetails = (OutletDetails) bundle.getSerializable("outlet_details");
             vendor_id = bundle.getString("vendor_id");
 //            Log.e("vendorID", vendor_id);
         }
 
-        pickup_outlet_add_txt = (TextView) pickUpView.findViewById(R.id.pickup_outlet_add_txt);
+        pickup_outlet_add_txt = findViewById(R.id.pickup_outlet_add_txt);
 
         pickup_outlet_add_txt.setText(outletDetails.getContactAddress());
 
 
-        prod_list_recycler_view = (RecyclerView) pickUpView.findViewById(R.id.prod_list_recycler_view);
-        prod_list_recycler_view.setLayoutManager(new LinearLayoutManager(getContext()));
+        prod_list_recycler_view = findViewById(R.id.prod_list_recycler_view);
+        prod_list_recycler_view.setLayoutManager(new LinearLayoutManager(this));
         prod_list_recycler_view.setHasFixedSize(true);
-        prod_list_recycler_view.addItemDecoration(new NotificationListItemOffsetDecor(getContext(), R.dimen.notifications_list_item_row_line_hight));
+        prod_list_recycler_view.addItemDecoration(new NotificationListItemOffsetDecor(this, R.dimen.notifications_list_item_row_line_hight));
 
 
-        proceed_payment_but = (Button) pickUpView.findViewById(R.id.proceed_payment_but);
-        coupon = (TextView) pickUpView.findViewById(R.id.apply_but);
-        coupon_code_edt_txt = (EditText) pickUpView.findViewById(R.id.coupon_code_edt_txt);
+        proceed_payment_but = findViewById(R.id.proceed_payment_but);
+        coupon = findViewById(R.id.apply_but);
+        coupon_code_edt_txt = findViewById(R.id.coupon_code_edt_txt);
         coupon_code_edt_txt.setFilters(new InputFilter[]{new InputFilter.AllCaps()});
-        proc_to_check_service_tax_label = (TextView) pickUpView.findViewById(R.id.service_tax_label);
-        platformChargesText = (TextView) pickUpView.findViewById(R.id.delivery_charges_txt);
+        proc_to_check_service_tax_label = findViewById(R.id.service_tax_label);
+        platformChargesText = findViewById(R.id.delivery_charges_txt);
 
 
-        proc_to_check_coupon_apply_table_lay = (TableRow) pickUpView.findViewById(R.id.proc_to_check_coupon_apply_table_lay);
-        proc_to_check_coupon_edt_txt_view = (EditText) pickUpView.findViewById(R.id.proc_to_check_coupon_edt_txt_view);
+        proc_to_check_coupon_apply_table_lay = findViewById(R.id.proc_to_check_coupon_apply_table_lay);
+        proc_to_check_coupon_edt_txt_view = findViewById(R.id.proc_to_check_coupon_edt_txt_view);
         proc_to_check_coupon_edt_txt_view.setFilters(new InputFilter[]{new InputFilter.AllCaps()});
-        proc_to_check_coupon_apply_btn = (Button) pickUpView.findViewById(R.id.proc_to_check_coupon_apply_btn);
-        copoun_code_err_msg_txt = (TextView) pickUpView.findViewById(R.id.copoun_code_err_msg_txt);
+        proc_to_check_coupon_apply_btn = findViewById(R.id.proc_to_check_coupon_apply_btn);
+        copoun_code_err_msg_txt = findViewById(R.id.copoun_code_err_msg_txt);
 
         proc_to_check_coupon_edt_txt_view.addTextChangedListener(new TextWatcher() {
             @Override
@@ -222,9 +239,9 @@ public class PickUpFragment extends Fragment implements TimePickerDialog.OnTimeS
             }
         });
 
-        proc_to_check_coupon_remove_table_lay = (TableRow) pickUpView.findViewById(R.id.proc_to_check_coupon_remove_table_lay);
-        proc_to_check_coupon_txt_view = (TextView) pickUpView.findViewById(R.id.proc_to_check_coupon_txt_view);
-        proc_to_check_coupon_romve_btn = (Button) pickUpView.findViewById(R.id.proc_to_check_coupon_romve_btn);
+        proc_to_check_coupon_remove_table_lay = findViewById(R.id.proc_to_check_coupon_remove_table_lay);
+        proc_to_check_coupon_txt_view = findViewById(R.id.proc_to_check_coupon_txt_view);
+        proc_to_check_coupon_romve_btn = findViewById(R.id.proc_to_check_coupon_romve_btn);
         proc_to_check_coupon_romve_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -233,34 +250,34 @@ public class PickUpFragment extends Fragment implements TimePickerDialog.OnTimeS
         });
 
 
-        proc_to_check_coupon_discount_table_lay = (TableRow) pickUpView.findViewById(R.id.proc_to_check_coupon_discount_table_lay);
-        proc_to_chec_coupon_disc_amt_holder_txt_view = (TextView) pickUpView.findViewById(R.id.proc_to_chec_coupon_disc_amt_holder_txt_view);
-        proc_to_chec_coupon_disc_amt_txt_view = (TextView) pickUpView.findViewById(R.id.proc_to_chec_coupon_disc_amt_txt_view);
+        proc_to_check_coupon_discount_table_lay = findViewById(R.id.proc_to_check_coupon_discount_table_lay);
+        proc_to_chec_coupon_disc_amt_holder_txt_view = findViewById(R.id.proc_to_chec_coupon_disc_amt_holder_txt_view);
+        proc_to_chec_coupon_disc_amt_txt_view = findViewById(R.id.proc_to_chec_coupon_disc_amt_txt_view);
 
 
-        proc_to_check_coupon_amt_pay_table_lay = (TableRow) pickUpView.findViewById(R.id.proc_to_check_coupon_amt_pay_table_lay);
-        proc_to_chec_amt_pay_holder_txt_view = (TextView) pickUpView.findViewById(R.id.proc_to_chec_amt_pay_holder_txt_view);
-        proc_to_chec_amt_pay_txt_view = (TextView) pickUpView.findViewById(R.id.proc_to_chec_amt_pay_txt_view);
+        proc_to_check_coupon_amt_pay_table_lay = findViewById(R.id.proc_to_check_coupon_amt_pay_table_lay);
+        proc_to_chec_amt_pay_holder_txt_view = findViewById(R.id.proc_to_chec_amt_pay_holder_txt_view);
+        proc_to_chec_amt_pay_txt_view = findViewById(R.id.proc_to_chec_amt_pay_txt_view);
 
 
-        sub_total_txt = (TextView) pickUpView.findViewById(R.id.sub_total_txt);
-        service_tax_txt = (TextView) pickUpView.findViewById(R.id.service_tax_txt);
-        grand_total_txt = (TextView) pickUpView.findViewById(R.id.grand_total_txt);
+        sub_total_txt = findViewById(R.id.sub_total_txt);
+        service_tax_txt = findViewById(R.id.service_tax_txt);
+        grand_total_txt = findViewById(R.id.grand_total_txt);
 
-        deliv_promo_code_apply_row = (TableRow) pickUpView.findViewById(R.id.deliv_promo_code_apply_row);
-        deliv_valide_promo_code_table_row = (TableRow) pickUpView.findViewById(R.id.deliv_valide_promo_code_table_row);
+        deliv_promo_code_apply_row = findViewById(R.id.deliv_promo_code_apply_row);
+        deliv_valide_promo_code_table_row = findViewById(R.id.deliv_valide_promo_code_table_row);
 
-        deliv_vali_promo_code_txt = (TextView) pickUpView.findViewById(R.id.deliv_vali_promo_code_txt);
-        deliv_vali_promo_code_amt_txt = (TextView) pickUpView.findViewById(R.id.deliv_vali_promo_code_amt_txt);
+        deliv_vali_promo_code_txt = findViewById(R.id.deliv_vali_promo_code_txt);
+        deliv_vali_promo_code_amt_txt = findViewById(R.id.deliv_vali_promo_code_amt_txt);
 
-        input_layout_delivery = (TextInputLayout) pickUpView.findViewById(R.id.input_Layout_Delivery);
-        input_layout_promocode = (TextInputLayout) pickUpView.findViewById(R.id.input_Layout_Promo);
-        InputDelivery = (EditText) pickUpView.findViewById(R.id.del_instruction);
+        input_layout_delivery = findViewById(R.id.input_Layout_Delivery);
+        input_layout_promocode = findViewById(R.id.input_Layout_Promo);
+        InputDelivery = findViewById(R.id.del_instruction);
 
         InputDelivery.addTextChangedListener(new MyTextWatcher(InputDelivery));
         coupon_code_edt_txt.addTextChangedListener(new MyTextWatcher(coupon_code_edt_txt));
-        ed_date = pickUpView.findViewById(R.id.ed_date);
-        ed_time = pickUpView.findViewById(R.id.ed_time);
+        ed_date = findViewById(R.id.ed_date);
+        ed_time = findViewById(R.id.ed_time);
 
 
         if (outletDetails.getTaxType() == 2) {
@@ -334,7 +351,7 @@ public class PickUpFragment extends Fragment implements TimePickerDialog.OnTimeS
         ed_time.setOnClickListener(v -> {
 
             if (ed_date.getText().toString().isEmpty()){
-                Toast.makeText(getActivity(), getString(R.string.please_select_date), Toast.LENGTH_SHORT).show();
+                Toast.makeText(PickUpActivity.this, getString(R.string.please_select_date), Toast.LENGTH_SHORT).show();
                 return;
             }
 
@@ -342,13 +359,13 @@ public class PickUpFragment extends Fragment implements TimePickerDialog.OnTimeS
             now.add(Calendar.MINUTE,45);
             if (tpd == null) {
                 tpd = TimePickerDialog.newInstance(
-                        PickUpFragment.this,
+                        PickUpActivity.this,
                         now.get(Calendar.HOUR_OF_DAY),
                         now.get(Calendar.MINUTE),false);
 
             } else {
                 tpd.initialize(
-                        PickUpFragment.this,
+                        PickUpActivity.this,
                         now.get(Calendar.HOUR_OF_DAY),
                         now.get(Calendar.MINUTE),
                         now.get(Calendar.SECOND),
@@ -367,14 +384,12 @@ public class PickUpFragment extends Fragment implements TimePickerDialog.OnTimeS
                 tpd.setMinTime(hr, min, sec);
             }
             tpd.setTimeInterval(1, 15);
-            tpd.show(getFragmentManager(), "Timepickerdialog");
+            tpd.show(getSupportFragmentManager(), "Timepickerdialog");
 
         });
-
-
-
-        return pickUpView;
     }
+
+
     @Override
     public void onDateSet(DatePickerDialog view, int year, int monthOfYear, int dayOfMonth) {
         String date = year+"-"+(++monthOfYear)+"-"+dayOfMonth;
@@ -417,7 +432,7 @@ public class PickUpFragment extends Fragment implements TimePickerDialog.OnTimeS
 
     private void LoadProductFromDB() {
 
-        delivFragProductAdapter = new DelivFragProductAdapter(getContext(), productRespository.getCartProductList());
+        delivFragProductAdapter = new DelivFragProductAdapter(this, productRespository.getCartProductList());
         prod_list_recycler_view.setAdapter(delivFragProductAdapter);
 
 
@@ -506,7 +521,7 @@ public class PickUpFragment extends Fragment implements TimePickerDialog.OnTimeS
                             CouponCodeSuccessMethod(response.body().getResponse());
 
                         } else if (response.body().getResponse().getHttpCode() == 400) {
-                            Toast.makeText(getContext(), "" + response.body().getResponse().getMessage(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(PickUpActivity.this, "" + response.body().getResponse().getMessage(), Toast.LENGTH_SHORT).show();
                         }
 
                     } catch (Exception e) {
@@ -585,7 +600,7 @@ public class PickUpFragment extends Fragment implements TimePickerDialog.OnTimeS
                 proc_to_chec_amt_pay_txt_view.setText(prefManager.getFormatCurrencyValue(prefManager.GetEngDecimalFormatValues((float) final_amt)));
 
                 outletDetails.setApplyCoupon(true);
-                outletDetails.setCouponAmount("" + Double.toString(subtract_anount));
+                outletDetails.setCouponAmount("" + subtract_anount);
                 outletDetails.setCouponId("" + promoCodeResponse.getCouponDetails().getCouponId());
                 outletDetails.setCouponType("" + promoCodeResponse.getCouponDetails().getCouponType());
 
@@ -650,12 +665,12 @@ public class PickUpFragment extends Fragment implements TimePickerDialog.OnTimeS
     private void submit() {
 
         if (ed_date.getText().toString().isEmpty()){
-            Toast.makeText(getContext(), ""+getString(R.string.please_select_date), Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, ""+getString(R.string.please_select_date), Toast.LENGTH_SHORT).show();
             return;
         }
 
         if (ed_time.getText().toString().isEmpty()){
-            Toast.makeText(getContext(), ""+getString(R.string.please_select_time), Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, ""+getString(R.string.please_select_time), Toast.LENGTH_SHORT).show();
             return;
         }
 
@@ -678,7 +693,7 @@ public class PickUpFragment extends Fragment implements TimePickerDialog.OnTimeS
         outletDetails.setPaymentOption(2);
         outletDetails.setDeliveryDate(ed_date.getText().toString().trim()+" "+ed_time.getText().toString().trim());
 
-        Intent place_order = new Intent(getContext(), PickUpProceedToPayment.class);
+        Intent place_order = new Intent(this, PickUpProceedToPayment.class);
         place_order.putExtra("outlet_details", outletDetails);
         place_order.putExtra("vendor_id", vendor_id);
         startActivity(place_order);
@@ -724,7 +739,7 @@ public class PickUpFragment extends Fragment implements TimePickerDialog.OnTimeS
                         ApplyPromoCodeSuccessMethod(response.body().getResponse());
 
                     } else if (response.body().getResponse().getHttpCode() == 400) {
-                        Toast.makeText(getContext(), "" + response.body().getResponse().getMessage(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(PickUpActivity.this, "" + response.body().getResponse().getMessage(), Toast.LENGTH_SHORT).show();
                     }
 
                 } catch (Exception e) {
@@ -782,10 +797,10 @@ public class PickUpFragment extends Fragment implements TimePickerDialog.OnTimeS
             grand_total_txt.setText(prefManager.getFormatCurrencyValue(prefManager.GetEngDecimalFormatValues((float) final_amt)));
 
             deliv_vali_promo_code_txt.setText("" + getString(R.string.promo_code_applied_succ_txt) + " " + promoCodeResponse.getCouponDetails().getCouponCode());
-            deliv_vali_promo_code_amt_txt.setText(prefManager.getFormatCurrencyValue("" + Double.toString(subtract_anount)));
+            deliv_vali_promo_code_amt_txt.setText(prefManager.getFormatCurrencyValue("" + subtract_anount));
 
             outletDetails.setApplyCoupon(true);
-            outletDetails.setCouponAmount("" + Double.toString(subtract_anount));
+            outletDetails.setCouponAmount("" + subtract_anount);
             outletDetails.setCouponId("" + promoCodeResponse.getCouponDetails().getCouponId());
             outletDetails.setCouponType("" + promoCodeResponse.getCouponDetails().getCouponType());
 
@@ -801,7 +816,7 @@ public class PickUpFragment extends Fragment implements TimePickerDialog.OnTimeS
 //            return;
 //        }
 //
-//        Intent next=new Intent(getContext(), ProceedToPayment.class);
+//        Intent next=new Intent(this, ProceedToPayment.class);
 //        next.putExtra("KEY", response_result);
 //        startActivity(next);
 //
@@ -835,7 +850,7 @@ public class PickUpFragment extends Fragment implements TimePickerDialog.OnTimeS
 
     private void requestFocus(View v) {
         if (v.requestFocus()) {
-            getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
+            PickUpActivity.this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
         }
     }
 
@@ -868,6 +883,28 @@ public class PickUpFragment extends Fragment implements TimePickerDialog.OnTimeS
         }
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+//        getMenuInflater().inflate(R.menu.store_prod_categ_menu, menu);
+//        MenuItem itemCart = menu.findItem(R.id.action_carts);
+//        icon = (LayerDrawable) itemCart.getIcon();
+//        setBadgeCount(OrderDetailActivity.this, icon, "0");
+        return true;
+    }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                onBackPressed();
+                break;
+            case R.id.action_carts:
+                break;
+
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+        return true;
+    }
 }
 

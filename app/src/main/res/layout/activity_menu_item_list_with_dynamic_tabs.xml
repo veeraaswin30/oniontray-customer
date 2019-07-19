@@ -183,7 +183,7 @@
                         <TextView
                             android:id="@+id/minimun_order_text"
                             android:layout_width="match_parent"
-                            android:layout_height="30dp"
+                            android:layout_height="wrap_content"
                             android:textDirection="locale"
                             android:layout_marginEnd="@dimen/smal_margin"
                             android:text="@string/product_menu_list_min_order_text"
@@ -213,7 +213,7 @@
                         <TextView
                             android:id="@+id/delivery_time_text"
                             android:layout_width="match_parent"
-                            android:layout_height="30dp"
+                            android:layout_height="wrap_content"
                             android:textDirection="locale"
                             android:layout_gravity="end"
                             android:layout_marginEnd="@dimen/smal_margin"
@@ -239,6 +239,7 @@
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
+                        android:visibility="gone"
                         android:layoutDirection="locale"
                         android:orientation="vertical">
 
@@ -251,8 +252,7 @@
                             android:layout_marginEnd="@dimen/smal_margin"
                             android:text="@string/preparation_time"
                             android:textColor="@color/disable_txt_color"
-                            android:textSize="@dimen/small_txt_appearence_size"
-                            android:visibility="visible" />
+                            android:textSize="@dimen/small_txt_appearence_size"  />
 
                         <TextView
                             android:id="@+id/preparation_time_text"
@@ -278,7 +278,7 @@
                         <TextView
                             android:id="@+id/delivery_text"
                             android:layout_width="match_parent"
-                            android:layout_height="30dp"
+                            android:layout_height="wrap_content"
                             android:textDirection="locale"
                             android:layout_gravity="end"
                             android:text="@string/product_menu_delivery"

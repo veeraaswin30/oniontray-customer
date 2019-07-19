@@ -1,19 +1,18 @@
-package com.app.oniontray.Fragments;
+package com.app.oniontray.Activites;
 
 
 import android.content.Intent;
-
+import android.graphics.Color;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
 import android.location.Location;
 import android.os.Bundle;
-import com.google.android.material.textfield.TextInputLayout;
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 import android.text.Editable;
 import android.text.InputFilter;
 import android.text.TextWatcher;
-import android.text.format.DateUtils;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
@@ -25,8 +24,12 @@ import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.app.oniontray.Activites.AddAddressActivity;
-import com.app.oniontray.Activites.ProceedToPayment;
+import androidx.annotation.Nullable;
+import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.app.oniontray.Adapters.DelivFragDeliveryAddressAdapter;
 import com.app.oniontray.Adapters.DelivFragProductAdapter;
 import com.app.oniontray.Adapters.DeliveryAdapter;
@@ -39,6 +42,8 @@ import com.app.oniontray.CustomViews.ProcToCheckDelivSlotDialog;
 import com.app.oniontray.DB.ProductRespository;
 import com.app.oniontray.DotsProgressBar.DDProgressBarDialog;
 import com.app.oniontray.Interface.ProcToCheckDelivSlotInterface;
+import com.app.oniontray.LocalizationActivity.LanguageSetting;
+import com.app.oniontray.LocalizationActivity.LocalizationActivity;
 import com.app.oniontray.R;
 import com.app.oniontray.RecyclerView.NotificationListItemOffsetDecor;
 import com.app.oniontray.RequestModels.AddressList;
@@ -54,6 +59,7 @@ import com.app.oniontray.RequestModels.PromoCodeResponse;
 import com.app.oniontray.Utils.LoginPrefManager;
 import com.app.oniontray.WebService.APIService;
 import com.app.oniontray.WebService.Webdata;
+import com.google.android.material.textfield.TextInputLayout;
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
 import com.wdullaer.materialdatetimepicker.time.TimePickerDialog;
 
@@ -71,12 +77,12 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 
-public class  DeliveryFragment extends Fragment implements ProcExpandDeliveryAdapter.deliveryChargeUpdateInterface, DelivFragDeliveryAddressAdapter.deliveryChargeUpdateInterface, DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener {
+public class DeliveryActivity extends LocalizationActivity implements ProcExpandDeliveryAdapter.deliveryChargeUpdateInterface, DelivFragDeliveryAddressAdapter.deliveryChargeUpdateInterface, DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener {
 
-    private View deliFragView;
 
+    private static int ADDRESS_REFRESH_CODE = 78;
     private static Button proceed_payment_but;
-
+    private Toolbar toolbar;
     private TextView add_address;
 
     private TextView sub_total_txt;
@@ -169,69 +175,86 @@ public class  DeliveryFragment extends Fragment implements ProcExpandDeliveryAda
     private TextView ed_date, ed_time;
 
     private DatePickerDialog dpd;
-    private com.wdullaer.materialdatetimepicker.time.TimePickerDialog tpd;
-    public DeliveryFragment() {
+    private TimePickerDialog tpd;
+    public DeliveryActivity() {
     }
 
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setRetainInstance(false);
-    }
+        setContentView(R.layout.activity_delivey);
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        deliFragView = inflater.inflate(R.layout.deliveyfragment, container, false);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar.setTitle("");
+        toolbar.setTitleTextColor(getResources().getColor(R.color.colorPrimary));
+        setSupportActionBar(toolbar);
 
-        Bundle bundle = this.getArguments();
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        String language = String.valueOf(LanguageSetting.getLanguage(DeliveryActivity.this));
+
+
+        if (language.equals("en")) {
+            //getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_action_bar_en_back_ic);
+            final Drawable upArrow = getResources().getDrawable(R.drawable.ic_action_bar_en_back_ic);
+            upArrow.setColorFilter(Color.parseColor(loginPrefManager.getToolbarIconcolor()), PorterDuff.Mode.SRC_ATOP);
+            getSupportActionBar().setHomeAsUpIndicator(upArrow);
+        } else {
+/*
+            getSupportActionBar().setHomeAsUpIndicator(R.drawable.action_bar_ar_back_ic);
+*/
+        }
+
+
+        Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
             outletDetails = (OutletDetails) bundle.getSerializable("outlet_details");
             vendor_id = bundle.getString("vendor_id");
 //            Log.e("vendorID", vendor_id);
         }
-
-        prefManager = new LoginPrefManager(getContext());
-        progressBarDialog = new DDProgressBarDialog(getContext());
+//        vendor_id = productRespository.getVendorID().get(0);
+        prefManager = new LoginPrefManager(this);
+        progressBarDialog = new DDProgressBarDialog(this);
 
         productRespository = new ProductRespository();
 
 //        Log.e("user_id", prefManager.getStringValue("user_id"));
 //        Log.e("user_token", prefManager.getStringValue("user_token"));
 
-        deliv_address_expand_list = (ExpandableHeightListView) deliFragView.findViewById(R.id.proc_to_che_deliv_address_expand_list);
+        deliv_address_expand_list = findViewById(R.id.proc_to_che_deliv_address_expand_list);
 
 
-        proc_to_che_deliv_address_recycler_view = (RecyclerView) deliFragView.findViewById(R.id.proc_to_che_deliv_address_recycler_view);
-        proc_to_che_deliv_address_recycler_view.setLayoutManager(new LinearLayoutManager(getContext()));
+        proc_to_che_deliv_address_recycler_view = findViewById(R.id.proc_to_che_deliv_address_recycler_view);
+        proc_to_che_deliv_address_recycler_view.setLayoutManager(new LinearLayoutManager(this));
         proc_to_che_deliv_address_recycler_view.setHasFixedSize(true);
-        proc_to_che_deliv_address_recycler_view.addItemDecoration(new NotificationListItemOffsetDecor(getContext(), R.dimen.notifications_list_item_row_line_hight));
+        proc_to_che_deliv_address_recycler_view.addItemDecoration(
+                new NotificationListItemOffsetDecor(this, R.dimen.notifications_list_item_row_line_hight));
 
 
-        prod_list_recycler_view = (RecyclerView) deliFragView.findViewById(R.id.prod_list_recycler_view);
-        prod_list_recycler_view.setLayoutManager(new LinearLayoutManager(getContext()));
+        prod_list_recycler_view = findViewById(R.id.prod_list_recycler_view);
+        prod_list_recycler_view.setLayoutManager(new LinearLayoutManager(this));
         prod_list_recycler_view.setHasFixedSize(true);
-        prod_list_recycler_view.addItemDecoration(new NotificationListItemOffsetDecor(getContext(), R.dimen.notifications_list_item_row_line_hight));
+        prod_list_recycler_view.addItemDecoration(new NotificationListItemOffsetDecor(this, R.dimen.notifications_list_item_row_line_hight));
 
 
-        deliv_slot_date_expand_list = (ExpandableHeightListView) deliFragView.findViewById(R.id.pro_expand_deli_slot_list_view);
-        proc_to_check_recy_layout = (RecyclerView) deliFragView.findViewById(R.id.proc_to_check_recy_layout);
+        deliv_slot_date_expand_list = findViewById(R.id.pro_expand_deli_slot_list_view);
+        proc_to_check_recy_layout = findViewById(R.id.proc_to_check_recy_layout);
 
-        proceed_payment_but = (Button) deliFragView.findViewById(R.id.proceed_payment_but);
-        coupon = (TextView) deliFragView.findViewById(R.id.apply_but);
-        coupon_code_edt_txt = (EditText) deliFragView.findViewById(R.id.coupon_code_edt_txt);
+        proceed_payment_but = findViewById(R.id.proceed_payment_but);
+        coupon = findViewById(R.id.apply_but);
+        coupon_code_edt_txt = findViewById(R.id.coupon_code_edt_txt);
         coupon_code_edt_txt.setFilters(new InputFilter[]{new InputFilter.AllCaps()});
-        proc_to_check_service_tax_label = (TextView) deliFragView.findViewById(R.id.service_tax_label);
-        ed_date = deliFragView.findViewById(R.id.ed_date);
-        ed_time = deliFragView.findViewById(R.id.ed_time);
+        proc_to_check_service_tax_label = findViewById(R.id.service_tax_label);
+        ed_date = findViewById(R.id.ed_date);
+        ed_time = findViewById(R.id.ed_time);
 
 
-        proc_to_check_coupon_apply_table_lay = (TableRow) deliFragView.findViewById(R.id.proc_to_check_coupon_apply_table_lay);
-        proc_to_check_coupon_edt_txt_view = (EditText) deliFragView.findViewById(R.id.proc_to_check_coupon_edt_txt_view);
+        proc_to_check_coupon_apply_table_lay = findViewById(R.id.proc_to_check_coupon_apply_table_lay);
+        proc_to_check_coupon_edt_txt_view = findViewById(R.id.proc_to_check_coupon_edt_txt_view);
         proc_to_check_coupon_edt_txt_view.setFilters(new InputFilter[]{new InputFilter.AllCaps()});
-        proc_to_check_coupon_apply_btn = (Button) deliFragView.findViewById(R.id.proc_to_check_coupon_apply_btn);
-        copoun_code_err_msg_txt = (TextView) deliFragView.findViewById(R.id.copoun_code_err_msg_txt);
+        proc_to_check_coupon_apply_btn = findViewById(R.id.proc_to_check_coupon_apply_btn);
+        copoun_code_err_msg_txt = findViewById(R.id.copoun_code_err_msg_txt);
 
         proc_to_check_coupon_edt_txt_view.addTextChangedListener(new TextWatcher() {
             @Override
@@ -268,9 +291,9 @@ public class  DeliveryFragment extends Fragment implements ProcExpandDeliveryAda
             }
         });
 
-        proc_to_check_coupon_remove_table_lay = (TableRow) deliFragView.findViewById(R.id.proc_to_check_coupon_remove_table_lay);
-        proc_to_check_coupon_txt_view = (TextView) deliFragView.findViewById(R.id.proc_to_check_coupon_txt_view);
-        proc_to_check_coupon_romve_btn = (Button) deliFragView.findViewById(R.id.proc_to_check_coupon_romve_btn);
+        proc_to_check_coupon_remove_table_lay = findViewById(R.id.proc_to_check_coupon_remove_table_lay);
+        proc_to_check_coupon_txt_view = findViewById(R.id.proc_to_check_coupon_txt_view);
+        proc_to_check_coupon_romve_btn = findViewById(R.id.proc_to_check_coupon_romve_btn);
         proc_to_check_coupon_romve_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -279,34 +302,34 @@ public class  DeliveryFragment extends Fragment implements ProcExpandDeliveryAda
         });
 
 
-        proc_to_check_coupon_discount_table_lay = (TableRow) deliFragView.findViewById(R.id.proc_to_check_coupon_discount_table_lay);
-        proc_to_chec_coupon_disc_amt_holder_txt_view = (TextView) deliFragView.findViewById(R.id.proc_to_chec_coupon_disc_amt_holder_txt_view);
-        proc_to_chec_coupon_disc_amt_txt_view = (TextView) deliFragView.findViewById(R.id.proc_to_chec_coupon_disc_amt_txt_view);
+        proc_to_check_coupon_discount_table_lay = findViewById(R.id.proc_to_check_coupon_discount_table_lay);
+        proc_to_chec_coupon_disc_amt_holder_txt_view = findViewById(R.id.proc_to_chec_coupon_disc_amt_holder_txt_view);
+        proc_to_chec_coupon_disc_amt_txt_view = findViewById(R.id.proc_to_chec_coupon_disc_amt_txt_view);
 
 
-        proc_to_check_coupon_amt_pay_table_lay = (TableRow) deliFragView.findViewById(R.id.proc_to_check_coupon_amt_pay_table_lay);
-        proc_to_chec_amt_pay_holder_txt_view = (TextView) deliFragView.findViewById(R.id.proc_to_chec_amt_pay_holder_txt_view);
-        proc_to_chec_amt_pay_txt_view = (TextView) deliFragView.findViewById(R.id.proc_to_chec_amt_pay_txt_view);
+        proc_to_check_coupon_amt_pay_table_lay = findViewById(R.id.proc_to_check_coupon_amt_pay_table_lay);
+        proc_to_chec_amt_pay_holder_txt_view = findViewById(R.id.proc_to_chec_amt_pay_holder_txt_view);
+        proc_to_chec_amt_pay_txt_view = findViewById(R.id.proc_to_chec_amt_pay_txt_view);
 
 
-        sub_total_txt = (TextView) deliFragView.findViewById(R.id.sub_total_txt);
-        service_tax_txt = (TextView) deliFragView.findViewById(R.id.service_tax_txt);
-        delivery_charges_txt = (TextView) deliFragView.findViewById(R.id.delivery_charges_txt);
-        grand_total_txt = (TextView) deliFragView.findViewById(R.id.grand_total_txt);
+        sub_total_txt = findViewById(R.id.sub_total_txt);
+        service_tax_txt = findViewById(R.id.service_tax_txt);
+        delivery_charges_txt = findViewById(R.id.delivery_charges_txt);
+        grand_total_txt = findViewById(R.id.grand_total_txt);
 
-        Product_list = (ExpandableHeightListView) deliFragView.findViewById(R.id.pro_expand_list);
+        Product_list = findViewById(R.id.pro_expand_list);
 
-        add_address = (TextView) deliFragView.findViewById(R.id.add_adr_but);
+        add_address = findViewById(R.id.add_adr_but);
 
-        deliv_promo_code_apply_row = (TableRow) deliFragView.findViewById(R.id.deliv_promo_code_apply_row);
-        deliv_valide_promo_code_table_row = (TableRow) deliFragView.findViewById(R.id.deliv_valide_promo_code_table_row);
+        deliv_promo_code_apply_row = findViewById(R.id.deliv_promo_code_apply_row);
+        deliv_valide_promo_code_table_row = findViewById(R.id.deliv_valide_promo_code_table_row);
 
-        deliv_vali_promo_code_txt = (TextView) deliFragView.findViewById(R.id.deliv_vali_promo_code_txt);
-        deliv_vali_promo_code_amt_txt = (TextView) deliFragView.findViewById(R.id.deliv_vali_promo_code_amt_txt);
+        deliv_vali_promo_code_txt = findViewById(R.id.deliv_vali_promo_code_txt);
+        deliv_vali_promo_code_amt_txt = findViewById(R.id.deliv_vali_promo_code_amt_txt);
 
-        input_layout_delivery = (TextInputLayout) deliFragView.findViewById(R.id.input_Layout_Delivery);
-        input_layout_promocode = (TextInputLayout) deliFragView.findViewById(R.id.input_Layout_Promo);
-        InputDelivery = (EditText) deliFragView.findViewById(R.id.del_instruction);
+        input_layout_delivery = findViewById(R.id.input_Layout_Delivery);
+        input_layout_promocode = findViewById(R.id.input_Layout_Promo);
+        InputDelivery = findViewById(R.id.del_instruction);
 
         InputDelivery.addTextChangedListener(new MyTextWatcher(InputDelivery));
         coupon_code_edt_txt.addTextChangedListener(new MyTextWatcher(coupon_code_edt_txt));
@@ -339,10 +362,10 @@ public class  DeliveryFragment extends Fragment implements ProcExpandDeliveryAda
         add_address.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), AddAddressActivity.class);
+                Intent intent = new Intent(DeliveryActivity.this, AddAddressActivity.class);
                 intent.putExtra("screen_flow", "2");
                 intent.putExtra("country_id", "" + prefManager.getCountryID());
-                startActivity(intent);
+                startActivityForResult(intent,ADDRESS_REFRESH_CODE);
             }
         });
 
@@ -368,14 +391,14 @@ public class  DeliveryFragment extends Fragment implements ProcExpandDeliveryAda
             Calendar now = Calendar.getInstance();
             if (dpd == null) {
                 dpd = DatePickerDialog.newInstance(
-                        DeliveryFragment.this,
+                        DeliveryActivity.this,
                         now.get(Calendar.YEAR),
                         now.get(Calendar.MONTH),
                         now.get(Calendar.DAY_OF_MONTH)
                 );
             } else {
                 dpd.initialize(
-                        DeliveryFragment.this,
+                        DeliveryActivity.this,
                         now.get(Calendar.YEAR),
                         now.get(Calendar.MONTH),
                         now.get(Calendar.DAY_OF_MONTH)
@@ -388,7 +411,7 @@ public class  DeliveryFragment extends Fragment implements ProcExpandDeliveryAda
 
             dpd.setMinDate(now);
             dpd.setMaxDate(ThreedaysAdded);
-            dpd.show(getFragmentManager(), "Datepickerdialog");
+            dpd.show(getSupportFragmentManager(), "Datepickerdialog");
 
         });
 
@@ -396,7 +419,7 @@ public class  DeliveryFragment extends Fragment implements ProcExpandDeliveryAda
         ed_time.setOnClickListener(v -> {
 
             if (ed_date.getText().toString().isEmpty()){
-                Toast.makeText(getActivity(), getString(R.string.please_select_date), Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, getString(R.string.please_select_date), Toast.LENGTH_SHORT).show();
                 return;
             }
 
@@ -404,17 +427,17 @@ public class  DeliveryFragment extends Fragment implements ProcExpandDeliveryAda
 
             if (tpd == null) {
                 tpd = TimePickerDialog.newInstance(
-                        DeliveryFragment.this,
+                        DeliveryActivity.this,
                         now.get(Calendar.HOUR_OF_DAY),
                         now.get(Calendar.MINUTE),false);
 
             } else {
                 tpd.initialize(
-                        DeliveryFragment.this,
+                        DeliveryActivity.this,
                         now.get(Calendar.HOUR_OF_DAY),
                         now.get(Calendar.MINUTE),
                         now.get(Calendar.SECOND),
-                       false
+                        false
                 );
             }
 
@@ -422,21 +445,16 @@ public class  DeliveryFragment extends Fragment implements ProcExpandDeliveryAda
             int min =  now.get(Calendar.MINUTE);
             int sec =  now.get(Calendar.SECOND);
 
-             //for today date only need to set min time
+            //for today date only need to set min time
             String date = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH).format(new Date());
 
             if (ed_date.getText().toString().equals(date)) {
                 tpd.setMinTime(hr, min, sec);
             }
             tpd.setTimeInterval(1, 15);
-            tpd.show(getFragmentManager(), "Timepickerdialog");
+            tpd.show(getSupportFragmentManager(), "Timepickerdialog");
 
         });
-
-
-
-
-        return deliFragView;
     }
 
     @Override
@@ -468,10 +486,10 @@ public class  DeliveryFragment extends Fragment implements ProcExpandDeliveryAda
 
     private void LoadProductFromDB() {
 
-        delivFragProductAdapter = new DelivFragProductAdapter(getContext(), productRespository.getCartProductList());
+        delivFragProductAdapter = new DelivFragProductAdapter(this, productRespository.getCartProductList());
         prod_list_recycler_view.setAdapter(delivFragProductAdapter);
 
-//        DeliveryAdapter deliveryAdapter = new DeliveryAdapter(getContext(), productRespository.getCartProductList());
+//        DeliveryAdapter deliveryAdapter = new DeliveryAdapter(this, productRespository.getCartProductList());
 //        Product_list.setAdapter(deliveryAdapter);
 //        Product_list.setExpanded(true);
     }
@@ -551,17 +569,17 @@ public class  DeliveryFragment extends Fragment implements ProcExpandDeliveryAda
     private void submit() {
 
         if (ed_date.getText().toString().isEmpty()){
-            Toast.makeText(getContext(), ""+getString(R.string.please_select_date), Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, ""+getString(R.string.please_select_date), Toast.LENGTH_SHORT).show();
             return;
         }
 
         if (ed_time.getText().toString().isEmpty()){
-            Toast.makeText(getContext(), ""+getString(R.string.please_select_time), Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, ""+getString(R.string.please_select_time), Toast.LENGTH_SHORT).show();
             return;
         }
 
         if (delivFragDeliveryAddressAdapter == null || delivFragDeliveryAddressAdapter.getselectedAddressID().isEmpty()) {
-            Toast.makeText(getContext(), "" + getString(R.string.proc_to_che_select_address_txt), Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "" + getString(R.string.proc_to_che_select_address_txt), Toast.LENGTH_SHORT).show();
             return;
         } else {
             outletDetails.setDeliveryAddressID("" + delivFragDeliveryAddressAdapter.getselectedAddressID());
@@ -587,7 +605,7 @@ public class  DeliveryFragment extends Fragment implements ProcExpandDeliveryAda
         outletDetails.setSubTotal("" + productRespository.totalPrice());
         outletDetails.setDeliveryDate(ed_date.getText().toString().trim()+" "+ed_time.getText().toString().trim());
         outletDetails.setPaymentOption(1);
-        Intent place_order = new Intent(getContext(), ProceedToPayment.class);
+        Intent place_order = new Intent(this, ProceedToPayment.class);
         place_order.putExtra("outlet_details", outletDetails);
         place_order.putExtra("vendor_id", vendor_id);
         startActivity(place_order);
@@ -689,7 +707,9 @@ public class  DeliveryFragment extends Fragment implements ProcExpandDeliveryAda
 
                         if (response.body().getResponse().getHttpCode() == 200) {
 
-                            delivFragDeliveryAddressAdapter = new DelivFragDeliveryAddressAdapter(getActivity(), response.body().getResponse().getAddressList(), DeliveryFragment.this);
+                            delivFragDeliveryAddressAdapter = new DelivFragDeliveryAddressAdapter(
+                                    DeliveryActivity.this, response.body().getResponse().getAddressList(),
+                                    DeliveryActivity.this);
                             proc_to_che_deliv_address_recycler_view.setAdapter(delivFragDeliveryAddressAdapter);
 
 
@@ -722,17 +742,18 @@ public class  DeliveryFragment extends Fragment implements ProcExpandDeliveryAda
 
     private void runThread(final List<ProcToCheckAvaliableSlotMob> deliverItems) {
 
-        getActivity().runOnUiThread(new Thread(new Runnable() {
+        runOnUiThread(new Thread(new Runnable() {
             public void run() {
                 try {
-                    procExpandDeliverySlotAdapter = new ProcExpandDeliverySlotAdapter(getActivity(), deliverItems);
+                    procExpandDeliverySlotAdapter = new ProcExpandDeliverySlotAdapter(
+                            DeliveryActivity.this, deliverItems);
                     deliv_slot_date_expand_list.setAdapter(procExpandDeliverySlotAdapter);
                     deliv_slot_date_expand_list.setExpanded(true);
 
                     procExpandDeliverySlotAdapter.procToCheckDelivSlotInterface(new ProcToCheckDelivSlotInterface() {
                         @Override
                         public void proctoCheckdelivslotinterface(ProcToCheckAvaliableSlotMob procToCheckAvaliableSlotMob) {
-                            new ProcToCheckDelivSlotDialog(getActivity(), procToCheckAvaliableSlotMob).show();
+                            new ProcToCheckDelivSlotDialog(DeliveryActivity.this, procToCheckAvaliableSlotMob).show();
                         }
                     });
                 } catch (Exception e) {
@@ -777,7 +798,7 @@ public class  DeliveryFragment extends Fragment implements ProcExpandDeliveryAda
                             CouponCodeSuccessMethod(response.body().getResponse());
 
                         } else if (response.body().getResponse().getHttpCode() == 400) {
-                            Toast.makeText(getContext(), "" + response.body().getResponse().getMessage(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(DeliveryActivity.this, "" + response.body().getResponse().getMessage(), Toast.LENGTH_SHORT).show();
                         }
 
                     } catch (Exception e) {
@@ -860,7 +881,7 @@ public class  DeliveryFragment extends Fragment implements ProcExpandDeliveryAda
 //            deliv_vali_promo_code_amt_txt.setText(prefManager.getFormatCurrencyValue("" + Double.toString(subtract_anount)));
 
                 outletDetails.setApplyCoupon(true);
-                outletDetails.setCouponAmount("" + Double.toString(subtract_anount));
+                outletDetails.setCouponAmount("" + subtract_anount);
                 outletDetails.setCouponId("" + promoCodeResponse.getCouponDetails().getCouponId());
                 outletDetails.setCouponType("" + promoCodeResponse.getCouponDetails().getCouponType());
 
@@ -938,7 +959,7 @@ public class  DeliveryFragment extends Fragment implements ProcExpandDeliveryAda
                         ApplyPromoCodeSuccessMethod(response.body().getResponse());
 
                     } else if (response.body().getResponse().getHttpCode() == 400) {
-                        Toast.makeText(getContext(), "" + response.body().getResponse().getMessage(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(DeliveryActivity.this, "" + response.body().getResponse().getMessage(), Toast.LENGTH_SHORT).show();
                     }
 
                 } catch (Exception e) {
@@ -996,10 +1017,10 @@ public class  DeliveryFragment extends Fragment implements ProcExpandDeliveryAda
             grand_total_txt.setText(prefManager.getFormatCurrencyValue(prefManager.GetEngDecimalFormatValues((float) final_amt)));
 
             deliv_vali_promo_code_txt.setText("" + getString(R.string.promo_code_applied_succ_txt) + " " + promoCodeResponse.getCouponDetails().getCouponCode());
-            deliv_vali_promo_code_amt_txt.setText(prefManager.getFormatCurrencyValue("" + Double.toString(subtract_anount)));
+            deliv_vali_promo_code_amt_txt.setText(prefManager.getFormatCurrencyValue("" + subtract_anount));
 
             outletDetails.setApplyCoupon(true);
-            outletDetails.setCouponAmount("" + Double.toString(subtract_anount));
+            outletDetails.setCouponAmount("" + subtract_anount);
             outletDetails.setCouponId("" + promoCodeResponse.getCouponDetails().getCouponId());
             outletDetails.setCouponType("" + promoCodeResponse.getCouponDetails().getCouponType());
 
@@ -1035,7 +1056,7 @@ public class  DeliveryFragment extends Fragment implements ProcExpandDeliveryAda
 
     private void requestFocus(View v) {
         if (v.requestFocus()) {
-            getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
+            DeliveryActivity.this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
         }
     }
 
@@ -1063,7 +1084,7 @@ public class  DeliveryFragment extends Fragment implements ProcExpandDeliveryAda
 
         if (addressList.getLocationId() != Integer.parseInt(prefManager.getLocID())) {
 
-            Toast.makeText(getContext(), "No delivery available in this address.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "No delivery available in this address.", Toast.LENGTH_SHORT).show();
 
             return false;
         }
@@ -1152,7 +1173,7 @@ public class  DeliveryFragment extends Fragment implements ProcExpandDeliveryAda
 
 
     private void showToast(String message) {
-        Toast.makeText(getContext(), message, Toast.LENGTH_LONG).show();
+        Toast.makeText(this, message, Toast.LENGTH_LONG).show();
     }
 
 
@@ -1188,4 +1209,35 @@ public class  DeliveryFragment extends Fragment implements ProcExpandDeliveryAda
     }
 
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+//        getMenuInflater().inflate(R.menu.store_prod_categ_menu, menu);
+//        MenuItem itemCart = menu.findItem(R.id.action_carts);
+//        icon = (LayerDrawable) itemCart.getIcon();
+//        setBadgeCount(OrderDetailActivity.this, icon, "0");
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                onBackPressed();
+                break;
+            case R.id.action_carts:
+                break;
+
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+        return true;
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == ADDRESS_REFRESH_CODE && resultCode == RESULT_OK) {
+            addresListRequestMethod();
+        }
+    }
 }

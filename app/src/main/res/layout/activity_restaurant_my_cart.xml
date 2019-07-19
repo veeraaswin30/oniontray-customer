@@ -95,8 +95,9 @@
                             android:textColor="@color/disable_txt_color" />
                     </LinearLayout>
 
+                    <!--android:id="@+id/my_cart_add_more_check_out_layout"-->
                     <LinearLayout
-                        android:id="@+id/my_cart_add_more_check_out_layout"
+                        android:visibility="gone"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="@dimen/lowest_margi"
@@ -121,6 +122,39 @@
                             android:layout_weight="1"
                             android:background="@drawable/rectangle_colored_box"
                             android:text="@string/restaurant_mycart_check_out"
+                            android:textAllCaps="false"
+                            android:textColor="@android:color/white" />
+
+                        <!--android:elevation="0dp"-->
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/my_cart_add_more_check_out_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/lowest_margi"
+                        android:background="@android:color/white">
+
+                        <Button
+                            android:id="@+id/restaurant_take_away"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/big_margin"
+                            android:layout_weight="1"
+                            android:background="@drawable/rectangle_add_more"
+                            android:text="@string/proc_to_che_out_delivery_txt"
+                            android:textAllCaps="false"
+                            android:textColor="@color/dark_txt_color" />
+
+                        <Button
+                            android:id="@+id/restaurant_self_pickup"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/big_margin"
+                            android:layout_weight="1"
+                            android:background="@drawable/rectangle_colored_box"
+                            android:text="@string/proc_to_che_out_pickup_txt"
                             android:textAllCaps="false"
                             android:textColor="@android:color/white" />
 

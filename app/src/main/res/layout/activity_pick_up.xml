@@ -4,8 +4,27 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layoutDirection="locale"
+    android:focusableInTouchMode="true"
+    android:background="@color/app_background_color"
     android:orientation="vertical">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@android:color/white"
+        app:popupTheme="@style/AppTheme.PopupOverlay">
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/proc_to_che_out_pickup_txt"
+            android:textAppearance="?android:textAppearanceLarge"
+            android:textColor="@color/colorPrimary" />
+
+    </androidx.appcompat.widget.Toolbar>
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
@@ -16,165 +35,90 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/pro_to_check_line_height"
-                android:background="@color/white_color"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/activity_vertical_margin"
-                    android:layout_marginTop="@dimen/big_margin"
-                    android:layout_marginBottom="@dimen/big_margin"
-                    android:layout_weight="1"
-                    android:text="@string/proc_to_che_select_address_txt"
-                    android:textColor="@color/dark_txt_color"
-                    android:textDirection="locale"
-                    android:textSize="@dimen/medium_txt_appearence_size"
-                    tools:ignore="RtlHardcoded" />
-
-                <TextView
-                    android:id="@+id/add_adr_but"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/medium_margin"
-                    android:singleLine="false"
-                    android:text="@string/proc_to_add_new_address_txt"
-                    android:textColor="@color/colorAccent"
-                    android:textDirection="locale"
-                    android:textSize="@dimen/small_txt_appearence_size"
-                    tools:ignore="RtlHardcoded" />
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/medium_margin"
-                    android:layout_marginRight="@dimen/big_margin"
-                    android:src="@drawable/ic_home_right_arrow_ic"
-                    tools:ignore="RtlHardcoded" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/pro_to_check_line_height"
-                android:background="@color/white_color"
-                android:gravity="center_vertical"
-                android:orientation="vertical">
-
-                <com.app.oniontray.CustomViews.ExpandableHeightListView
-                    android:id="@+id/proc_to_che_deliv_address_expand_list"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@color/white_color"
-                    android:dividerHeight="@dimen/pro_to_check_line_height"
-                    android:visibility="gone" />
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/proc_to_che_deliv_address_recycler_view"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/pro_to_check_line_mediam_height"
-                    android:background="@color/white_color"
-                    android:nestedScrollingEnabled="false" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/white_color"
-                android:visibility="gone"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/activity_vertical_margin"
-                    android:layout_marginTop="@dimen/big_margin"
-                    android:layout_marginBottom="@dimen/big_margin"
-                    android:text="@string/product_menu_list_delivery_time_text"
-                    android:textColor="@color/dark_txt_color"
-                    android:textSize="@dimen/medium_txt_appearence_size" />
-
-                <TextView
-                    android:id="@+id/tvDeliveryTime"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/activity_vertical_margin"
-                    android:layout_marginBottom="@dimen/big_margin"
-                    android:ellipsize="end"
-                    android:singleLine="false"
-                    android:textSize="@dimen/medium_txt_appearence_size" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="1dp"
-                android:background="@color/white_color"
-                android:gravity="center_vertical"
-                android:orientation="horizontal"
-                android:visibility="gone">
-
-                <TextView
-                    android:id="@+id/ed_date"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/activity_vertical_margin"
-                    android:layout_weight="1"
-                    android:background="@drawable/promo_code_copoun_edt_background"
-                    android:hint="@string/select_date"
-                    android:padding="@dimen/activity_vertical_margin" />
-
-                <TextView
-                    android:id="@+id/ed_time"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/activity_vertical_margin"
-                    android:layout_weight="1"
-                    android:background="@drawable/promo_code_copoun_edt_background"
-                    android:hint="@string/select_time"
-                    android:padding="@dimen/activity_vertical_margin" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/pro_to_check_line_height"
                 android:layout_marginBottom="@dimen/pro_to_check_line_mediam_height"
                 android:background="@color/white_color"
                 android:orientation="vertical"
                 android:padding="@dimen/activity_vertical_margin">
 
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/input_Layout_Delivery"
+                <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:errorTextAppearance="@style/error_appearance">
+                    android:text="@string/proc_to_chec_out_user_hint_txt"
+                    android:textColor="@color/dark_txt_color"
+                    android:textSize="@dimen/medium_txt_appearence_size" />
 
-                    <EditText
-                        android:id="@+id/del_instruction"
+                <TextView
+                    android:id="@+id/pickup_outlet_add_txt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/big_margin"
+                    android:layout_marginBottom="@dimen/big_margin"
+                    android:ellipsize="end"
+                    android:singleLine="false"
+                    android:textSize="@dimen/medium_txt_appearence_size" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="1dp"
+                    android:background="@color/white_color"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/ed_date"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:gravity="top|left"
-                        android:hint="@string/proc_to_che_out_deli_instr_txt"
-                        android:inputType="textMultiLine"
-                        android:maxHeight="@dimen/delivery_fragment_desc_max_edt_txt_size"
-                        android:minHeight="@dimen/delivery_fragment_desc_min_edt_txt_size"
-                        android:textAppearance="?android:textAppearanceSmall"
-                        android:textDirection="locale"
-                        tools:ignore="RtlHardcoded" />
+                        android:layout_marginEnd="@dimen/activity_vertical_margin"
+                        android:layout_weight="1"
+                        android:background="@drawable/promo_code_copoun_edt_background"
+                        android:hint="@string/select_date"
+                        android:padding="@dimen/activity_vertical_margin" />
 
-                </com.google.android.material.textfield.TextInputLayout>
+                    <TextView
+                        android:id="@+id/ed_time"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/promo_code_copoun_edt_background"
+                        android:hint="@string/select_time"
+                        android:padding="@dimen/activity_vertical_margin" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/input_Layout_Delivery"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/medium_margin"
+                        app:errorTextAppearance="@style/error_appearance">
+
+                        <EditText
+                            android:id="@+id/del_instruction"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="top|left"
+                            android:hint="@string/proc_to_che_out_deli_instr_txt"
+                            android:inputType="textMultiLine"
+                            android:maxHeight="@dimen/delivery_fragment_desc_max_edt_txt_size"
+                            android:minHeight="@dimen/delivery_fragment_desc_min_edt_txt_size"
+                            android:textAppearance="?android:textAppearanceSmall"
+                            tools:ignore="RtlHardcoded" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                </LinearLayout>
 
             </LinearLayout>
 
@@ -183,14 +127,14 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                <com.app.oniontray.CustomViews.ExpandableHeightListView
-                    android:id="@+id/pro_expand_list"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/pro_to_check_line_mediam_height"
-                    android:background="@color/white_color"
-                    android:dividerHeight="@dimen/pro_to_check_line_height"
-                    android:visibility="gone" />
+                <!--<com.app.ofood_customer.CustomViews.ExpandableHeightListView-->
+                <!--android:id="@+id/pro_expand_list"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginBottom="@dimen/pro_to_check_line_mediam_height"-->
+                <!--android:background="@color/white_color"-->
+                <!--android:visibility="gone"-->
+                <!--android:dividerHeight="@dimen/pro_to_check_line_height" />-->
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/prod_list_recycler_view"
@@ -219,8 +163,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="@string/proc_to_chec_sub_total_txt"
-                            android:textDirection="locale" />
+                            android:text="@string/proc_to_chec_sub_total_txt" />
 
                         <TextView
                             android:id="@+id/sub_total_txt"
@@ -228,8 +171,7 @@
                             android:layout_height="wrap_content"
                             android:gravity="end"
                             android:singleLine="false"
-                            android:textColor="@color/colorPrimary"
-                            android:textDirection="locale" />
+                            android:textColor="@color/colorPrimary" />
 
                     </TableRow>
 
@@ -240,8 +182,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="@string/proc_to_chec_service_tax_txt"
-                            android:textDirection="locale" />
+                            android:text="@string/proc_to_chec_service_tax_txt" />
 
                         <TextView
                             android:id="@+id/service_tax_txt"
@@ -249,21 +190,21 @@
                             android:layout_height="wrap_content"
                             android:gravity="end"
                             android:singleLine="false"
-                            android:textColor="@color/colorPrimary"
-                            android:textDirection="locale" />
+                            android:textColor="@color/colorPrimary" />
 
                     </TableRow>
 
                     <!--service_tax_txt-->
 
-                    <TableRow android:layout_marginTop="@dimen/big_margin">
+                    <TableRow
+                        android:layout_marginTop="@dimen/big_margin"
+                        android:visibility="visible">
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="@string/proc_to_chec_deliv_chargs"
-                            android:textDirection="locale" />
+                            android:text="@string/platform_charge" />
 
                         <TextView
                             android:id="@+id/delivery_charges_txt"
@@ -271,8 +212,7 @@
                             android:layout_height="wrap_content"
                             android:gravity="end"
                             android:singleLine="false"
-                            android:textColor="@color/colorPrimary"
-                            android:textDirection="locale" />
+                            android:textColor="@color/colorPrimary" />
 
                     </TableRow>
 
@@ -301,8 +241,7 @@
                                 android:backgroundTint="@color/white_color"
                                 android:hint="@string/proc_to_chec_apply_coupon_txt"
                                 android:singleLine="true"
-                                android:textAppearance="?android:textAppearanceSmall"
-                                android:textDirection="locale" />
+                                android:textAppearance="?android:textAppearanceSmall" />
 
                         </com.google.android.material.textfield.TextInputLayout>
 
@@ -314,7 +253,6 @@
                             android:gravity="right|center"
                             android:text="@string/proc_to_chec_apply_txt"
                             android:textColor="@color/colorAccent"
-                            android:textDirection="locale"
                             tools:ignore="RtlHardcoded" />
 
                         <!--android:layout_marginTop="@dimen/activity_horizontal_margin"-->
@@ -344,7 +282,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:padding="@dimen/big_margin"
-                                android:src="@drawable/ic_ingred_select_done_green_btn_ic" />
+                                android:src="@drawable/ic_tick" />
 
                             <TextView
                                 android:id="@+id/deliv_vali_promo_code_txt"
@@ -352,7 +290,6 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:textColor="@color/disable_txt_color"
-                                android:textDirection="locale"
                                 android:textSize="@dimen/medium_txt_appearence_size" />
 
                             <TextView
@@ -361,7 +298,6 @@
                                 android:layout_height="wrap_content"
                                 android:layout_margin="@dimen/big_margin"
                                 android:textColor="@color/colorPrimary"
-                                android:textDirection="locale"
                                 android:textSize="@dimen/medium_txt_appearence_size" />
 
                         </LinearLayout>
@@ -374,7 +310,6 @@
                             android:gravity="right|center"
                             android:text="@string/proc_to_chec_remove_txt"
                             android:textColor="@color/colorAccent"
-                            android:textDirection="locale"
                             android:visibility="gone"
                             tools:ignore="RtlHardcoded" />
 
@@ -387,8 +322,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:text="@string/proc_to_chec_grand_total_txt"
-                            android:textColor="@color/colorAccent"
-                            android:textDirection="locale" />
+                            android:textColor="@color/colorAccent" />
 
                         <TextView
                             android:id="@+id/grand_total_txt"
@@ -396,8 +330,7 @@
                             android:layout_height="wrap_content"
                             android:gravity="end"
                             android:singleLine="false"
-                            android:textColor="@color/colorAccent"
-                            android:textDirection="locale" />
+                            android:textColor="@color/colorAccent" />
 
                     </TableRow>
 
@@ -440,8 +373,7 @@
                                         android:inputType="text"
                                         android:singleLine="true"
                                         android:textAppearance="?android:textAppearanceSmall"
-                                        android:textColor="@color/dark_txt_color"
-                                        android:textDirection="locale" />
+                                        android:textColor="@color/dark_txt_color" />
 
                                 </LinearLayout>
 
@@ -473,7 +405,6 @@
                                 android:layout_marginBottom="@dimen/small_margin"
                                 android:text="@string/err_promo_detail"
                                 android:textColor="@color/colorAccent"
-                                android:textDirection="locale"
                                 android:visibility="gone" />
 
                         </LinearLayout>
@@ -493,8 +424,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="@string/proc_to_chec_coupon_discount_txt"
-                            android:textDirection="locale" />
+                            android:text="@string/proc_to_chec_coupon_discount_txt" />
 
                         <TextView
                             android:id="@+id/proc_to_chec_coupon_disc_amt_txt_view"
@@ -502,8 +432,7 @@
                             android:layout_height="wrap_content"
                             android:gravity="end"
                             android:singleLine="false"
-                            android:textColor="@color/colorPrimary"
-                            android:textDirection="locale" />
+                            android:textColor="@color/colorPrimary" />
 
                     </TableRow>
 
@@ -520,8 +449,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="@string/proc_to_chec_pay_amt_txt"
-                            android:textDirection="locale" />
+                            android:text="@string/proc_to_chec_pay_amt_txt" />
 
                         <TextView
                             android:id="@+id/proc_to_chec_amt_pay_txt_view"
@@ -529,8 +457,7 @@
                             android:layout_height="wrap_content"
                             android:gravity="end"
                             android:singleLine="false"
-                            android:textColor="@color/colorPrimary"
-                            android:textDirection="locale" />
+                            android:textColor="@color/colorPrimary" />
 
                     </TableRow>
 
@@ -563,14 +490,13 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
                                     android:backgroundTint="@color/white_color"
-                                    android:drawableLeft="@drawable/ic_ingred_select_done_green_btn_ic"
+                                    android:drawableLeft="@drawable/ic_tick"
                                     android:drawablePadding="@dimen/small_margin"
                                     android:gravity="center_vertical"
                                     android:hint="@string/proc_to_chec_apply_coupon_txt"
                                     android:maxLines="1"
                                     android:textAppearance="?android:textAppearanceSmall"
-                                    android:textColor="@color/dark_txt_color"
-                                    android:textDirection="locale" />
+                                    android:textColor="@color/dark_txt_color" />
 
                             </LinearLayout>
 
@@ -621,5 +547,6 @@
             android:textSize="@dimen/medium_txt_appearence_size" />
 
     </LinearLayout>
+
 
 </LinearLayout>

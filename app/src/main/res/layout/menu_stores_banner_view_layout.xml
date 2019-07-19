@@ -15,7 +15,7 @@
         android:background="@color/white_color"
         android:paddingLeft="@dimen/activity_horizontal_margin"
         android:paddingRight="@dimen/activity_horizontal_margin"
-        android:visibility="visible">
+        android:visibility="gone">
 
 
 
