@@ -138,5 +138,9 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         }
     }
 
-
+    @Override
+    public void onNewToken(String s) {
+        super.onNewToken(s);
+        loginPrefManager.setStringValue("device_token",s);
+    }
 }

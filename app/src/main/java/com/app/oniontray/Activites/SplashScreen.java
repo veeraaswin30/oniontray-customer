@@ -16,27 +16,28 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.provider.Settings;
-import androidx.core.app.ActivityCompat;
-import androidx.core.app.NotificationCompat;
-import androidx.core.content.ContextCompat;
-import androidx.appcompat.app.AlertDialog;
 import android.util.Base64;
 import android.util.Log;
 import android.view.WindowManager;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
+import androidx.core.app.ActivityCompat;
+import androidx.core.app.NotificationCompat;
+import androidx.core.content.ContextCompat;
+
 import com.app.oniontray.AppControler.onionTray;
 import com.app.oniontray.LocalizationActivity.LocalizationActivity;
-import com.app.oniontray.RequestModels.Currency;
-import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.GoogleApiAvailability;
-import com.app.oniontray.GCM.MyFirebaseInstanceIDService;
 import com.app.oniontray.R;
+import com.app.oniontray.RequestModels.Currency;
 import com.app.oniontray.RequestModels.Datum;
 import com.app.oniontray.RequestModels.Language;
 import com.app.oniontray.Utils.NetworkStatus;
 import com.app.oniontray.WebService.APIService;
 import com.app.oniontray.WebService.Webdata;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GoogleApiAvailability;
+import com.google.firebase.iid.FirebaseInstanceId;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -105,10 +106,10 @@ public class SplashScreen extends LocalizationActivity implements onionTray.Spla
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    if (loginPrefManager.getStringValue("device_token").isEmpty()) {
-                        MyFirebaseInstanceIDService firebaseIntent = new MyFirebaseInstanceIDService();
-                        firebaseIntent.onTokenRefresh();
-                    }
+                    FirebaseInstanceId.getInstance().getInstanceId()
+                            .addOnCompleteListener(task ->
+                                    loginPrefManager.setStringValue("device_token",
+                                            task.getResult().getToken()));
                 }
             });
         }
@@ -297,12 +298,11 @@ public class SplashScreen extends LocalizationActivity implements onionTray.Spla
 
 
     @Override
-    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
 
         switch (requestCode) {
 
-            case REQUEST_ID_MULTIPLE_PERMISSIONS:
-                {
+            case REQUEST_ID_MULTIPLE_PERMISSIONS: {
 
                 Map<String, Integer> perms = new HashMap<>();
                 perms.put(Manifest.permission.ACCESS_FINE_LOCATION, PackageManager.PERMISSION_GRANTED);
@@ -400,14 +400,14 @@ public class SplashScreen extends LocalizationActivity implements onionTray.Spla
 
                         loginPrefManager.setStringValue("Off_Status", "" + response.body().getResponse().getSettOffMod().getActiveStatus());
                         loginPrefManager.setStringValue("currency_side", "" + response.body().getResponse().getGeneralSettings().getCurrencySide());
-                        loginPrefManager.setThemeListID(""+response.body().getResponse().getThemeList().getId());
-                        loginPrefManager.setThemeColor(""+response.body().getResponse().getThemeList().getThemeColor());
-                        loginPrefManager.setThemeColorAccent(""+response.body().getResponse().getThemeList().getColorAcceent());
-                        loginPrefManager.setThemeFontColor(""+response.body().getResponse().getThemeList().getFontColor());
-                        loginPrefManager.setThemeStatusbarColor(""+response.body().getResponse().getThemeList().getStatusBarColor());
-                        loginPrefManager.setThemeType(""+response.body().getResponse().getThemeList().getType());
-                        loginPrefManager.setToolbarIconcolor(""+response.body().getResponse().getThemeList().getFontColor());
-                       // loginPrefManager.setThemeColor(""+"#dd0014");
+                        loginPrefManager.setThemeListID("" + response.body().getResponse().getThemeList().getId());
+                        loginPrefManager.setThemeColor("" + response.body().getResponse().getThemeList().getThemeColor());
+                        loginPrefManager.setThemeColorAccent("" + response.body().getResponse().getThemeList().getColorAcceent());
+                        loginPrefManager.setThemeFontColor("" + response.body().getResponse().getThemeList().getFontColor());
+                        loginPrefManager.setThemeStatusbarColor("" + response.body().getResponse().getThemeList().getStatusBarColor());
+                        loginPrefManager.setThemeType("" + response.body().getResponse().getThemeList().getType());
+                        loginPrefManager.setToolbarIconcolor("" + response.body().getResponse().getThemeList().getFontColor());
+                        // loginPrefManager.setThemeColor(""+"#dd0014");
 
                         List<Datum> langugeedata = response.body().getResponse().getData();
 

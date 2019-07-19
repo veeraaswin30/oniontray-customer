@@ -207,6 +207,7 @@
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
+                        android:visibility="gone"
                         android:layoutDirection="locale"
                         android:orientation="vertical">
 
@@ -269,6 +270,7 @@
                     </LinearLayout>
 
                     <LinearLayout
+                        android:visibility="gone"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
