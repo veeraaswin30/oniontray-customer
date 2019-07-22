@@ -22,6 +22,7 @@ import com.app.oniontray.Utils.LoginPrefManager;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 import com.app.oniontray.R;
+import com.google.gson.Gson;
 
 
 public class MyFirebaseMessagingService extends FirebaseMessagingService {
@@ -36,11 +37,8 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
         Log.e(TAG, "Message: " + remoteMessage.toString());
 
-        Log.e(TAG, "NotificationItem data id: " + remoteMessage.getData().get("id"));
-        Log.e(TAG, "NotificationItem data custom: " + remoteMessage.getData().get("custom"));
-        Log.e(TAG, "NotificationItem data title: " + remoteMessage.getData().get("title"));
-        Log.e(TAG, "NotificationItem data message: " + remoteMessage.getData().get("message"));
-        Log.e(TAG, "NotificationItem: " + remoteMessage.getData().toString());
+
+        Log.e(TAG, "NotificationItem: " + new Gson().toJson(remoteMessage.getData().toString()));
         content = remoteMessage.getData().get("message");
 
 
@@ -50,7 +48,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
             Log.e("App Login status ", "false");
 
-            sendSplashScreenNotification(remoteMessage.getData().get("title"), "Foodboy Offer Message");
+            sendSplashScreenNotification(remoteMessage.getData().get("title"), ""+getString(R.string.app_name));
 
         } else {
 
@@ -118,7 +116,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this,channel_name)
                 .setSmallIcon(R.drawable.notification_ic).setColor(getResources().getColor(R.color.colorPrimary))
                 .setLargeIcon(BitmapFactory.decodeResource(getResources(), R.drawable.ic_launcher))
-                .setContentTitle(content)
+                .setContentTitle(getString(R.string.app_name))
                 .setContentText(message)
                 .setAutoCancel(true)
                 .setStyle(new NotificationCompat.BigTextStyle().bigText(content))

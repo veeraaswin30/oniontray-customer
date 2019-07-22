@@ -118,6 +118,7 @@ public class SplashScreen extends LocalizationActivity implements onionTray.Spla
         loginPrefManager.setStringValue("device_id", "" + device_id);
 
         Log.e("device_token", "- " + loginPrefManager.getStringValue("device_token"));
+        Log.e("device_id", "- " + loginPrefManager.getStringValue("device_id"));
 
         printHashKey(SplashScreen.this);
 

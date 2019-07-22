@@ -464,7 +464,7 @@ public class PaypalFragment extends Fragment {
             parent = new JSONObject();
 
             parent.put("user_id", "" + loginManager.getStringValue("user_id"));
-            parent.put("store_id", "" + Vendor_id);
+            parent.put("store_id", "" + outletDetails.getVendorsId());
             parent.put("outlet_id", "" + outletDetails.getOutletsId());
 
             parent.put("vendor_key", "" + outletDetails.getOutletName());
@@ -530,7 +530,7 @@ public class PaypalFragment extends Fragment {
                 parent.put("order_type", "1");
             }else{
 
-                parent.put("delivery_address", "");
+                parent.put("delivery_address", "0");
                 parent.put("delivery_slot", "1"); //static
                 parent.put("delivery_charge", "0");
 
