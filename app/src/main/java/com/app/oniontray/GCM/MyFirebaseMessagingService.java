@@ -4,6 +4,7 @@ package com.app.oniontray.GCM;
  * Created by Invenzo on 03-10-2016.
  */
 
+import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -80,6 +81,8 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
                 .setLargeIcon(BitmapFactory.decodeResource(getResources(), R.drawable.ic_launcher))
                 .setContentTitle("" + noti_title)
                 .setContentText(message)
+                .setStyle(new NotificationCompat.BigTextStyle()
+                        .bigText(message))
                 .setAutoCancel(true)
                 .setChannelId(channel_name)
                 .setSound(defaultSoundUri)

@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Bundle;
 import com.google.android.material.textfield.TextInputLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -33,6 +34,10 @@ import com.app.oniontray.WebService.APIService;
 import com.app.oniontray.WebService.Webdata;
 
 import java.math.BigDecimal;
+import java.text.NumberFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -553,6 +558,16 @@ public class ExpCheckProceedToCheckActivity extends LocalizationActivity {
         if (!grand_total_at.equals("0")) {
             outletDetails.setGrandTotal(loginPrefManager.GetEngDecimalFormatValues(Float.parseFloat("" + grand_total_at)));
         }
+
+        SimpleDateFormat curr_format = new SimpleDateFormat("yyyy-MM-dd");
+
+        if (android.os.Build.VERSION.SDK_INT > Build.VERSION_CODES.M) {
+            NumberFormat nf = NumberFormat.getNumberInstance(Locale.ENGLISH);
+            curr_format.setNumberFormat(nf);
+        }
+        outletDetails.setDeliveryDate(curr_format.format(new Date()));
+
+
 
 //        if (promo_offer_amount != 0) {
 //            outletDetails.setDeliveryPromoCode("" + promo_offer_amount);

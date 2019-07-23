@@ -481,7 +481,7 @@ public class SplashScreen extends LocalizationActivity implements onionTray.Spla
     public void printHashKey(Context pContext) {
 
         try {
-            PackageInfo info = getPackageManager().getPackageInfo("com.app.OddappzFood", PackageManager.GET_SIGNATURES);
+            PackageInfo info = getPackageManager().getPackageInfo("com.app.oniontray", PackageManager.GET_SIGNATURES);
             for (Signature signature : info.signatures) {
                 MessageDigest md = MessageDigest.getInstance("SHA");
                 md.update(signature.toByteArray());

@@ -54,22 +54,23 @@ public class MyOrdersListAdapter extends RecyclerView.Adapter<MyOrdersListAdapte
 
 //        <!--1, 10, 12, 14, 19, 18-->
 
-        if (myOrdersArrayList.get(position).getOrderStatusId() == 1) {
-            holder.my_order_restaurant_status.setText("" + moContext.getString(R.string.order_states_initiated_txt));
-        } else if (myOrdersArrayList.get(position).getOrderStatusId() == 10) {
-            holder.my_order_restaurant_status.setText("" + moContext.getString(R.string.order_states_processed_txt));
-        } else if (myOrdersArrayList.get(position).getOrderStatusId() == 12) {
-            holder.my_order_restaurant_status.setText("" + moContext.getString(R.string.order_states_delivered_txt));
-        } else if (myOrdersArrayList.get(position).getOrderStatusId() == 14) {
-            holder.my_order_restaurant_status.setText("" + moContext.getString(R.string.order_states_shipped_txt));
-        } else if (myOrdersArrayList.get(position).getOrderStatusId() == 19) {
-            holder.my_order_restaurant_status.setText("" + moContext.getString(R.string.order_states_dispatched_txt));
-        } else if (myOrdersArrayList.get(position).getOrderStatusId() == 24) {
-            holder.my_order_restaurant_status.setText("" + moContext.getString(R.string.order_states_packed_txt));
-        }else if (myOrdersArrayList.get(position).getOrderStatusId() == 11) {
-            holder.my_order_restaurant_status.setText("" + moContext.getString(R.string.order_states_canceld_txt));
-        }
+//        if (myOrdersArrayList.get(position).getOrderStatusId() == 1) {
+//            holder.my_order_restaurant_status.setText("" + moContext.getString(R.string.order_states_initiated_txt));
+//        } else if (myOrdersArrayList.get(position).getOrderStatusId() == 10) {
+//            holder.my_order_restaurant_status.setText("" + moContext.getString(R.string.order_states_processed_txt));
+//        } else if (myOrdersArrayList.get(position).getOrderStatusId() == 12) {
+//            holder.my_order_restaurant_status.setText("" + moContext.getString(R.string.order_states_delivered_txt));
+//        } else if (myOrdersArrayList.get(position).getOrderStatusId() == 14) {
+//            holder.my_order_restaurant_status.setText("" + moContext.getString(R.string.order_states_shipped_txt));
+//        } else if (myOrdersArrayList.get(position).getOrderStatusId() == 19) {
+//            holder.my_order_restaurant_status.setText("" + moContext.getString(R.string.order_states_dispatched_txt));
+//        } else if (myOrdersArrayList.get(position).getOrderStatusId() == 24) {
+//            holder.my_order_restaurant_status.setText("" + moContext.getString(R.string.order_states_packed_txt));
+//        }else if (myOrdersArrayList.get(position).getOrderStatusId() == 11) {
+//            holder.my_order_restaurant_status.setText("" + moContext.getString(R.string.order_states_canceld_txt));
+//        }
 
+            holder.my_order_restaurant_status.setText(myOrdersArrayList.get(position).getStatusName());
         holder.my_order_restaurant_status.setTextColor(Color.parseColor("" + myOrdersArrayList.get(position).getColorCode().trim()));
 
 ////        if(myOrdersArrayList.get(position).getOrderType() == 2){

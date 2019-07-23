@@ -3,7 +3,7 @@
     <!--<string name="user_email">madesan.v@nextbrainitech.com</string>-->
     <!--<string name="user_password">1234567</string>-->
 
-    <string name="facebook_app_id">888547657992391</string>
+    <string name="facebook_app_id">3114952451878428</string>
 
 
     <string name="default_notification_channel_id" translatable="false">fcm_default_channel</string>

@@ -88,7 +88,7 @@ dependencies {
     implementation 'com.google.android.gms:play-services-auth:17.0.0'
     implementation 'com.google.android.gms:play-services-places:17.0.0'
     implementation 'com.paypal.sdk:paypal-android-sdk:2.15.1'
-    implementation 'com.facebook.android:facebook-android-sdk:4.1.0'
+    implementation 'com.facebook.android:facebook-android-sdk:5.0.0'
     implementation 'jp.wasabeef:glide-transformations:2.0.1'
     implementation 'com.googlecode.libphonenumber:libphonenumber:6.2'
     implementation group: 'com.zopim.android', name: 'sdk', version: '1.4.4'

@@ -1,5 +1,6 @@
 package com.app.oniontray.Activites;
 
+import android.os.Build;
 import android.os.Bundle;
 import com.google.android.material.tabs.TabLayout;
 import androidx.fragment.app.Fragment;
@@ -22,9 +23,13 @@ import com.app.oniontray.Utils.LoginPrefManager;
 
 import org.json.JSONObject;
 
+import java.text.NumberFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * Created by nextbrain on 23/6/18.
@@ -96,6 +101,7 @@ public class ExpCheckProceedToPayActivity extends LocalizationActivity implement
         bundle.putSerializable("exp_che_add_det", expCheAdd);
         bundle.putSerializable("out_det", outletDetails);
         bundle.putString("vendor_id", vendor_id);
+
 
 
         expCheckPayPalFragment = new ExpCheckPayPalFragment();

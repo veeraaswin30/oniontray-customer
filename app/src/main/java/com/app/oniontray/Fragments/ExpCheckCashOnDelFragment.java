@@ -108,16 +108,16 @@ public class ExpCheckCashOnDelFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                VisitorsOtpDailogView visitorsOtpDailogView = new VisitorsOtpDailogView(getActivity(), expCheAdd, new invokeOfflinePaymentMethod() {
-                    @Override
-                    public void offlinePaymentMethod() {
+//                VisitorsOtpDailogView visitorsOtpDailogView = new VisitorsOtpDailogView(getActivity(), expCheAdd, new invokeOfflinePaymentMethod() {
+//                    @Override
+//                    public void offlinePaymentMethod() {
 
                         MyCartRequestMethod();
 
-                    }
-                });
-                visitorsOtpDailogView.setCancelable(false);
-                visitorsOtpDailogView.show();
+//                    }
+//                });
+//                visitorsOtpDailogView.setCancelable(false);
+//                visitorsOtpDailogView.show();
 
 //                PlaceOrderRequestMethod();
 
@@ -250,7 +250,7 @@ public class ExpCheckCashOnDelFragment extends Fragment {
 
 
             if (outletDetails.getDeliveryType() == 1) {
-                parent.put("delivery_address", "" + outletDetails.getDeliveryAddressID());
+                parent.put("delivery_address", "0");
                 parent.put("delivery_cost", "" + outletDetails.getDeliveryCost());
                 parent.put("delivery_slot", "0");
 

@@ -487,22 +487,23 @@ public class OrderDetailActivity extends LocalizationActivity implements
 
                     //        <!--1, 10, 12, 14, 19, 24, 11-->
 
-                    if (response.body().getResponse().getVendorInfo().get(0).getOrderStatus() == 1) {
-                        Input_order_status.setText("" + getString(R.string.order_states_initiated_txt));
-                    } else if (response.body().getResponse().getVendorInfo().get(0).getOrderStatus() == 10) {
-                        Input_order_status.setText("" + getString(R.string.order_states_processed_txt));
-                    } else if (response.body().getResponse().getVendorInfo().get(0).getOrderStatus() == 12) {
-                        Input_order_status.setText("" + getString(R.string.order_states_delivered_txt));
-                    } else if (response.body().getResponse().getVendorInfo().get(0).getOrderStatus() == 14) {
-                        Input_order_status.setText("" + getString(R.string.order_states_shipped_txt));
-                    } else if (response.body().getResponse().getVendorInfo().get(0).getOrderStatus() == 19) {
-                        Input_order_status.setText("" + getString(R.string.order_states_dispatched_txt));
-                    } else if (response.body().getResponse().getVendorInfo().get(0).getOrderStatus() == 24) {
-                        Input_order_status.setText("" + getString(R.string.order_states_packed_txt));
-                    } else if (response.body().getResponse().getVendorInfo().get(0).getOrderStatus() == 11) {
-                        Input_order_status.setText("" + getString(R.string.order_states_canceld_txt));
-                    }
+//                    if (response.body().getResponse().getVendorInfo().get(0).getOrderStatus() == 1) {
+//                        Input_order_status.setText("" + getString(R.string.order_states_initiated_txt));
+//                    } else if (response.body().getResponse().getVendorInfo().get(0).getOrderStatus() == 10) {
+//                        Input_order_status.setText("" + getString(R.string.order_states_processed_txt));
+//                    } else if (response.body().getResponse().getVendorInfo().get(0).getOrderStatus() == 12) {
+//                        Input_order_status.setText("" + getString(R.string.order_states_delivered_txt));
+//                    } else if (response.body().getResponse().getVendorInfo().get(0).getOrderStatus() == 14) {
+//                        Input_order_status.setText("" + getString(R.string.order_states_shipped_txt));
+//                    } else if (response.body().getResponse().getVendorInfo().get(0).getOrderStatus() == 19) {
+//                        Input_order_status.setText("" + getString(R.string.order_states_dispatched_txt));
+//                    } else if (response.body().getResponse().getVendorInfo().get(0).getOrderStatus() == 24) {
+//                        Input_order_status.setText("" + getString(R.string.order_states_packed_txt));
+//                    } else if (response.body().getResponse().getVendorInfo().get(0).getOrderStatus() == 11) {
+//                        Input_order_status.setText("" + getString(R.string.order_states_canceld_txt));
+//                    }
 
+                    Input_order_status.setText(response.body().getResponse().getVendorInfo().get(0).getName());
 
                     if (response.body().getResponse().getVendorInfo().get(0).getOrderStatus() == 19) {
                         my_ord_det_deli_track_btn.setVisibility(View.VISIBLE);
