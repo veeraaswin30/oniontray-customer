@@ -76,30 +76,6 @@ public class SplashScreen extends LocalizationActivity implements onionTray.Spla
 
         onionTray.CallSplashScreenInterface(SplashScreen.this);
 
-        runnable = new Runnable() {
-            @Override
-            public void run() {
-//check if the app is already launched or not
-                if (!loginPrefManager.getCityID().isEmpty() && !loginPrefManager.getLocID().isEmpty()) {
-//menu screen
-                    Intent signInActivity = new Intent(SplashScreen.this, BaseMenuTabActivity.class);
-                    signInActivity.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-                    startActivity(signInActivity);
-                    finish();
-
-                } else {
-//welcome Screen
-                    Intent signInActivity = new Intent(SplashScreen.this, WelcomeLocationActivity.class);
-                    signInActivity.putExtra("screen_flow", "0");
-                    signInActivity.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                    startActivity(signInActivity);
-                    finish();
-
-                }
-
-            }
-        };
-
         GeneralSettingsReq();
 
         if (checkPlayServices()) {
@@ -462,6 +438,27 @@ public class SplashScreen extends LocalizationActivity implements onionTray.Spla
                             }
                         }
 
+                        runnable = () -> {
+//check if the app is already launched or not
+                            if (!loginPrefManager.getCityID().isEmpty() && !loginPrefManager.getLocID().isEmpty()) {
+//menu screen
+                                Intent signInActivity = new Intent(SplashScreen.this, BaseMenuTabActivity.class);
+                                signInActivity.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                                startActivity(signInActivity);
+                                finish();
+
+                            } else {
+//welcome Screen
+                                Intent signInActivity = new Intent(SplashScreen.this, WelcomeLocationActivity.class);
+                                signInActivity.putExtra("screen_flow", "0");
+                                signInActivity.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                startActivity(signInActivity);
+                                finish();
+
+                            }
+
+                        };
+                        checkPermision();
                     }
 
                 } catch (Exception e) {

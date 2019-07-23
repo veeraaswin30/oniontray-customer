@@ -315,10 +315,11 @@ public class RestaurantSignInSignUpActivity extends LocalizationActivity impleme
     @Override
     public void ExpressCheckOut() {
 
-        Intent exp_Intent = new Intent(RestaurantSignInSignUpActivity.this, ExpressCheckoutActivity.class);
+        /*Intent exp_Intent = new Intent(RestaurantSignInSignUpActivity.this, ExpressCheckoutActivity.class);
         exp_Intent.putExtra("outlet_details", outletDetails);
         exp_Intent.putExtra("vendor_id", vendor_id);
-        startActivity(exp_Intent);
+        startActivity(exp_Intent);*/
+        finish();
 
     }
 
@@ -366,10 +367,10 @@ public class RestaurantSignInSignUpActivity extends LocalizationActivity impleme
     @Override
     public void ProcedToCheck() {
 
-        Intent proceedToCheck = new Intent(RestaurantSignInSignUpActivity.this, ProceedToCheckActivity.class);
+       /* Intent proceedToCheck = new Intent(RestaurantSignInSignUpActivity.this, ProceedToCheckActivity.class);
         proceedToCheck.putExtra("outlet_details", outletDetails);
         proceedToCheck.putExtra("vendor_id", vendor_id);
-        startActivity(proceedToCheck);
+        startActivity(proceedToCheck);*/
 
         finish();
 
@@ -390,12 +391,13 @@ public class RestaurantSignInSignUpActivity extends LocalizationActivity impleme
         handleFacebookLogin();
     }
 
-    private void handleFacebookLogin() {
+    private void
+    handleFacebookLogin() {
         if (AccessToken.getCurrentAccessToken() != null) {
             mLoginManager.logOut();
         } else {
             mAccessTokenTracker.startTracking();
-            mLoginManager.logInWithReadPermissions(RestaurantSignInSignUpActivity.this, Arrays.asList("public_profile"));
+            mLoginManager.logInWithReadPermissions(RestaurantSignInSignUpActivity.this, Arrays.asList("public_profile","email"));
         }
 
     }
@@ -679,10 +681,10 @@ public class RestaurantSignInSignUpActivity extends LocalizationActivity impleme
 
                             if (proc_to_check) {
 
-                                Intent proceedToCheck = new Intent(RestaurantSignInSignUpActivity.this, ProceedToCheckActivity.class);
+                               /* Intent proceedToCheck = new Intent(RestaurantSignInSignUpActivity.this, ProceedToCheckActivity.class);
                                 proceedToCheck.putExtra("outlet_details", outletDetails);
                                 proceedToCheck.putExtra("vendor_id", vendor_id);
-                                startActivity(proceedToCheck);
+                                startActivity(proceedToCheck);*/
 
                                 finish();
 
@@ -929,10 +931,10 @@ public class RestaurantSignInSignUpActivity extends LocalizationActivity impleme
 
                             if (proc_to_check) {
 
-                                Intent proceedToCheck = new Intent(RestaurantSignInSignUpActivity.this, ProceedToCheckActivity.class);
+                         /*       Intent proceedToCheck = new Intent(RestaurantSignInSignUpActivity.this, ProceedToCheckActivity.class);
                                 proceedToCheck.putExtra("outlet_details", outletDetails);
                                 proceedToCheck.putExtra("vendor_id", vendor_id);
-                                startActivity(proceedToCheck);
+                                startActivity(proceedToCheck);*/
 
                                 finish();
 
