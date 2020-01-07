@@ -31,15 +31,16 @@ public class Webdata {
     private static DDProgressBarDialog ddProgressBarDialog = null;
 
 
-    public static String BaseUrl = "http://192.168.1.43:1016/api/";
-//    public static String BaseUrl = "http://172.104.172.200/api/";
-    private static String NbtBaseUrl = "http://192.168.1.43:1016/api/";
-//    private static String NbtBaseUrl = "http://172.104.172.200/api/";
+//    public static String BaseUrl = "http://192.168.1.43:1016/api/";
+    public static String MainUrl = "http://oniontray.nbtdemo.com/";
+    public static String BaseUrl = MainUrl + "api/";
+//    private static String NbtBaseUrl = "http://192.168.1.43:1016/api/";
+    private static String NbtBaseUrl = MainUrl + "api/";
 
-    public static final String helpandSuppord_Url = "http://172.104.172.200/mob-cms/faq";
-    public static final String aboutUS_Url = "http://172.104.172.200/mob-cms/about-us";
-    public static final String term_condi_Url = "http://172.104.172.200/mob-cms/terms-conditions";
-    public static final String privacy_policy_Url = "http://172.104.172.200/mob-cms/privacy-policy";
+    public static final String helpandSuppord_Url = MainUrl + "mob-cms/faq";
+    public static final String aboutUS_Url = MainUrl + "mob-cms/about-us";
+    public static final String term_condi_Url = MainUrl + "mob-cms/terms-conditions";
+    public static final String privacy_policy_Url = MainUrl + "mob-cms/privacy-policy";
 
     private static InternetConnectionListener mInternetConnectionListener;
 
