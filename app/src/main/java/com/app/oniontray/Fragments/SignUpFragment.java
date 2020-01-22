@@ -7,11 +7,14 @@ import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
+
 import androidx.annotation.Nullable;
+
 import com.google.android.material.textfield.TextInputLayout;
 
 import androidx.fragment.app.Fragment;
 import androidx.core.graphics.drawable.DrawableCompat;
+
 import android.text.Editable;
 import android.text.Html;
 import android.text.InputFilter;
@@ -64,6 +67,7 @@ import com.google.gson.Gson;
 import com.google.i18n.phonenumbers.NumberParseException;
 import com.google.i18n.phonenumbers.PhoneNumberUtil;
 import com.google.i18n.phonenumbers.Phonenumber;
+import com.hbb20.CountryCodePicker;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -108,6 +112,7 @@ public class SignUpFragment extends Fragment {
     protected PhoneNumberUtil mPhoneNumberUtil = PhoneNumberUtil.getInstance();
     protected SparseArray<ArrayList<Country>> mCountriesMap = new SparseArray<ArrayList<Country>>();
     protected CountryAdapter mAdapter;
+    private CountryCodePicker ccpSignup;
 
 
     protected static final TreeSet<String> CANADA_CODES = new TreeSet<String>();
@@ -455,7 +460,7 @@ public class SignUpFragment extends Fragment {
             }
 
             input_phone.getText().clear();
-            input_phone.getText().insert(input_phone.getText().length() > 0 ? 1 : 0, String.valueOf(c.getCountryCode()));
+            // input_phone.getText().insert(input_phone.getText().length() > 0 ? 1 : 0, String.valueOf(c.getCountryCode()));
             input_phone.setSelection(input_phone.length());
             mLastEnteredPhone = null;
         }
@@ -533,6 +538,7 @@ public class SignUpFragment extends Fragment {
     private SignUpresponse signUpresponse;
 
 
+    @SuppressLint("ResourceAsColor")
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -545,13 +551,13 @@ public class SignUpFragment extends Fragment {
         loginPrefMananger = new LoginPrefManager(context);
         progressDialog = Webdata.getProgressBarDialog(context);
 
-        mSpinner = (Spinner) rootView.findViewById(R.id.spinner);
+        /*mSpinner = (Spinner) rootView.findViewById(R.id.spinner);
         mAdapter = new CountryAdapter(getActivity());
         mSpinner.setAdapter(mAdapter);
-        mSpinner.setOnItemSelectedListener(mOnItemSelectedListener);
+        mSpinner.setOnItemSelectedListener(mOnItemSelectedListener);*/
 
 
-        initCodes(getActivity());
+        // initCodes(getActivity());
 
         sign_in_btn = (Button) rootView.findViewById(R.id.sign_in_btn);
         sign_in_btn.setBackgroundColor(Color.parseColor(loginPrefMananger.getThemeFontColor()));
@@ -581,6 +587,10 @@ public class SignUpFragment extends Fragment {
         input_first_name = (EditText) rootView.findViewById(R.id.input_first_name);
         input_last_name = (EditText) rootView.findViewById(R.id.input_last_name);
 
+        ccpSignup = rootView.findViewById(R.id.ccpSignup);
+        ccpSignup.registerCarrierNumberEditText(input_phone);
+
+
         input_email.addTextChangedListener(new MyTextWatcher(input_email));
         input_password.addTextChangedListener(new MyTextWatcher(input_password));
 //        input_phone.addTextChangedListener(new MyTextWatcher(input_phone));
@@ -588,9 +598,12 @@ public class SignUpFragment extends Fragment {
         input_last_name.addTextChangedListener(new MyTextWatcher(input_last_name));
 
 
-        input_email.setFilters(new InputFilter[] { new InputFilter.AllCaps() {
-            @Override public CharSequence filter(CharSequence source, int start, int end, Spanned dest, int dstart, int dend) {
-                return String.valueOf(source).toLowerCase(); } } });
+        input_email.setFilters(new InputFilter[]{new InputFilter.AllCaps() {
+            @Override
+            public CharSequence filter(CharSequence source, int start, int end, Spanned dest, int dstart, int dend) {
+                return String.valueOf(source).toLowerCase();
+            }
+        }});
 
 
         SpannableString spannableString = new SpannableString(Html.fromHtml(getResources().getString(R.string.hint_i_agree_the_terms_and_conditions_txt)));
@@ -702,11 +715,6 @@ public class SignUpFragment extends Fragment {
 //        });
 
 
-
-
-
-
-
         // Facebook button
         btnSignInWithFacebook = (Button) rootView.findViewById(R.id.btnFacebookLogin);
 
@@ -746,7 +754,7 @@ public class SignUpFragment extends Fragment {
             }
         };
 
-           String language = String.valueOf(LanguageSetting.getLanguage(getActivity()));
+        String language = String.valueOf(LanguageSetting.getLanguage(getActivity()));
 
 
         if (language.equals("en")) {
@@ -777,7 +785,6 @@ public class SignUpFragment extends Fragment {
             public void onClick(View v) {
 
 //                VerifyOTPDialogMethod();
-
                 ForSignUpRequest();
 
             }
@@ -799,7 +806,7 @@ public class SignUpFragment extends Fragment {
             }
         });
 
-        input_phone.addTextChangedListener(new CustomPhoneNumberFormattingTextWatcher(mOnPhoneChangedListener));
+       /* input_phone.addTextChangedListener(new CustomPhoneNumberFormattingTextWatcher(mOnPhoneChangedListener));
         InputFilter filter = new InputFilter() {
             public CharSequence filter(CharSequence source, int start, int end,
                                        Spanned dest, int dstart, int dend) {
@@ -811,7 +818,7 @@ public class SignUpFragment extends Fragment {
                 }
                 return null;
             }
-        };
+        };*/
 
         signInButtonGplus.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -855,7 +862,7 @@ public class SignUpFragment extends Fragment {
         }
     }
 
-    protected void initCodes(Context context) {
+ /*   protected void initCodes(Context context) {
         new AsyncPhoneInitTask(context).execute();
     }
 
@@ -929,7 +936,7 @@ public class SignUpFragment extends Fragment {
                 mSpinner.setSelection(mSpinnerPosition);
             }
         }
-    }
+    }*/
 
     private void passwordVisibilityMethod() {
 
@@ -1012,7 +1019,7 @@ public class SignUpFragment extends Fragment {
             APIService apiService = Webdata.getRetrofit().create(APIService.class);
             apiService.signup_user_without_prof_img_call(input_first_name.getText().toString().trim(),
                     input_last_name.getText().toString().trim(), input_email.getText().toString().trim(),
-                    input_password.getText().toString().trim(), input_phone.getText().toString().replaceAll("\\s+", ""),
+                    input_password.getText().toString().trim(), ccpSignup.getFullNumberWithPlus(),
                     gender_value, "1", getString(R.string.login_type), loginPrefMananger.getStringValue("Lang_code"), "0",
                     "" + getString(R.string.user_type_normal), loginPrefMananger.getStringValue("device_id"),
                     loginPrefMananger.getStringValue("device_token")).enqueue(new Callback<Signup>() {
@@ -1166,7 +1173,11 @@ public class SignUpFragment extends Fragment {
 
     private boolean validateMobileNumber() {
 
-        if (input_phone.getText().toString().trim().length() < 7) {
+        if (input_phone.getText().toString().trim().length() < 10) {
+            input_layout_phone.setError(getString(R.string.err_msg_mobile));
+            requestFocus(input_phone);
+            return false;
+        } else if (input_phone.getText().toString().trim().length() > 10) {
             input_layout_phone.setError(getString(R.string.err_msg_mobile));
             requestFocus(input_phone);
             return false;
@@ -1265,28 +1276,31 @@ public class SignUpFragment extends Fragment {
 
 
     public void setStyleForfnameTextForAutoComplete(int color) {
-        Drawable wrappedDrawable =     DrawableCompat.wrap(input_first_name.getBackground());
+        Drawable wrappedDrawable = DrawableCompat.wrap(input_first_name.getBackground());
         DrawableCompat.setTint(wrappedDrawable, color);
         input_first_name.setBackgroundDrawable(wrappedDrawable);
     }
 
     public void setStyleForlnameTextForAutoComplete(int color) {
-        Drawable wrappedDrawable =     DrawableCompat.wrap(input_last_name.getBackground());
+        Drawable wrappedDrawable = DrawableCompat.wrap(input_last_name.getBackground());
         DrawableCompat.setTint(wrappedDrawable, color);
         input_last_name.setBackgroundDrawable(wrappedDrawable);
     }
+
     public void setStyleForemailTextForAutoComplete(int color) {
-        Drawable wrappedDrawable =     DrawableCompat.wrap(input_email.getBackground());
+        Drawable wrappedDrawable = DrawableCompat.wrap(input_email.getBackground());
         DrawableCompat.setTint(wrappedDrawable, color);
         input_email.setBackgroundDrawable(wrappedDrawable);
     }
+
     public void setStyleForpassTextForAutoComplete(int color) {
-        Drawable wrappedDrawable =     DrawableCompat.wrap(input_password.getBackground());
+        Drawable wrappedDrawable = DrawableCompat.wrap(input_password.getBackground());
         DrawableCompat.setTint(wrappedDrawable, color);
         input_password.setBackgroundDrawable(wrappedDrawable);
     }
+
     public void setStyleFormobTextForAutoComplete(int color) {
-        Drawable wrappedDrawable =     DrawableCompat.wrap(input_phone.getBackground());
+        Drawable wrappedDrawable = DrawableCompat.wrap(input_phone.getBackground());
         DrawableCompat.setTint(wrappedDrawable, color);
         input_phone.setBackgroundDrawable(wrappedDrawable);
     }
