@@ -1,6 +1,7 @@
 package com.app.oniontray.Adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -11,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.app.oniontray.Activites.OrderDetailActivity;
 import com.app.oniontray.DotsProgressBar.DDProgressBarDialog;
 import com.app.oniontray.R;
 import com.app.oniontray.RequestModels.NotifData;
@@ -66,6 +68,15 @@ public class NotifiListRecyAdapter extends RecyclerView.Adapter<NotifiListRecyAd
             @Override
             public void onClick(View v) {
                 DeleteRequestMethod(dataList.get(position).getId(), position);
+            }
+        });
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent order_det_intent = new Intent(context, OrderDetailActivity.class);
+                order_det_intent.putExtra("Order_id","" + dataList.get(position).getOrderId());
+                context.startActivity(order_det_intent);
             }
         });
 
