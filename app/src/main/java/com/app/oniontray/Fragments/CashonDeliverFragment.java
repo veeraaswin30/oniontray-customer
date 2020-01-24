@@ -3,7 +3,9 @@ package com.app.oniontray.Fragments;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+
 import androidx.fragment.app.Fragment;
+
 import android.text.Html;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -254,13 +256,13 @@ public class CashonDeliverFragment extends Fragment {
             parent.put("delivery_instructions", "" + outletDetails.getDeliveryInstruction().trim());
 
 
-            parent.put("delivery_date", "" +outletDetails.getDeliveryDate());
-            outletDetails.setDeliveryTime("" +outletDetails.getDeliveryDate());
-            if (outletDetails.getPaymentOption()==1) {
+            parent.put("delivery_date", "" + outletDetails.getDeliveryDate());
+            outletDetails.setDeliveryTime("" + outletDetails.getDeliveryDate());
+            if (outletDetails.getPaymentOption() == 1) {
 
                 parent.put("delivery_address", "" + outletDetails.getDeliveryAddressID());
                 parent.put("delivery_slot", "0");
-                parent.put("delivery_cost", ""+outletDetails.getDeliveryCost());
+                parent.put("delivery_cost", "" + outletDetails.getDeliveryCost());
                 parent.put("delivery_charge", "" + outletDetails.getDeliveryCost());//Rightnow static
 
 
@@ -270,7 +272,7 @@ public class CashonDeliverFragment extends Fragment {
 
                 parent.put("delivery_address", "");
                 parent.put("delivery_slot", "0");
-                parent.put("delivery_cost", ""+outletDetails.getPlatformCharge());
+                parent.put("delivery_cost", "" + outletDetails.getPlatformCharge());
                 parent.put("delivery_charge", "0");
 
                 parent.put("order_type", "2");
@@ -412,11 +414,13 @@ public class CashonDeliverFragment extends Fragment {
                 parent.toString()).enqueue(new Callback<OfflinePayment>() {
             @Override
             public void onResponse(Call<OfflinePayment> call, Response<OfflinePayment> response) {
-
+               //u Log.e("OUTPOUT", p);
                 try {
 
                     progressBarDialog.dismiss();
-                    Log.e("response", "" + response.raw().toString());
+                    Log.e("INPUT", new Gson().toJson(response.raw().request().toString()));
+                    Log.e("OUTPOUT", new Gson().toJson(response.body().toString()));
+
 
                     if (response.body().getResponse().getHttpCode() == 200) {
 

@@ -16,6 +16,7 @@ import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.text.Editable;
@@ -35,6 +36,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
@@ -54,8 +56,6 @@ import com.app.oniontray.Utils.NetworkStatus;
 import com.app.oniontray.WebService.APIService;
 import com.app.oniontray.WebService.Webdata;
 import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
-import com.google.android.gms.common.GooglePlayServicesRepairableException;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.PendingResult;
 import com.google.android.gms.common.api.ResultCallback;
@@ -66,8 +66,6 @@ import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.location.LocationSettingsRequest;
 import com.google.android.gms.location.LocationSettingsResult;
 import com.google.android.gms.location.LocationSettingsStatusCodes;
-import com.google.android.gms.location.places.Place;
-import com.google.android.gms.location.places.ui.PlaceAutocomplete;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -76,10 +74,15 @@ import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.libraries.places.api.model.Place;
+import com.google.android.libraries.places.widget.Autocomplete;
+import com.google.android.libraries.places.widget.AutocompleteActivity;
+import com.google.android.libraries.places.widget.model.AutocompleteActivityMode;
 import com.google.android.material.textfield.TextInputLayout;
 
 import java.io.IOException;
 import java.text.DateFormat;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -283,13 +286,10 @@ public class AddAddressActivity extends LocalizationActivity implements View.OnC
         addr_edt_txt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                try {
-                    firstTimePlaceSearch = true;
-                    Intent intent = new PlaceAutocomplete.IntentBuilder(PlaceAutocomplete.MODE_FULLSCREEN).build(AddAddressActivity.this);
-                    startActivityForResult(intent, PLACE_AUTOCOMPLETE_REQUEST_CODE);
-                } catch (GooglePlayServicesRepairableException | GooglePlayServicesNotAvailableException e) {
-                    // TODO: Handle the error.
-                }
+                List<Place.Field> fields = Arrays.asList(Place.Field.ID, Place.Field.NAME, Place.Field.ADDRESS, Place.Field.LAT_LNG);
+                Intent intent = new Autocomplete.IntentBuilder(AutocompleteActivityMode.FULLSCREEN, fields)
+                        .build(AddAddressActivity.this);
+                startActivityForResult(intent, PLACE_AUTOCOMPLETE_REQUEST_CODE);
             }
         });
 
@@ -953,11 +953,12 @@ public class AddAddressActivity extends LocalizationActivity implements View.OnC
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
+        super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == PLACE_AUTOCOMPLETE_REQUEST_CODE) {
 
             if (resultCode == RESULT_OK) {
 
-                place = PlaceAutocomplete.getPlace(this, data);
+                place = Autocomplete.getPlaceFromIntent(data);
                 latitude = place.getLatLng().latitude;
                 longitude = place.getLatLng().longitude;
 
@@ -970,9 +971,9 @@ public class AddAddressActivity extends LocalizationActivity implements View.OnC
 //                Log.e("data", "Place: " + place.getAddress());
 
 
-            } else if (resultCode == PlaceAutocomplete.RESULT_ERROR) {
+            } else if (resultCode == AutocompleteActivity.RESULT_ERROR) {
 
-                Status status = PlaceAutocomplete.getStatus(this, data);
+                Status status = Autocomplete.getStatusFromIntent(data);
 //                Log.e("data", status.getStatusMessage());
 
             } else if (resultCode == RESULT_CANCELED) {
@@ -1146,6 +1147,7 @@ public class AddAddressActivity extends LocalizationActivity implements View.OnC
         });
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     public void onMapReady(GoogleMap googleMap) {
         Mmap = googleMap;

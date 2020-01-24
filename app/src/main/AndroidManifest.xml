@@ -396,7 +396,7 @@
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyCmu30CcPa4hudSWimAOPXVrf5DfxIQZgY" />
+            android:value="@string/google_api_key" />
 
         <!--Razor pay-->
         <meta-data

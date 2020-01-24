@@ -16,19 +16,19 @@ import android.graphics.drawable.Drawable;
 import android.location.Location;
 import android.os.Build;
 import android.os.Bundle;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.core.app.ActivityCompat;
-import androidx.localbroadcastmanager.content.LocalBroadcastManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.core.app.ActivityCompat;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.app.oniontray.Adapters.PicMyLocAddressAdapter;
 import com.app.oniontray.LocalizationActivity.LocalizationActivity;
@@ -40,8 +40,6 @@ import com.app.oniontray.RequestModels.AutoDetectLocation;
 import com.app.oniontray.WebService.APIService;
 import com.app.oniontray.WebService.Webdata;
 import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
-import com.google.android.gms.common.GooglePlayServicesRepairableException;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.PendingResult;
 import com.google.android.gms.common.api.ResultCallback;
@@ -52,12 +50,16 @@ import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.location.LocationSettingsRequest;
 import com.google.android.gms.location.LocationSettingsResult;
 import com.google.android.gms.location.LocationSettingsStatusCodes;
-import com.google.android.gms.location.places.Place;
-import com.google.android.gms.location.places.ui.PlaceAutocomplete;
+import com.google.android.libraries.places.api.model.Place;
+import com.google.android.libraries.places.widget.Autocomplete;
+import com.google.android.libraries.places.widget.AutocompleteActivity;
+import com.google.android.libraries.places.widget.model.AutocompleteActivityMode;
 
 import java.text.DateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -157,9 +159,8 @@ public class PickMyLocationActivity extends LocalizationActivity implements PicM
         pic_my_loc_search_edt_txt_view = (TextView) findViewById(R.id.pic_my_loc_search_edt_txt_view);
 
         pick_my_loc_use_my_loca_txt_view = (TextView) findViewById(R.id.pick_my_loc_use_my_loca_txt_view);
-       // pick_my_loc_use_my_loca_txt_view.setTextColor(getResources().getColor(R.color.colorPrimary));
+        // pick_my_loc_use_my_loca_txt_view.setTextColor(getResources().getColor(R.color.colorPrimary));
         pick_my_loc_use_my_loca_txt_view.setTextColor(Color.parseColor(loginPrefManager.getThemeColor()));
-
 
 
         //pick_my_loc_use_my_loca_txt_view.setTextColor(Color.parseColor(loginPrefManager.getThemeFontColor()));
@@ -214,13 +215,10 @@ public class PickMyLocationActivity extends LocalizationActivity implements PicM
         pic_my_loc_search_edt_txt_view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                try {
-                    Intent intent = new PlaceAutocomplete.IntentBuilder(PlaceAutocomplete.MODE_FULLSCREEN).build(PickMyLocationActivity.this);
-                    startActivityForResult(intent, PLACE_AUTOCOMPLETE_REQUEST_CODE);
-
-                } catch (GooglePlayServicesRepairableException | GooglePlayServicesNotAvailableException e) {
-                    // TODO: Handle the error.
-                }
+                List<Place.Field> fields = Arrays.asList(Place.Field.ID, Place.Field.NAME, Place.Field.ADDRESS, Place.Field.LAT_LNG);
+                Intent intent = new Autocomplete.IntentBuilder(AutocompleteActivityMode.FULLSCREEN, fields)
+                        .build(PickMyLocationActivity.this);
+                startActivityForResult(intent, PLACE_AUTOCOMPLETE_REQUEST_CODE);
             }
         });
 
@@ -419,11 +417,12 @@ public class PickMyLocationActivity extends LocalizationActivity implements PicM
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
+        super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == PLACE_AUTOCOMPLETE_REQUEST_CODE) {
 
             if (resultCode == RESULT_OK) {
 
-                Place place = PlaceAutocomplete.getPlace(this, data);
+                Place place = Autocomplete.getPlaceFromIntent(data);
 
                 pic_my_loc_search_edt_txt_view.setText("" + place.getAddress());
 
@@ -440,9 +439,9 @@ public class PickMyLocationActivity extends LocalizationActivity implements PicM
 //
 //                addr_edt_txt.setText(place.getAddress());
 
-            } else if (resultCode == PlaceAutocomplete.RESULT_ERROR) {
+            } else if (resultCode == AutocompleteActivity.RESULT_ERROR) {
 
-                Status status = PlaceAutocomplete.getStatus(this, data);
+                Status status = Autocomplete.getStatusFromIntent(data);
 //                Log.e("data", status.getStatusMessage());
 
             } else if (resultCode == RESULT_CANCELED) {
@@ -583,7 +582,7 @@ public class PickMyLocationActivity extends LocalizationActivity implements PicM
 //                            Log.e("city and location id", "" + response.body().getResponse().getCityId());
 //                            Log.e("location id", "" + response.body().getResponse().getLocationId());
 
-                            loginPrefManager.clearCartForOtherLocation( "" + response.body().getResponse().getLocationId());
+                            loginPrefManager.clearCartForOtherLocation("" + response.body().getResponse().getLocationId());
                             loginPrefManager.setCountryIDandName("" + response.body().getResponse().getCountryId(), "" + response.body().getResponse().getCountryName());
                             loginPrefManager.setCityIDandName("" + response.body().getResponse().getCityId(), "" + response.body().getResponse().getCityName());
                             loginPrefManager.setLocIDandName("" + response.body().getResponse().getLocationId(), "" + response.body().getResponse().getLocationName());
@@ -596,7 +595,7 @@ public class PickMyLocationActivity extends LocalizationActivity implements PicM
                             finish();
 
                         } else if (response.body().getResponse().getHttpCode() == 400) {
-                            NoRestaurantFound();
+                            NoRestaurantFound(response.body().getResponse().getMessage());
                         }
                     } catch (Exception e) {
 //                        Log.e("res", e.toString());
@@ -615,11 +614,11 @@ public class PickMyLocationActivity extends LocalizationActivity implements PicM
         }
     }
 
-    public void NoRestaurantFound() {
+    public void NoRestaurantFound(String message) {
 
         android.app.AlertDialog.Builder alertDialog = new android.app.AlertDialog.Builder(this, android.app.AlertDialog.THEME_DEVICE_DEFAULT_LIGHT);
         alertDialog.setTitle("" + getString(R.string.message));
-        alertDialog.setMessage("" + getString(R.string.no_restaurant_available));
+        alertDialog.setMessage(message);
 
         alertDialog.setPositiveButton("" + getString(R.string.ok_btn_txt),
                 new DialogInterface.OnClickListener() {

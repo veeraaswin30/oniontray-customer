@@ -48,6 +48,79 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@color/white_color">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textDirection="locale"
+                    android:layout_marginBottom="@dimen/small_margin"
+                    android:background="@color/app_background_color"
+                    android:padding="@dimen/big_margin"
+                    android:text="@string/filter_order_by_txt"
+                    android:textColor="@color/dark_txt_color"
+                    android:textSize="14sp" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_gravity="left"
+                    android:padding="@dimen/small_margin">
+
+                <RadioGroup
+                    android:id="@+id/store_filter_order_by_radio_group"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginEnd="@dimen/activity_horizontal_margin"
+                    android:layout_marginStart="@dimen/activity_horizontal_margin"
+                    android:gravity="left|center"
+                    android:orientation="horizontal">
+
+
+                    <RadioButton
+                        android:id="@+id/store_filter_asc_radio_btn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:button="@android:color/transparent"
+                        android:checked="true"
+                        android:textSize="14sp"
+                        android:drawableTop="@drawable/ic_sort"
+                        android:gravity="left"
+                        android:background=""
+                        android:layout_gravity="left"
+                        android:text="@string/filter_decn_txt"
+                        android:textColor="@drawable/filter_recommended_custom_radio_btn"
+                        android:theme="@style/MyRadioButton"
+                        tools:ignore="RtlHardcoded" />
+
+                    <RadioButton
+                        android:id="@+id/store_filter_decn_radio_btn"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:button="@android:color/transparent"
+                        android:checked="true"
+                        android:textSize="14sp"
+                        android:visibility="gone"
+                        android:drawableTop="@drawable/filter_recommended_custom_radio_btn"
+                        android:gravity="center_horizontal"
+                        android:text="@string/filter_relev_txt"
+                        android:textColor="@drawable/filter_recommended_custom_radio_btn"
+                        android:theme="@style/MyRadioButton"
+                        tools:ignore="RtlHardcoded" />
+
+
+                </RadioGroup>
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@color/white_color"
                 android:orientation="vertical">
@@ -62,7 +135,7 @@
                     android:padding="@dimen/big_margin"
                     android:text="@string/filter_sort_by_txt"
                     android:textColor="@color/dark_txt_color"
-                    android:textSize="@dimen/medium_txt_appearence_size" />
+                    android:textSize="14sp" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -95,6 +168,8 @@
                             android:layout_weight="1"
                             android:button="@android:color/transparent"
                             android:checked="true"
+                            android:textSize="14sp"
+                            android:visibility="gone"
                             android:drawableTop="@drawable/filter_recommended_custom_radio_btn"
                             android:gravity="center_horizontal"
                             android:text="@string/filter_relev_txt"
@@ -107,6 +182,7 @@
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             android:layout_weight="1"
+                            android:textSize="14sp"
                             android:button="@android:color/transparent"
                             android:drawableTop="@drawable/filter_rating_custom_radio_btn"
                             android:gravity="center_horizontal"
@@ -120,6 +196,7 @@
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             android:layout_weight="1"
+                            android:textSize="14sp"
                             android:button="@android:color/transparent"
                             android:drawableTop="@drawable/filter_deliv_time_custom_radio_btn"
                             android:gravity="center_horizontal"
@@ -133,6 +210,7 @@
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             android:layout_weight="1"
+                            android:textSize="14sp"
                             android:button="@android:color/transparent"
                             android:drawableTop="@drawable/filter_deliv_prize_custom_radio_btn"
                             android:gravity="center_horizontal"
@@ -165,7 +243,7 @@
                     android:padding="@dimen/big_margin"
                     android:text="@string/filter_pay_method_txt"
                     android:textColor="@color/dark_txt_color"
-                    android:textSize="@dimen/medium_txt_appearence_size" />
+                    android:textSize="14sp" />
 
 
                 <RadioGroup
@@ -188,6 +266,7 @@
                         android:drawableTop="@drawable/filter_payment_all_radio_btn"
                         android:gravity="center"
                         android:text="@string/filter_all_txt"
+                        android:textSize="14sp"
                         android:textColor="@drawable/filter_payment_all_radio_btn"
                         android:theme="@style/MyRadioButton"
                         tools:ignore="RtlHardcoded" />
@@ -201,6 +280,7 @@
                         android:drawableTop="@drawable/filter_payment_cash_radio_btn"
                         android:gravity="center"
                         android:text="@string/filter_cash_txt"
+                        android:textSize="14sp"
                         android:textColor="@drawable/filter_payment_cash_radio_btn"
                         android:theme="@style/MyRadioButton"
                         tools:ignore="RtlHardcoded" />
@@ -213,6 +293,7 @@
                         android:button="@android:color/transparent"
                         android:drawableTop="@drawable/filter_payment_cart_radio_btn"
                         android:gravity="center"
+                        android:textSize="14sp"
                         android:text="@string/filter_card_txt"
                         android:textColor="@drawable/filter_payment_cart_radio_btn"
                         android:theme="@style/MyRadioButton"
@@ -240,7 +321,7 @@
                     android:padding="@dimen/big_margin"
                     android:text="@string/filter_prize_filter_by_txt"
                     android:textColor="@color/dark_txt_color"
-                    android:textSize="@dimen/medium_txt_appearence_size" />
+                    android:textSize="14sp" />
 
                 <TextView
                     android:layout_width="match_parent"
@@ -283,7 +364,7 @@
                     android:padding="@dimen/big_margin"
                     android:text="@string/filter_cuisines_filter_txt"
                     android:textColor="@color/dark_txt_color"
-                    android:textSize="@dimen/medium_txt_appearence_size" />
+                    android:textSize="14sp" />
 
                 <!--android:layout_margin="@dimen/small_margin"-->
 
@@ -317,7 +398,7 @@
             android:text="@string/show_restaurents_txt"
             android:textAllCaps="false"
             android:textColor="@color/white_color"
-            android:textSize="@dimen/large_txt_appearence_size" />
+            android:textSize="14sp" />
 
     </LinearLayout>
 

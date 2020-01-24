@@ -3,92 +3,105 @@
     <!--<string name="user_email">madesan.v@nextbrainitech.com</string>-->
     <!--<string name="user_password">1234567</string>-->
 
+    <array name="more_details">
+        <item>Name</item>
+        <item>City</item>
+        <item>Area</item>
+        <item>Status</item>
+        <item>Cuisine</item>
+        <item>Opening Hours</item>
+        <item>Delivery Time</item>
+        <item>Minimum Order</item>
+        <item>Delivery Fee</item>
+        <item>Preorder</item>
+        <item>Payment</item>
+    </array>
+
+
     <string name="facebook_app_id">3114952451878428</string>
 
-
     <string name="default_notification_channel_id" translatable="false">fcm_default_channel</string>
-
     <string name="sign_up_login">1</string>
+
     <string name="fb_login">2</string>
+
 
     <string name="android_user_login_type">2</string>
 
 
     <string name="app_name">OnionTray</string>
-
-
     <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
 
 
     <!--Currency Code value-->
+    <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="my_progress_loader_dot_color">#dd353d</string>
+
+
     <string name="my_order_status_color_code">#dd353d</string>
-
-
     <string name="store_close_status_txt_color">#dd0014</string>
+
+
     <string name="store_open_status_txt_color">#1f8b04</string>
 
 
-    <string name="dark_txt_color">#BF151515</string>
-
-
     <!--Store open - close colors-->
+    <string name="dark_txt_color">#BF151515</string>
     <string name="open_store_name_text_view_color">#7a3d25</string>
-    <string name="open_store_status_text_view_color">#1f8b04</string>
 
+    <string name="open_store_status_text_view_color">#1f8b04</string>
     <string name="open_store_rating_text_view_color">#92b036</string>
+
     <string name="open_store_min_amt_text_view_color">#dd353d</string>
 
+
     <string name="closse_store_text_view_color">#bdbdbd</string>
-
-
     <string name="cancel_btn_txt">Cancel</string>
     <string name="ok_btn_txt">OK</string>
     <string name="done_btn_txt">Done</string>
     <string name="go_btn">Go</string>
-    <string name="login_btn_txt">Login</string>
 
+    <string name="login_btn_txt">Login</string>
     <string name="yes_btn_txt">Yes</string>
-    <string name="no_btn_txt">No</string>
 
     <!--<string name="cost_type_txt">$</string>-->
 
+    <string name="no_btn_txt">No</string>
     <string name="amount_payable">Amount payable</string>
+
     <string name="place_order">Place order</string>
-
     <string name="no_internet">No internet connection.</string>
-    <string name="pick_image_intent_text">Select your image:</string>
 
-    <string name="restarent_was_closed_txt">Restaurant was closed.</string>
+    <string name="pick_image_intent_text">Select your image:</string>
 
 
     <!--<string name="tab_two_name">Credit card</string>-->
+    <string name="restarent_was_closed_txt">Restaurant was closed.</string>
     <string name="cash_on_delivery_txt">Cash On Delivery</string>
+
+
     <string name="inclusive_of_tax">Inc of all taxes</string>
-
-
     <string name="tab_one_name">Paypal</string>
     <string name="tab_two_name">Razor pay</string>
     <string name="tab_three_name">Cash on delivery</string>
-    <string name="proc_to_pay_wallet_txt">Wallet</string>
 
 
     <!--select language activity-->
+    <string name="proc_to_pay_wallet_txt">Wallet</string>
     <string name="select_language">Select language</string>
     <string name="btn_arabic">Arabic</string>
     <string name="btn_english">English</string>
     <string name="welcome">Welcome!</string>
-    <string name="welcome_content">You are one step away from enjoying the \n adorable shopping experience.</string>
 
 
     <!--No internet connection-->
+    <string name="welcome_content">You are one step away from enjoying the \n adorable shopping experience.</string>
     <string name="no_internet_conn_tit_txt">No internet connection</string>
     <string name="no_internet_conn_msg_txt">No internet connection in your device. Please enable it.</string>
-    <string name="no_internet_conn_ok_btn_txt">OK</string>
 
 
     <!--welcome slide-->
+    <string name="no_internet_conn_ok_btn_txt">OK</string>
     <string name="slide_one_title">Shop from your nearby store</string>
     <string name="slide_two_title">Add products in to cart</string>
     <string name="slide_three_title">Real time updates on your order</string>
@@ -98,10 +111,10 @@
     <string name="slide_three_content">Lorem Ipsum is simply dummy text of the printing and typesetting industry</string>
     <string name="slide_four_content">Lorem Ipsum is simply dummy text of the printing and typesetting industry</string>
     <string name="btn_skip">SKIP</string>
-    <string name="get_started">Getting started</string>
 
 
     <!--sign in-->
+    <string name="get_started">Getting started</string>
     <string name="sign_in">Sign In</string>
     <string name="hint_email">Email</string>
     <string name="hint_password">Password</string>
@@ -114,23 +127,23 @@
     <string name="hint_dont_have_an_account">Don\'t have an account?</string>
     <string name="hint_create_one">Create one!</string>
     <string name="hint_order_without_account">Order without an account</string>
+
     <string name="hint_express_checkout">Express Checkout</string>
 
+    <!--Contitions & conditions-->
     <string name="hint_email_and_phone_no">Email</string>
 
-    <!--Contitions & conditions-->
-    <string name="terms_conditions_tit_txt">Terms &amp; Conditions</string>
-
     <!--Privacy policy-->
-    <string name="privacy_policy_tit_txt">Privacy Policy</string>
+    <string name="terms_conditions_tit_txt">Terms &amp; Conditions</string>
 
 
     <!--forgot password-->
+    <string name="privacy_policy_tit_txt">Privacy Policy</string>
     <string name="hint_forgot_password">Forgot password</string>
-    <string name="hint_submit">Submit</string>
 
 
     <!--signUp-->
+    <string name="hint_submit">Submit</string>
     <string name="hint_signup">Sign Up</string>
     <string name="hint_mobile">Mobile</string>
     <string name="hint_mobile_with_country_code">Mobile number</string>
@@ -143,17 +156,14 @@
     <string name="hint_i_agree_the_terms_and_conditions_txt">I agree the <![CDATA[<font color="#e91e63"><b>Terms &amp; Conditions </b></font>]]> of Foodrunner</string>
     <string name="hint_already_have_an_account">Already have an account?</string>
     <string name="hint_login">Login!</string>
-    <string name="hint_sign_up_with_facebook"> f &#160; &#160;  Sign up with facebook</string>
 
 
     <!--foodboy sign in activity-->
+    <string name="hint_sign_up_with_facebook"> f &#160; &#160;  Sign up with facebook</string>
     <string name="hint_reset_password">Reset your password</string>
+
+
     <string name="hint_for_accept">By proceeding you agree to our <b>Terms Of Service</b> and <b>Privacy Policy</b></string>
-
-
-    <string-array name="select_cooperative">
-        <item>Select cooperative</item>
-    </string-array>
 
 
     <!--error message-->
@@ -284,6 +294,7 @@
 
     <string name="home_store_status_open_txt">Open</string>
     <string name="home_store_status_close_txt">Closed</string>
+    <string name="googlekey">AIzaSyAzEJdu-e3Ej2zHIk_u-AZysc3uFOrp0_k</string>
 
 
     <!--store listing page-->
@@ -310,6 +321,7 @@
     <string name="filter_show_resternt_txt">Done</string>
     <string name="filter_sort_by_txt">Sort by</string>
     <string name="filter_relev_txt">Recommended</string>
+    <string name="filter_decn_txt">Decending</string>
     <string name="filter_ratting_txt">Rating</string>
     <string name="filter_deliver_pick_up_time_txt">Delivery / Pickup \n time</string>
     <string name="filter_deliver_min_ord_txt">Minimum order</string>
@@ -643,6 +655,7 @@
     <string name="demo_max_label">Max</string>
 
     <string name="filter_pay_method_txt">Payment Method</string>
+    <string name="filter_order_by_txt">Order By</string>
     <string name="filter_prize_filter_by_txt">Filter by</string>
     <string name="filter_prize_budget_txt">Budget</string>
     <string name="filter_by_category">Category</string>
@@ -753,34 +766,21 @@
 
     <!--More details-->
 
-    <array name="more_details">
-        <item>Name</item>
-        <item>City</item>
-        <item>Area</item>
-        <item>Status</item>
-        <item>Cuisine</item>
-        <item>Opening Hours</item>
-        <item>Delivery Time</item>
-        <item>Minimum Order</item>
-        <item>Delivery Fee</item>
-        <item>Preorder</item>
-        <item>Payment</item>
-    </array>
     <string name="more_details_leave">Leave</string>
-
     <string name="more_det_credit_cart">Credit card</string>
+
     <string name="more_det_cash_on_delivery">Cash on delivery</string>
+    <string name="restaurant_mycart_add_more">Add More</string>
 
     <!--foodboy my cart activity-->
-    <string name="restaurant_mycart_add_more">Add More</string>
     <string name="restaurant_mycart_check_out">Checkout</string>
     <string name="restaurant_review_order">Review Order</string>
-
     <string name="no_restaurant_found_txt">No Restaurant found.</string>
+
+    <string name="my_account">My Account</string>
 
 
     <!--My account-->
-    <string name="my_account">My Account</string>
     <string name="my_account_live_chat">Live Chat</string>
     <string name="my_account_offers">Offers</string>
     <string name="my_account_notifications">Notifications</string>
@@ -791,10 +791,10 @@
     <string name="my_account_my_address">My Address</string>
     <string name="my_account_send_feed_back">Send feedback</string>
     <string name="my_account_log_out">Log out</string>
+    <string name="send_feed_back_tit">Feedback</string>
 
 
     <!--Feedback-->
-    <string name="send_feed_back_tit">Feedback</string>
     <string name="send_feed_name_txt">Name</string>
     <string name="send_feed_mobile_txt">Mobile</string>
     <string name="send_feed_email_txt">Email</string>
@@ -802,8 +802,8 @@
     <string name="send_feed_enquiry_spinner_hint_txt">Enquiry type</string>
     <string name="send_feed_description_txt">Description</string>
     <string name="send_feed_send_btn_txt">Send</string>
-
     <string name="send_feed_err_msg_first_name">Please enter your name</string>
+
     <string name="send_feed_err_msg_mobile_no">Please enter your mobile number</string>
     <string name="send_feed_err_msg_valid_mobile_no">Please enter valid mobile number</string>
     <string name="send_feed_err_msg_email">Please enter your email</string>
@@ -811,25 +811,25 @@
     <string name="send_feed_err_msg_city">Please select city</string>
     <string name="send_feed_err_msg_enquiry_type">Please select enquiry type</string>
     <string name="send_feed_err_msg_description">Please enter description</string>
-
     <string name="send_feed_enq_type">Enquiry type</string>
+
     <string name="send_feed_enq_general">General</string>
     <string name="send_feed_enq_product">Product</string>
     <string name="send_feed_enq_delivery">Delivery</string>
     <string name="send_feed_enq_payment">Payment</string>
     <string name="send_feed_enq_restaurant">Restaurant</string>
+    <string name="reset_password_content_text">Type in your registered id  in the\n field and we will send you link to \n reset your password</string>
 
 
     <!--Forgot password-->
-    <string name="reset_password_content_text">Type in your registered id  in the\n field and we will send you link to \n reset your password</string>
     <string name="reset_password_send_link_txt">Send Link</string>
     <string name="enter_email_txt">Enter Email</string>
-
     <string name="no_outlets_found_txt">No outlets found.</string>
+
+    <string name="expr_hint_first_name">First Name*</string>
 
 
     <!--Express checkout-->
-    <string name="expr_hint_first_name">First Name*</string>
     <string name="expr_hint_last_name">Last Name*</string>
     <string name="expr_hint_email">Email*</string>
     <string name="expr_hint_mobile_number">Mobile Number*</string>
@@ -837,8 +837,8 @@
     <string name="expr_hint_land_mark">Land Mark</string>
     <string name="expr_hint_address_type">Address Type*</string>
     <string name="expr_hint_address">Address*</string>
-
     <string name="expr_hint_landline_number">Landline Number</string>
+
     <string name="expr_hint_delivery_address">Delivery Address</string>
     <string name="expr_hint_area">Area</string>
     <string name="expr_hint_street">Street</string>
@@ -848,23 +848,23 @@
     <string name="expr_hint_additional_direction">Additional Directions(optional)</string>
     <string name="expr_hint_continue">Continue</string>
     <string name="expr_hint_sub_mit">Submit</string>
-
     <string name="expr_err_msg_first_name_txt">Enter first name</string>
+
     <string name="expr_err_msg_last_name_txt">Enter last name</string>
     <string name="expr_err_msg_email_txt">Enter valid email</string>
     <string name="expr_err_msg_build_no_flat_no_txt">Enter Building number, Flat number</string>
     <string name="expr_err_msg_land_mark_txt">Enter land mark</string>
     <string name="expr_err_msg_sele_addr_type_txt">Select address type</string>
     <string name="expr_err_msg_enter_addr_txt">Enter valid address</string>
-
-
     <string name="expr_check_addr_type_value">1</string>
+
+
     <string name="expr_check_guest_type">1</string>
     <string name="expr_check_login_type">2</string>
+    <string name="my_wallet_foodboy_tit_txt">Foodrunner Wallet</string>
 
 
     <!--My wallet-->
-    <string name="my_wallet_foodboy_tit_txt">Foodrunner Wallet</string>
     <string name="my_wallet_tit_txt">My Wallet</string>
     <string name="my_wallet_Your_wallet_balance_txt">Your wallet balance</string>
     <string name="my_wallet_add_money_txt">Add Money</string>
@@ -872,127 +872,127 @@
     <string name="my_wallet_added_txt">Added</string>
     <string name="my_wallet_deducted_txt">Deducted</string>
     <string name="my_wallet_add_credit_txt">Add Credit</string>
-
     <string name="my_wallet_ok_btn">Ok</string>
+
     <string name="my_wallet_debit_card_txt">Debit card</string>
     <string name="my_wallet_credit_card_txt">Credit card</string>
     <string name="my_wallet_amount_hint_txt">Amount</string>
     <string name="my_wallet_amount_err_msg_txt">Please enter valid amount</string>
-
     <string name="my_wallet_added_food_acc_txt">تمت الإضافة إلى حساب أودفودي</string>
+
     <string name="my_wallet_amt_txt">- $ 10</string>
     <string name="my_wallet_date_txt">08, december 2017</string>
-
     <string name="my_wallet_credit_err_msg_txt">No credits found.</string>
-    <string name="my_wallet_debit_err_msg_txt">No debits found.</string>
 
+    <string name="my_wallet_debit_err_msg_txt">No debits found.</string>
     <string name="my_wallet_added_to_food_acco_txt">Added to foodboy Account</string>
+
     <string name="my_wallet_deducted_to_account">Deducted to your foodboy Wallet Account</string>
     <string name="my_wallet_deducted_adapter_view_btn">View</string>
+    <string name="pic_my_curr_loc_txt">Pick my current location</string>
 
 
     <!--Pick My Current Location-->
-    <string name="pic_my_curr_loc_txt">Pick my current location</string>
     <string name="pic_my_loc_search_txt_hint">Search delivery location</string>
     <string name="pic_my_loc_saved_address_txt">Saved Address</string>
     <string name="pic_my_loc_change_area_btn_txt">Change Area</string>
     <string name="pic_my_loc_no_saved_add_found_txt">No saved address found</string>
+    <string name="web_client_id_for_google_plus">454407070907-osj2gqmp1qdupr8u32t1f8gjn0qp2or0.apps.googleusercontent.com</string>
 
 
     <!--google plus-->
 
-    <string name="web_client_id_for_google_plus">454407070907-osj2gqmp1qdupr8u32t1f8gjn0qp2or0.apps.googleusercontent.com</string>
-
     <string name="user_type_normal">3</string>
+
     <string name="user_type_fb">4</string>
     <string name="user_type_google">5</string>
+    <string name="label_send">Send</string>
 
 
     <!--<string name="action_settings">Settings</string>-->
-    <string name="label_send">Send</string>
     <string name="label_error_incorrect_phone">Incorrect phone</string>
+    <string name="email_title">Message</string>
 
     <!--Email Dialog for Facebook -->
 
-    <string name="email_title">Message</string>
     <string name="email_description">Please provide mail ID to continue facebook login</string>
-
     <string name="done">Done</string>
-    <string name="cancel">Cancel</string>
 
+    <string name="cancel">Cancel</string>
     <string name="fb_login_email_phone_desc_txt">Please provide Mail ID and Phone Number to continue facebook login</string>
+
     <string name="fb_login_email_desc_txt">Please provide Mail ID to continue facebook login</string>
     <string name="fb_login_phone_desc_txt">Please provide Phone Number to continue facebook login</string>
-
     <string name="gp_login_phone_desc_txt">Please provide Phone Number to continue goole plus login</string>
+
     <string name="gp_login_email_phone_desc_txt">Please provide Mail ID and Phone Number to continue goole plus login</string>
     <string name="gp_login_email_desc_txt">Please provide Mail ID to continue goole plus login</string>
-
-
-    <!--Promotions List Activity-->
     <string name="promotions__tit">Promotions</string>
 
 
-    <!--App Closing Confirmation Alert-->
+    <!--Promotions List Activity-->
     <string name="confirm_alert_tit_txt">Closing Application</string>
+
+
+    <!--App Closing Confirmation Alert-->
     <string name="confirm_alert_msg_txt">Are you sure you want to close this app?</string>
     <string name="confirm_alert_yes_btn_txt">Yes</string>
     <string name="confirm_alert_no_btn_txt">No</string>
+    <string name="reg_otp_verify_daialog_tit_txt">Verify your OTP</string>
 
 
     <!--Sign up Reg Verify OTP-->
-    <string name="reg_otp_verify_daialog_tit_txt">Verify your OTP</string>
     <string name="reg_otp_msg">We sent verification code to your email \n &amp; mobile number. please enter the code.</string>
     <string name="reg_otp_diaog_enter_your_otp_txt">Enter Your OTP</string>
     <string name="reg_otp_err_msg_">Please enter OTP</string>
-
     <string name="reg_otp_dialog_verify_txt">Verify</string>
+
     <string name="reg_otp_dialog_re_send_btn">Resend</string>
     <string name="reg_otp_dialog_back_btn">Back</string>
-
-
     <string name="return_ord_dialog_yes_btn">Yes</string>
+
+
     <string name="return_ord_dialog_no_btn">No</string>
+    <string name="sign_in_verify_message_txt">Message</string>
 
 
     <!--Sign In Verify Dialog-->
-    <string name="sign_in_verify_message_txt">Message</string>
     <string name="sign_in_verify_msg_content_txt">Can not verify your mobile number. Now you ready to verify.</string>
     <string name="sign_in_verify_send_btn">OK</string>
     <string name="sign_in_verify_cancel_btn_txt">Cancel</string>
-
     <string name="sign_in_verify_exit_txt">Are you sure you want exit?</string>
+
+    <string name="log_review_dialog_tit_txt">Feedback</string>
 
 
     <!--Login Review Post Dialog-->
-    <string name="log_review_dialog_tit_txt">Feedback</string>
     <string name="log_review_dialog_sub_tit_txt">You got served!</string>
     <string name="log_review_dialog_rate_rest_exp_txt">Rate Restaurant Experience</string>
     <string name="log_review_dialog_leave_a_comment_here_txt">Leave a comment here</string>
     <string name="log_review_dialog_submit_btn_txt">Submit</string>
     <string name="log_review_dialog_exit_dialig_msg">Are you sure you want to exit?</string>
+    <string name="no_of_items_txt">NO OF ITEMS</string>
 
 
     <!--Track Order Status-->
-    <string name="no_of_items_txt">NO OF ITEMS</string>
     <string name="eta_txt">ETA</string>
     <string name="payable_amount_txt">PAYABLE AMOUNT</string>
-
     <string name="delivery_exe_txt">Delivery executive</string>
-    <string name="picked_order_txt">has picked up your order.</string>
 
+    <string name="picked_order_txt">has picked up your order.</string>
     <string name="track_order_phone_no_err_msg">Phone number not found</string>
+
     <string name="order_id_txt">Order Id:</string>
     <string name="delivery_fee">Delivery Fee: </string>
-
     <string name="order_delivered">The Order has been delivered successfully</string>
+
     <string name="del_frag_del_inst_txt">Write here the delivery instructions \n  and the specifications of your order</string>
-    <!--Express Checkout-->
     <string name="paypal_purchase">Frap Purchase</string>
+    <!--Express Checkout-->
     <string name="ec_tit_txt">Order Summary</string>
     <string name="ec_del_add_txt">Delivery Address</string>
-
     <string name="ec_fir_name_txt">First Name:</string>
+
     <string name="ec_lst_name_txt">Last Name:</string>
     <string name="ec_address_txt">Address:</string>
     <string name="ec_land_mark_txt">Landmark:</string>
@@ -1001,4 +1001,7 @@
     <string name="select_time">Select Time</string>
     <string name="please_select_date">Please select date</string>
     <string name="please_select_time">Please select time</string>
+    <string-array name="select_cooperative">
+        <item>Select cooperative</item>
+    </string-array>
 </resources>

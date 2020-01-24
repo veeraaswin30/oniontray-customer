@@ -37,6 +37,7 @@ import com.app.oniontray.WebService.APIService;
 import com.app.oniontray.WebService.Webdata;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
+import com.google.android.libraries.places.api.Places;
 import com.google.firebase.iid.FirebaseInstanceId;
 
 import java.security.MessageDigest;
@@ -44,6 +45,7 @@ import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 import retrofit2.Call;
@@ -75,6 +77,9 @@ public class SplashScreen extends LocalizationActivity implements onionTray.Spla
         setContentView(R.layout.activity_splash_screen);
 
         onionTray.CallSplashScreenInterface(SplashScreen.this);
+        if (!Places.isInitialized()) {
+            Places.initialize(getApplicationContext(), getString(R.string.google_api_key), Locale.US);
+        }
 
         GeneralSettingsReq();
 

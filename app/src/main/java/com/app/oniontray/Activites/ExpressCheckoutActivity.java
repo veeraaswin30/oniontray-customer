@@ -14,11 +14,6 @@ import android.location.Location;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import com.google.android.material.textfield.TextInputLayout;
-import androidx.core.app.ActivityCompat;
-import androidx.appcompat.widget.Toolbar;
 import android.text.Editable;
 import android.text.InputFilter;
 import android.text.Spanned;
@@ -39,6 +34,11 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.ActivityCompat;
+
 import com.app.oniontray.CountrySpinner.Country;
 import com.app.oniontray.CountrySpinner.CountryAdapter;
 import com.app.oniontray.CountrySpinner.CountryCodes;
@@ -55,8 +55,6 @@ import com.app.oniontray.RequestModels.OutletDetails;
 import com.app.oniontray.WebService.APIService;
 import com.app.oniontray.WebService.Webdata;
 import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
-import com.google.android.gms.common.GooglePlayServicesRepairableException;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.PendingResult;
 import com.google.android.gms.common.api.ResultCallback;
@@ -67,8 +65,6 @@ import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.location.LocationSettingsRequest;
 import com.google.android.gms.location.LocationSettingsResult;
 import com.google.android.gms.location.LocationSettingsStatusCodes;
-import com.google.android.gms.location.places.Place;
-import com.google.android.gms.location.places.ui.PlaceAutocomplete;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -77,6 +73,11 @@ import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.libraries.places.api.model.Place;
+import com.google.android.libraries.places.widget.Autocomplete;
+import com.google.android.libraries.places.widget.AutocompleteActivity;
+import com.google.android.libraries.places.widget.model.AutocompleteActivityMode;
+import com.google.android.material.textfield.TextInputLayout;
 import com.google.gson.Gson;
 import com.google.i18n.phonenumbers.NumberParseException;
 import com.google.i18n.phonenumbers.PhoneNumberUtil;
@@ -95,6 +96,7 @@ import java.text.DateFormat;
 import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -408,12 +410,10 @@ public class ExpressCheckoutActivity extends LocalizationActivity implements Goo
         expr_check_address_edt_txt_view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                try {
-                    Intent intent = new PlaceAutocomplete.IntentBuilder(PlaceAutocomplete.MODE_FULLSCREEN).build(ExpressCheckoutActivity.this);
-                    startActivityForResult(intent, PLACE_AUTOCOMPLETE_REQUEST_CODE);
-                } catch (GooglePlayServicesRepairableException | GooglePlayServicesNotAvailableException e) {
-                    // TODO: Handle the error.
-                }
+                List<Place.Field> fields = Arrays.asList(Place.Field.ID, Place.Field.NAME, Place.Field.ADDRESS, Place.Field.LAT_LNG);
+                Intent intent = new Autocomplete.IntentBuilder(AutocompleteActivityMode.FULLSCREEN, fields)
+                        .build(ExpressCheckoutActivity.this);
+                startActivityForResult(intent, PLACE_AUTOCOMPLETE_REQUEST_CODE);
             }
         });
 
@@ -1394,11 +1394,12 @@ public class ExpressCheckoutActivity extends LocalizationActivity implements Goo
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
+        super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == PLACE_AUTOCOMPLETE_REQUEST_CODE) {
 
             if (resultCode == RESULT_OK) {
 
-                Place place = PlaceAutocomplete.getPlace(this, data);
+                Place place = Autocomplete.getPlaceFromIntent(data);
 
                 this.latitude = place.getLatLng().latitude;
                 this.longitude = place.getLatLng().longitude;
@@ -1411,9 +1412,9 @@ public class ExpressCheckoutActivity extends LocalizationActivity implements Goo
 
                 expr_check_address_edt_txt_view.setText(place.getAddress());
 
-            } else if (resultCode == PlaceAutocomplete.RESULT_ERROR) {
+            } else if (resultCode == AutocompleteActivity.RESULT_ERROR) {
 
-                Status status = PlaceAutocomplete.getStatus(this, data);
+                Status status = Autocomplete.getStatusFromIntent(data);
 //                Log.e("data", status.getStatusMessage());
 
             } else if (resultCode == RESULT_CANCELED) {

@@ -31,10 +31,11 @@ public class Webdata {
     private static DDProgressBarDialog ddProgressBarDialog = null;
 
 
-//    public static String BaseUrl = "http://192.168.1.43:1016/api/";
-    public static String MainUrl = "http://oniontray.nbtdemo.com/";
+    //    public static String BaseUrl = "http://192.168.1.43:1016/api/";
+    //public static String MainUrl = "http://oniontray.nbtdemo.com/";
+    private static String MainUrl = " http://192.168.1.110:1009/";
     public static String BaseUrl = MainUrl + "api/";
-//    private static String NbtBaseUrl = "http://192.168.1.43:1016/api/";
+    //    private static String NbtBaseUrl = "http://192.168.1.43:1016/api/";
     private static String NbtBaseUrl = MainUrl + "api/";
 
     public static final String helpandSuppord_Url = MainUrl + "mob-cms/faq";
@@ -96,8 +97,8 @@ public class Webdata {
 
                 Response response = chain.proceed(request);
 
-                Log.e("url",""+original.url().toString());
-                Log.e("response",new Gson().toJson(response.request()));
+                Log.e("url", "" + original.url().toString());
+                Log.e("response", new Gson().toJson(response.request()));
 
 
                 // Customize or return the response

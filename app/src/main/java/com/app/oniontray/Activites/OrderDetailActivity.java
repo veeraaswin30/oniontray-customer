@@ -11,10 +11,12 @@ import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
 import android.os.Build;
 import android.os.Bundle;
+
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.appcompat.widget.Toolbar;
+
 import android.text.Html;
 import android.util.Log;
 import android.view.Menu;
@@ -112,7 +114,7 @@ public class OrderDetailActivity extends LocalizationActivity implements
 
     private TextView my_ord_det_deli_add_holder_txt_view, my_ord_det_deliv_date_holder_txt_view, my_ord_det_deliv_date_txt_view;
 
-    private TextView my_ord_det_deliv_slot_txt_view, my_ord_det_promo_code_amt_txt_view,tvOrderDeliveryCharge;
+    private TextView my_ord_det_deliv_slot_txt_view, my_ord_det_promo_code_amt_txt_view, tvOrderDeliveryCharge;
 
 
     private Button my_ord_det_can_btn;
@@ -153,7 +155,7 @@ public class OrderDetailActivity extends LocalizationActivity implements
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-           String language = String.valueOf(LanguageSetting.getLanguage(OrderDetailActivity.this));
+        String language = String.valueOf(LanguageSetting.getLanguage(OrderDetailActivity.this));
 
 
         if (language.equals("en")) {
@@ -445,7 +447,6 @@ public class OrderDetailActivity extends LocalizationActivity implements
                         tvOrderDeliveryCharge.setText(getString(R.string.deliver_charges));
 
 
-
 //                            if (!response.body().getResponse().getVendorInfo().get(0).getstart_time().isEmpty() && !response.body().getResponse().getVendorInfo().get(0).getend_time().isEmpty()) {
 //                                Date start_date = old_format.parse("" + response.body().getResponse().getVendorInfo().get(0).getstart_time());
 //                                Date end_date = old_format.parse("" + response.body().getResponse().getVendorInfo().get(0).getend_time());
@@ -554,9 +555,37 @@ public class OrderDetailActivity extends LocalizationActivity implements
 //                            Log.e("after", "" + created_date.after(created_time_date));
 //                            Log.e("before", "" + created_date.before(created_time_date));
 
+                        //Aswin
+                        String mCurrentDate = response.body().getResponse().getCurrentTime();
+                        String mDeliveryDte = response.body().getResponse().getVendorInfo().get(0).getDeliveryDate();
 
-                        if (created_date.after(created_time_date)) {
-                            if (response.body().getResponse().getVendorInfo().get(0).getOrderStatus() != 11) {
+                        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                        try {
+                            Date date = sdf.parse(mDeliveryDte);
+                            Date CurrDate = sdf.parse(mCurrentDate);
+
+                             if (date.after(CurrDate)) {
+                            Log.e("AferDate", "AfterDate");
+                            if (response.body().getResponse().getVendorInfo().get(0).getOrderStatus() == 1) {
+
+                                my_ord_det_can_btn.setVisibility(View.VISIBLE);
+
+                                // }
+                            } else {
+                                my_ord_det_can_btn.setVisibility(View.GONE);
+                            }
+                            } else {
+                                Log.e("OutDated", "OutDated");
+                            }
+
+                        } catch (ParseException e) {
+                            e.printStackTrace();
+                        }
+
+
+
+                        /*if (created_date.after(created_time_date)) {
+                            if (response.body().getResponse().getVendorInfo().get(0).getOrderStatus() == 1) {
 
                                 if (response.body().getResponse().getVendorInfo().get(0).getPaymentType().equals("COD")) {
                                     my_ord_det_can_btn.setVisibility(View.VISIBLE);
@@ -564,7 +593,7 @@ public class OrderDetailActivity extends LocalizationActivity implements
 
                             }
                         }
-
+*/
                         if (response.body().getResponse().getVendorInfo().get(0).getOrderStatus() == 12) {
                             my_ord_det_can_btn.setVisibility(View.GONE);
                         }

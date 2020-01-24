@@ -23,7 +23,7 @@
             android:layout_marginTop="@dimen/small_txt_appearence_size"
             android:background="@drawable/store_list_search_view_bg"
             android:drawablePadding="@dimen/smal_margin"
-            android:drawableStart="@drawable/places_ic_search"
+            android:drawableStart="@drawable/ic_location_on_black_24dp"
             android:ellipsize="end"
             android:gravity="center_vertical"
             android:maxLines="1"

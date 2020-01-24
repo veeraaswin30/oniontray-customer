@@ -41,7 +41,6 @@
                     android:layout_height="wrap_content"
                     android:textDirection="locale"
                     android:ellipsize="end"
-                    android:maxLines="2"
                     android:textColor="@android:color/secondary_text_light" />
 
                 <TextView

@@ -334,7 +334,7 @@ public class MenuRestaurantsActivity extends LocalizationActivity implements Sea
                 sortBy, orderBy, pay_method, cuisineID).enqueue(new Callback<StoreList>() {
             @Override
             public void onResponse(Call<StoreList> call, Response<StoreList> response) {
-                Log.e("input", new Gson().toJson(response.raw().request()));
+                Log.e("input", new Gson().toJson(response.raw().request().body()));
 
                 try {
 
