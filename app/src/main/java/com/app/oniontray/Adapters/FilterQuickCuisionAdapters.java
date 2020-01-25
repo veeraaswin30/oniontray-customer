@@ -6,6 +6,7 @@ import android.graphics.Color;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +16,7 @@ import android.widget.TextView;
 import com.app.oniontray.R;
 import com.app.oniontray.RequestModels.CuisineList;
 import com.app.oniontray.RequestModels.FilterCategoryList;
+import com.app.oniontray.Utils.CuisinesSingleton;
 import com.app.oniontray.Utils.LoginPrefManager;
 
 import java.util.ArrayList;
@@ -95,10 +97,10 @@ public class FilterQuickCuisionAdapters extends RecyclerView.Adapter<FilterQuick
                         new int[]{-android.R.attr.state_enabled}, //disabled
                         new int[]{android.R.attr.state_enabled} //enabled
                 },
-                new int[] {
+                new int[]{
 
                         Color.parseColor(loginPrefManager.getThemeColor()) //disabled
-                        ,Color.parseColor(loginPrefManager.getThemeColor()) //enabled
+                        , Color.parseColor(loginPrefManager.getThemeColor()) //enabled
 
                 }
         );
@@ -107,15 +109,26 @@ public class FilterQuickCuisionAdapters extends RecyclerView.Adapter<FilterQuick
 
     private void setfilterCuisineList(final FilterViewHolder holder, final int position) {
 
+        if (holder.cuisinesSingleton.getArray() != null &&
+                !holder.cuisinesSingleton.getArray().isEmpty()) {
+            for (int i = 0; i < holder.cuisinesSingleton.getArray().size(); i++) {
+                if (holder.cuisinesSingleton.getArray().get(i).contains(filterCuisineList.get(position).getId().toString())) {
+                    holder.filter_quick_name_check_box_view.setChecked(true);
+                }
+            }
+
+        }
+
+
         holder.filter_quick_name_txt_view.setText(filterCuisineList.get(position).getName());
 
-        if(CusineListHashMap.containsKey(""+position)){
+        if (CusineListHashMap.containsKey("" + position)) {
             holder.filter_quick_name_check_box_view.setChecked(true);
 //            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
 //                holder.filter_quick_name_check_box_view.setButtonTintList(colorStateList);
 //            }
             holder.filter_quick_name_txt_view.setTextColor(context.getResources().getColor(R.color.colorAccent));
-        }else{
+        } else {
             holder.filter_quick_name_check_box_view.setChecked(false);
             //holder.filter_quick_name_check_box_view.setButtonTintList(colorStateList);
             holder.filter_quick_name_txt_view.setTextColor(context.getResources().getColor(R.color.disable_txt_color));
@@ -129,27 +142,31 @@ public class FilterQuickCuisionAdapters extends RecyclerView.Adapter<FilterQuick
 
                 if (holder.filter_quick_name_check_box_view.isChecked()) {
                     holder.filter_quick_name_check_box_view.setChecked(false);
+                    holder.cuisinesSingleton.removeToArr(filterCuisineList.get(position).getId().toString());
+                    //mTempList.remove(cuisineList.id.toString())
+                    Log.e("ArrToStr", filterCuisineList.get(position).getId().toString());
+
 //                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
 //                        holder.filter_quick_name_check_box_view.setButtonTintList(colorStateList);
 //                    }
-                   // holder.filter_quick_name_check_box_view.setHighlightColor(Color.parseColor(loginPrefManager.getThemeColor()));
+                    // holder.filter_quick_name_check_box_view.setHighlightColor(Color.parseColor(loginPrefManager.getThemeColor()));
                     holder.filter_quick_name_txt_view.setTextColor(context.getResources().getColor(R.color.disable_txt_color));
                     CusineListHashMap.remove("" + position);
 
                 } else {
 
-                    if (position == 0)
-                    {
-                        if(CusineListHashMap.size() != 0)
-                        {
+                    if (position == 0) {
+                        if (CusineListHashMap.size() != 0) {
                             CusineListHashMap.clear();
                             holder.filter_quick_name_check_box_view.setChecked(true);
+                            holder.cuisinesSingleton.addToArray(filterCuisineList.get(position).getId().toString());
+                            Log.e("ArrToStr", filterCuisineList.get(position).getId().toString());
 //                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
 //                                holder.filter_quick_name_check_box_view.setButtonTintList(colorStateList);
 //                            }
-                           // holder.filter_quick_name_check_box_view.setHighlightColor(Color.parseColor(loginPrefManager.getThemeColor()));
+                            // holder.filter_quick_name_check_box_view.setHighlightColor(Color.parseColor(loginPrefManager.getThemeColor()));
                             //  holder.filter_quick_name_txt_view.setTextColor(context.getResources().getColor(R.color.colorAccent));
-                           // holder.filter_quick_name_txt_view.setTextColor(Color.parseColor(loginPrefManager.getThemeColor()));
+                            // holder.filter_quick_name_txt_view.setTextColor(Color.parseColor(loginPrefManager.getThemeColor()));
                             CusineListHashMap.put("" + position, filterCuisineList.get(position));
                             notifyDataSetChanged();
                         }
@@ -174,12 +191,23 @@ public class FilterQuickCuisionAdapters extends RecyclerView.Adapter<FilterQuick
 
     private void setfilterCategoryList(final FilterViewHolder holder, final int position) {
 
-        if(CategoryListHashMap.containsKey(""+position)){
+        if (holder.cuisinesSingleton.getFilterArray() != null &&
+                !holder.cuisinesSingleton.getFilterArray().isEmpty()) {
+            for (int i = 0; i < holder.cuisinesSingleton.getFilterArray().size(); i++) {
+                if (holder.cuisinesSingleton.getFilterArray().get(i).contains(filterCuisineList.get(position).getId().toString())) {
+                    holder.filter_quick_name_check_box_view.setChecked(true);
+                }
+            }
+
+        }
+
+
+        if (CategoryListHashMap.containsKey("" + position)) {
             holder.filter_quick_name_check_box_view.setChecked(true);
             holder.filter_quick_name_txt_view.setTextColor(context.getResources().getColor(R.color.colorAccent));
             //holder.filter_quick_name_txt_view.setTextColor(Color.parseColor(loginPrefManager.getThemeColor()));
 
-        }else{
+        } else {
             holder.filter_quick_name_check_box_view.setChecked(false);
 //            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
 //                holder.filter_quick_name_check_box_view.setButtonTintList(colorStateList);
@@ -189,6 +217,7 @@ public class FilterQuickCuisionAdapters extends RecyclerView.Adapter<FilterQuick
         }
 
         holder.filter_quick_name_txt_view.setText(filterCategoryList.get(position).getName());
+        // Log.e("CategoryName",filterCategoryList.get(position).getName());
 
 //        if(CategoryListHashMap.containsKey(position)){
 //            holder.filter_quick_name_check_box_view.setChecked(true);
@@ -204,6 +233,9 @@ public class FilterQuickCuisionAdapters extends RecyclerView.Adapter<FilterQuick
 
                 if (holder.filter_quick_name_check_box_view.isChecked()) {
                     holder.filter_quick_name_check_box_view.setChecked(false);
+                    holder.cuisinesSingleton.removeToFilterArr(filterCuisineList.get(position).getId().toString());
+                    //mTempList.remove(cuisineList.id.toString())
+                    Log.e("ArrToStr", filterCuisineList.get(position).getId().toString());
 //                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
 //                        holder.filter_quick_name_check_box_view.setButtonTintList(colorStateList);
 //                    }
@@ -212,12 +244,14 @@ public class FilterQuickCuisionAdapters extends RecyclerView.Adapter<FilterQuick
                     CategoryListHashMap.remove("" + position);
 
                 } else {
+                    //holder.cuisinesSingleton.addToFilterArray(filterCuisineList.get(position).getId().toString());
+                    // Log.e("ArrToStr",filterCuisineList.get(position).getId().toString());
                     holder.filter_quick_name_check_box_view.setChecked(true);
 //                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
 //                        holder.filter_quick_name_check_box_view.setButtonTintList(colorStateList);
 //                    }
 //                    holder.filter_quick_name_check_box_view.setHighlightColor(Color.parseColor(loginPrefManager.getThemeColor()));
-                   // holder.filter_quick_name_txt_view.setTextColor(context.getResources().getColor(R.color.colorAccent));
+                    // holder.filter_quick_name_txt_view.setTextColor(context.getResources().getColor(R.color.colorAccent));
                     //holder.filter_quick_name_txt_view.setTextColor(Color.parseColor(loginPrefManager.getThemeColor()));
 
                     CategoryListHashMap.put("" + position, filterCategoryList.get(position));
@@ -240,7 +274,8 @@ public class FilterQuickCuisionAdapters extends RecyclerView.Adapter<FilterQuick
 
     public class FilterViewHolder extends RecyclerView.ViewHolder {
 
-//        private CheckedTextView filter_selecter_check_txt_view;
+        //        private CheckedTextView filter_selecter_check_txt_view;
+        private CuisinesSingleton cuisinesSingleton;
 
         private View root_view;
 
@@ -251,7 +286,7 @@ public class FilterQuickCuisionAdapters extends RecyclerView.Adapter<FilterQuick
 
         public FilterViewHolder(View itemView) {
             super(itemView);
-
+            cuisinesSingleton = CuisinesSingleton.Companion.getInstance();
             root_view = itemView;
 
 //            filter_selecter_check_txt_view = (CheckedTextView) itemView.findViewById(R.id.filter_selecter_check_txt_view);

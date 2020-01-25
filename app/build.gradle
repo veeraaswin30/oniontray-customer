@@ -1,4 +1,6 @@
 apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-android'
 //apply plugin: 'android-apt'
 
 android {
@@ -110,9 +112,14 @@ implementation 'com.google.android.libraries.places:places:2.1.0'
         exclude group: 'androidx.appcompat'
         exclude group: 'androidx.recyclerview'
     }
-
+    compile "androidx.core:core-ktx:+"
+    compile "androidx.lifecycle:lifecycle-viewmodel-ktx:2.1.0"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
 
 }
 
 apply plugin: 'com.google.gms.google-services'
+repositories {
+    mavenCentral()
+}

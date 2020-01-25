@@ -223,7 +223,8 @@ public interface APIService {
                                             @Field("sortby") String sortby,
                                             @Field("orderby") String orderby,
                                             @Field("p_methods") String p_methods,
-                                            @Field("cuisine_ids") String cuisineID);
+                                            @Field("cuisine_ids") String cuisineID,
+                                            @Field("delivery_free") String delivery_free);
 
 
     @GET("store_banner")

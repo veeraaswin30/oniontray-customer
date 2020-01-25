@@ -7,12 +7,14 @@ import android.graphics.PorterDuff;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+
 import androidx.annotation.Nullable;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 import androidx.appcompat.widget.Toolbar;
+
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -28,6 +30,7 @@ import com.app.oniontray.R;
 import com.app.oniontray.RequestModels.CuisineList;
 import com.app.oniontray.RequestModels.FilterCategoryList;
 import com.app.oniontray.RequestModels.FilterSettings;
+import com.app.oniontray.Utils.CuisinesSingleton;
 import com.app.oniontray.WebService.APIService;
 import com.app.oniontray.WebService.Webdata;
 
@@ -56,10 +59,8 @@ public class StoreFilterActivity extends LocalizationActivity implements View.On
     private RadioGroup store_filter_rat_deli_time_radio_group;
     private String relvence_value, rat_time_value, rat_pay_value;
 
-   private ColorStateList colorStateList;
-   private TextView store_filter_done_txt_view_txt;
-
-
+    private ColorStateList colorStateList;
+    private TextView store_filter_done_txt_view_txt;
 
 
     private RadioGroup store_filter_pay_method_radio_group;
@@ -67,6 +68,9 @@ public class StoreFilterActivity extends LocalizationActivity implements View.On
     private RadioButton store_filter_pay_meth_all_radio_btn;
     private RadioButton store_filter_pay_meth_cash_radio_btn;
     private RadioButton store_filter_pay_meth_card_radio_btn;
+    private RadioButton store_filter_asc_radio_btn;
+
+    private CuisinesSingleton cuisinesSingleton;
 
 
     @Override
@@ -79,12 +83,14 @@ public class StoreFilterActivity extends LocalizationActivity implements View.On
         toolbar.setBackgroundColor(Color.parseColor(loginPrefManager.getThemeColor()));
         setSupportActionBar(toolbar);
 
-        TextView filter_title=findViewById(R.id.filter_title);
+        TextView filter_title = findViewById(R.id.filter_title);
         filter_title.setTextColor(Color.parseColor(loginPrefManager.getThemeFontColor()));
 
         if (getSupportActionBar() != null)
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
+
+        cuisinesSingleton = CuisinesSingleton.Companion.getInstance();
 
 
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
@@ -94,16 +100,16 @@ public class StoreFilterActivity extends LocalizationActivity implements View.On
             }
         });
 
-           String language = String.valueOf(LanguageSetting.getLanguage(StoreFilterActivity.this));
+        String language = String.valueOf(LanguageSetting.getLanguage(StoreFilterActivity.this));
 
 
         if (language.equals("en")) {
-          //  getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_action_bar_en_back_ic);
+            //  getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_action_bar_en_back_ic);
             final Drawable upArrow = getResources().getDrawable(R.drawable.ic_action_bar_en_back_ic);
             upArrow.setColorFilter(Color.parseColor(loginPrefManager.getThemeFontColor()), PorterDuff.Mode.SRC_ATOP);
             getSupportActionBar().setHomeAsUpIndicator(upArrow);
         } else {
-          //  getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_action_bar_en_back_ic);
+            //  getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_action_bar_en_back_ic);
             final Drawable upArrow = getResources().getDrawable(R.drawable.ic_action_bar_en_back_ic);
             upArrow.setColorFilter(Color.parseColor(loginPrefManager.getThemeFontColor()), PorterDuff.Mode.SRC_ATOP);
             getSupportActionBar().setHomeAsUpIndicator(upArrow);
@@ -123,11 +129,6 @@ public class StoreFilterActivity extends LocalizationActivity implements View.On
         store_filter_deli_prize_radio_btn = (RadioButton) findViewById(R.id.store_filter_deli_prize_radio_btn);
 
 
-
-
-
-
-
         store_filter_pay_method_radio_group = (RadioGroup) findViewById(R.id.store_filter_pay_method_radio_group);
 
 
@@ -136,6 +137,7 @@ public class StoreFilterActivity extends LocalizationActivity implements View.On
         store_filter_pay_meth_cash_radio_btn = (RadioButton) findViewById(R.id.store_filter_pay_meth_cash_radio_btn);
 
         store_filter_pay_meth_card_radio_btn = (RadioButton) findViewById(R.id.store_filter_pay_meth_card_radio_btn);
+        store_filter_asc_radio_btn = (RadioButton) findViewById(R.id.store_filter_asc_radio_btn);
 
         //ColorStateList colorStateList1 = ColorStateList.valueOf(Color.parseColor(loginPrefManager.getThemeColor()));
 //        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -197,14 +199,7 @@ public class StoreFilterActivity extends LocalizationActivity implements View.On
 //            }
 
 
-
-
-
-
-
-
-       // }
-
+        // }
 
 
         showRestaurantClick = (LinearLayout) findViewById(R.id.show_restaurant);
@@ -241,10 +236,10 @@ public class StoreFilterActivity extends LocalizationActivity implements View.On
 
     private void showRestaurantClickMethod() {
 
-        if (store_filter_recommended_radio_btn.isChecked()) {
-            relvence_value = "desc";
-        } else {
+        if (store_filter_asc_radio_btn.isChecked()) {
             relvence_value = "asc";
+        } else {
+            relvence_value = "desc";
         }
 
 
@@ -263,7 +258,7 @@ public class StoreFilterActivity extends LocalizationActivity implements View.On
 
         if (store_filter_pay_meth_all_radio_btn.isChecked()) {
 
-            rat_pay_value = "";
+            rat_pay_value = "3";
         }
 
         if (store_filter_pay_meth_cash_radio_btn.isChecked()) {
@@ -296,7 +291,7 @@ public class StoreFilterActivity extends LocalizationActivity implements View.On
         }
 
 //        Log.e("relevance", relvence_value);
-        if (rat_time_value != null){
+        if (rat_time_value != null) {
 
         }
 //            Log.e("ratvalue", ",,,,,,,," + rat_time_value);
@@ -328,11 +323,9 @@ public class StoreFilterActivity extends LocalizationActivity implements View.On
             filterData.putExtra("cuisineId", "");
         }
 
-        if (filterCategoryList.size() != 0)
-        {
+        if (filterCategoryList.size() != 0) {
             Iterator iterator = filterCategoryList.keySet().iterator();
-            while (iterator.hasNext())
-            {
+            while (iterator.hasNext()) {
                 String key = (String) iterator.next();
                 filterData.putExtra(filterCategoryList.get(key).getUrlKey(), "" + filterCategoryList.get(key).getId());
             }
@@ -377,8 +370,15 @@ public class StoreFilterActivity extends LocalizationActivity implements View.On
                             filterCategoryList.setName(getString(R.string.filter_open_restaurant));
                             filterCategoryList.setUrlKey(getString(R.string.filter_key_open_restaurant));
 
+                            FilterCategoryList filterFreeList = new FilterCategoryList();
+                            filterFreeList.setId(1);
+                            filterFreeList.setName(getString(R.string.filter_free_delivery));
+                            filterFreeList.setUrlKey(getString(R.string.filter_key_free_delivery));
+
+
                             filterCategoryListArrayList.add(filterCategoryListForOffers);
                             filterCategoryListArrayList.add(filterCategoryList);
+                            filterCategoryListArrayList.add(filterFreeList);
 
                             quickfilterQuickCuisionAdapters = new FilterQuickCuisionAdapters(StoreFilterActivity.this, filterCategoryListArrayList);
                             filter_by_category_recycler_view.setAdapter(quickfilterQuickCuisionAdapters);
@@ -422,6 +422,7 @@ public class StoreFilterActivity extends LocalizationActivity implements View.On
     }
 
     private void clearAllFilterData() {
+        cuisinesSingleton.mRemoveAll();
 
         quickfilterQuickCuisionAdapters.clearHashMapCategory();
 
@@ -433,7 +434,7 @@ public class StoreFilterActivity extends LocalizationActivity implements View.On
         store_filter_pay_method_radio_group.clearCheck();
 
 
-        store_filter_recommended_radio_btn.setChecked(true);
+        store_filter_asc_radio_btn.setChecked(true);
 
         store_filter_pay_meth_all_radio_btn.setChecked(false);
 
@@ -445,24 +446,24 @@ public class StoreFilterActivity extends LocalizationActivity implements View.On
             rat_time_value = "rating";
         } else if (checkedId == R.id.store_filter_deli_time_radio_btn) {
             rat_time_value = "delivery_time";
-        } else if (checkedId == R.id.store_filter_recommended_radio_btn) {
+        } else if (checkedId == R.id.store_filter_asc_radio_btn) {
             relvence_value = "desc";
         } else {
             rat_time_value = "minimum_order_amount";
         }
     }
 
-    public ColorStateList radioButtonColor(){
-        ColorStateList   colorStateList = new ColorStateList(
+    public ColorStateList radioButtonColor() {
+        ColorStateList colorStateList = new ColorStateList(
                 new int[][]{
 
                         new int[]{-android.R.attr.state_enabled}, //disabled
                         new int[]{android.R.attr.state_enabled} //enabled
                 },
-                new int[] {
+                new int[]{
 
                         Color.parseColor(loginPrefManager.getThemeFontColor()) //disabled
-                        ,Color.parseColor(loginPrefManager.getThemeColor()) //enabled
+                        , Color.parseColor(loginPrefManager.getThemeColor()) //enabled
 
                 }
         );

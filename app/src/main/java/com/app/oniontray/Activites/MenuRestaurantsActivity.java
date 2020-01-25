@@ -69,7 +69,7 @@ public class MenuRestaurantsActivity extends LocalizationActivity implements Sea
 
     private Toolbar toolbar;
 
-    private TextView menu_rest_title_txt,home_banner_search_txt_view;
+    private TextView menu_rest_title_txt, home_banner_search_txt_view;
 
     private SearchView restaurent_list_search_view;
 
@@ -79,13 +79,13 @@ public class MenuRestaurantsActivity extends LocalizationActivity implements Sea
     private HomeParallaxStoreListAdapter<StoreList_Data> datumHomeParallaxStoreListAdapter;
     private int array_list_count = 0;
     private ArrayList<StoreList_Data> storeListArrayList = new ArrayList<>();
-    private BroadcastReceiver Filter_broadcastReceiver,baseMenuBroadcastReceiver;
+    private BroadcastReceiver Filter_broadcastReceiver, baseMenuBroadcastReceiver;
     SwipeRefreshLayout swipe_view;
 
 
     private TextView restaurant_empty_txt_view;
 
-    String openRestaurant = "", openOffer = "";
+    String openRestaurant = "", openOffer = "", free_delivery = "";
 
     public static String review_status = "";
 
@@ -109,7 +109,7 @@ public class MenuRestaurantsActivity extends LocalizationActivity implements Sea
         upArrow.setColorFilter(Color.parseColor(loginPrefManager.getThemeFontColor()), PorterDuff.Mode.SRC_ATOP);
         getSupportActionBar().setHomeAsUpIndicator(upArrow);
 
-       // getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_action_bar_loc_ic);
+        // getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_action_bar_loc_ic);
 
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
@@ -152,9 +152,9 @@ public class MenuRestaurantsActivity extends LocalizationActivity implements Sea
         if (datumHomeParallaxStoreListAdapter != null) {
             datumHomeParallaxStoreListAdapter = null;
 
-            HomePageStoreList("", "asc", "", "");
+            HomePageStoreList("", "desc", "", "", "");
         } else {
-            HomePageStoreList("", "asc", "", "");
+            HomePageStoreList("", "desc", "", "", "");
         }
     }
 
@@ -181,7 +181,6 @@ public class MenuRestaurantsActivity extends LocalizationActivity implements Sea
         final Drawable upArrow = getResources().getDrawable(R.drawable.ic_action_bar_menu_filter_ic);
         upArrow.setColorFilter(Color.parseColor(loginPrefManager.getThemeFontColor()), PorterDuff.Mode.SRC_ATOP);
         menu.findItem(R.id.home_filter_ic).setIcon(upArrow);
-
 
 
         return true;
@@ -230,9 +229,9 @@ public class MenuRestaurantsActivity extends LocalizationActivity implements Sea
                 if (datumHomeParallaxStoreListAdapter != null) {
                     datumHomeParallaxStoreListAdapter = null;
 
-                    HomePageStoreList("", "asc", "", "");
+                    HomePageStoreList("", "desc", "", "", "");
                 } else {
-                    HomePageStoreList("", "asc", "", "");
+                    HomePageStoreList("", "desc", "", "", "");
                 }
 
             }
@@ -246,9 +245,9 @@ public class MenuRestaurantsActivity extends LocalizationActivity implements Sea
                         if (datumHomeParallaxStoreListAdapter != null) {
                             datumHomeParallaxStoreListAdapter = null;
 
-                            HomePageStoreList("", "asc", "", "");
+                            HomePageStoreList("", "desc", "", "", "");
                         } else {
-                            HomePageStoreList("", "asc", "", "");
+                            HomePageStoreList("", "desc", "", "", "");
                         }
 
                     }
@@ -256,7 +255,6 @@ public class MenuRestaurantsActivity extends LocalizationActivity implements Sea
             }
         };
         LocalBroadcastManager.getInstance(MenuRestaurantsActivity.this).registerReceiver(baseMenuBroadcastReceiver, new IntentFilter("base_activity_receiver"));
-
 
 
         Filter_broadcastReceiver = new BroadcastReceiver() {
@@ -270,9 +268,13 @@ public class MenuRestaurantsActivity extends LocalizationActivity implements Sea
                 if (intent.hasExtra(getString(R.string.filter_key_offer))) {
                     openOffer = intent.getStringExtra(getString(R.string.filter_key_offer));
                 }
+                if (intent.hasExtra(getString(R.string.filter_key_free_delivery))) {
+                    free_delivery = intent.getStringExtra(getString(R.string.filter_key_free_delivery));
+                }
 
                 HomePageStoreList(intent.getStringExtra("sortBy"),
-                        intent.getStringExtra("orderBy"), "", intent.getStringExtra("cuisineId"));
+                        intent.getStringExtra("orderBy"), intent.getStringExtra("pay_method"),
+                        intent.getStringExtra("cuisineId"), free_delivery);
 
             }
         };
@@ -312,7 +314,8 @@ public class MenuRestaurantsActivity extends LocalizationActivity implements Sea
     }
 
 
-    private void HomePageStoreList(String sortBy, String orderBy, String pay_method, String cuisineID) {
+    private void HomePageStoreList(String sortBy, String orderBy, String pay_method, String cuisineID,
+                                   String free_delivery) {
 
         if (!isFinishing()) {
             if (progressDialog != null) {
@@ -327,11 +330,12 @@ public class MenuRestaurantsActivity extends LocalizationActivity implements Sea
         Log.e("orderBy", ".........." + orderBy);
         Log.e("cuisineID", ".........." + cuisineID);
         Log.e("pay_method", ".........." + pay_method);
+        Log.e("free_delivery", ".........." + free_delivery);
 
         final APIService storeList = Webdata.getRetrofit().create(APIService.class);
         storeList.get_home_page_storeList("" + loginPrefManager.getLocID(), "" + loginPrefManager.getCityID(),
                 "" + loginPrefManager.getStringValue("Lang_code"), openRestaurant, openOffer,
-                sortBy, orderBy, pay_method, cuisineID).enqueue(new Callback<StoreList>() {
+                sortBy, orderBy, pay_method, cuisineID, free_delivery).enqueue(new Callback<StoreList>() {
             @Override
             public void onResponse(Call<StoreList> call, Response<StoreList> response) {
                 Log.e("input", new Gson().toJson(response.raw().request().body()));
@@ -532,14 +536,14 @@ public class MenuRestaurantsActivity extends LocalizationActivity implements Sea
                             }
                         }
 
-                       // ((MenuRestaurantsActivity.MenuRestaurantHolder) viewHolder).restaurant_minimum_order_amout.setText(loginPrefManager.getFormatCurrencyValue(loginPrefManager.GetEngDecimalFormatValues(Float.valueOf(store_list_adapter.getData().get(i).getMinimumOrderAmount()))));
-                        ((MenuRestaurantsActivity.MenuRestaurantHolder) viewHolder).restaurant_minimum_order_amout.setText(Html.fromHtml(loginPrefManager.getCurrecncyWithDynamicColor(loginPrefManager.getThemeFontColor(),loginPrefManager.GetEngDecimalFormatValues( Float.valueOf(store_list_adapter.getData().get(i).getMinimumOrderAmount())))));
+                        // ((MenuRestaurantsActivity.MenuRestaurantHolder) viewHolder).restaurant_minimum_order_amout.setText(loginPrefManager.getFormatCurrencyValue(loginPrefManager.GetEngDecimalFormatValues(Float.valueOf(store_list_adapter.getData().get(i).getMinimumOrderAmount()))));
+                        ((MenuRestaurantsActivity.MenuRestaurantHolder) viewHolder).restaurant_minimum_order_amout.setText(Html.fromHtml(loginPrefManager.getCurrecncyWithDynamicColor(loginPrefManager.getThemeFontColor(), loginPrefManager.GetEngDecimalFormatValues(Float.valueOf(store_list_adapter.getData().get(i).getMinimumOrderAmount())))));
 
                         if (store_list_adapter.getData().get(i).getDeliveryTime().isEmpty()) {
                             ((MenuRestaurantsActivity.MenuRestaurantHolder) viewHolder).restaurant_delivery_mins.setText("-");
                         } else {
                             ((MenuRestaurantsActivity.MenuRestaurantHolder) viewHolder).restaurant_delivery_mins.setText(Html.fromHtml(String.format(getString(R.string.rest_list_mins), "" + store_list_adapter.getData().get(i).getDeliveryTime())));
-                           // ((MenuRestaurantsActivity.MenuRestaurantHolder) viewHolder).restaurant_delivery_mins.setText(Html.fromHtml(String.format(getString(R.string.rest_list_mins),loginPrefManager.getCurrecncyWithDynamicColor(loginPrefManager.getThemeFontColor(),"" + store_list_adapter.getData().get(i).getDeliveryTime()))));
+                            // ((MenuRestaurantsActivity.MenuRestaurantHolder) viewHolder).restaurant_delivery_mins.setText(Html.fromHtml(String.format(getString(R.string.rest_list_mins),loginPrefManager.getCurrecncyWithDynamicColor(loginPrefManager.getThemeFontColor(),"" + store_list_adapter.getData().get(i).getDeliveryTime()))));
                         }
 
 
@@ -821,8 +825,8 @@ public class MenuRestaurantsActivity extends LocalizationActivity implements Sea
     @Override
     protected void onDestroy() {
         super.onDestroy();
-                LocalBroadcastManager.getInstance(MenuRestaurantsActivity.this).unregisterReceiver(baseMenuBroadcastReceiver);
-                LocalBroadcastManager.getInstance(MenuRestaurantsActivity.this).unregisterReceiver(Filter_broadcastReceiver);
+        LocalBroadcastManager.getInstance(MenuRestaurantsActivity.this).unregisterReceiver(baseMenuBroadcastReceiver);
+        LocalBroadcastManager.getInstance(MenuRestaurantsActivity.this).unregisterReceiver(Filter_broadcastReceiver);
 
     }
 }

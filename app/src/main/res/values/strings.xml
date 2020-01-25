@@ -326,9 +326,11 @@
     <string name="filter_deliver_pick_up_time_txt">Delivery / Pickup \n time</string>
     <string name="filter_deliver_min_ord_txt">Minimum order</string>
     <string name="filter_open_restaurant">Open Restaurant</string>
+    <string name="filter_free_delivery">Free Delivery</string>
     <string name="filter_offer">Offers</string>
     <string name="filter_key_offer">Open offer</string>
     <string name="filter_key_open_restaurant">Open restaurant</string>
+    <string name="filter_key_free_delivery">Free Delivery</string>
 
     <string name="filter_all_cuisines">All cuisines</string>
 
