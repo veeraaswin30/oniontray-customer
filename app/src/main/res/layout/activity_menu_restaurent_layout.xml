@@ -67,9 +67,10 @@
                 android:layout_marginTop="@dimen/small_txt_appearence_size"
                 android:background="@drawable/store_list_search_view_bg"
                 android:drawablePadding="@dimen/smal_margin"
-                android:drawableStart="@drawable/ic_location_on_black_24dp"
+                android:drawableStart="@drawable/ic_menu_light_gray_icon"
                 android:ellipsize="end"
                 android:gravity="center_vertical"
+
                 android:maxLines="1"
                 android:text="@string/home_search_restar_hint_txt"
                 android:textColor="@color/disable_txt_color" />

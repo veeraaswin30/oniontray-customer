@@ -70,7 +70,9 @@ public class StoreFilterActivity extends LocalizationActivity implements View.On
     private RadioButton store_filter_pay_meth_card_radio_btn;
     private RadioButton store_filter_asc_radio_btn;
 
+    private RadioGroup store_filter_order_by_radio_group;
     private CuisinesSingleton cuisinesSingleton;
+    public static TextView resetTxt;
 
 
     @Override
@@ -130,6 +132,7 @@ public class StoreFilterActivity extends LocalizationActivity implements View.On
 
 
         store_filter_pay_method_radio_group = (RadioGroup) findViewById(R.id.store_filter_pay_method_radio_group);
+        store_filter_order_by_radio_group = (RadioGroup) findViewById(R.id.store_filter_order_by_radio_group);
 
 
         store_filter_pay_meth_all_radio_btn = (RadioButton) findViewById(R.id.store_filter_pay_meth_all_radio_btn);
@@ -238,36 +241,44 @@ public class StoreFilterActivity extends LocalizationActivity implements View.On
 
         if (store_filter_asc_radio_btn.isChecked()) {
             relvence_value = "asc";
+            CuisinesSingleton.Companion.setOrderBy(relvence_value);
         } else {
             relvence_value = "desc";
+            CuisinesSingleton.Companion.setOrderBy(relvence_value);
         }
 
 
         if (store_filter_rating_radio_btn.isChecked()) {
             rat_time_value = "rating";
+            CuisinesSingleton.Companion.setSortBy(rat_time_value);
         }
 
         if (store_filter_deli_time_radio_btn.isChecked()) {
             rat_time_value = "delivery_time";
+            CuisinesSingleton.Companion.setSortBy(rat_time_value);
         }
 
         if (store_filter_deli_prize_radio_btn.isChecked()) {
             rat_time_value = "minimum_order_amount";
+            CuisinesSingleton.Companion.setSortBy(rat_time_value);
         }
 
 
         if (store_filter_pay_meth_all_radio_btn.isChecked()) {
 
             rat_pay_value = "3";
+            CuisinesSingleton.Companion.setPaymentBy(rat_pay_value);
         }
 
         if (store_filter_pay_meth_cash_radio_btn.isChecked()) {
 
             rat_pay_value = "1";
+            CuisinesSingleton.Companion.setPaymentBy(rat_pay_value);
         }
 
         if (store_filter_pay_meth_card_radio_btn.isChecked()) {
             rat_pay_value = "2";
+            CuisinesSingleton.Companion.setPaymentBy(rat_pay_value);
         }
 
 
@@ -355,6 +366,10 @@ public class StoreFilterActivity extends LocalizationActivity implements View.On
                 try {
                     if (response.body().getResponse() != null) {
                         if (response.body().getResponse().getHttpCode() == 200) {
+
+                            //mSet SingleTon datas
+                            mSetSingletonData();
+
                             cuisionfilterQuickCuisionAdapters = new FilterQuickCuisionAdapters(StoreFilterActivity.this, response.body().getResponse().getCuisineList(), "1");
                             cuisines_filter_recycler_view.setAdapter(cuisionfilterQuickCuisionAdapters);
 
@@ -383,6 +398,7 @@ public class StoreFilterActivity extends LocalizationActivity implements View.On
                             quickfilterQuickCuisionAdapters = new FilterQuickCuisionAdapters(StoreFilterActivity.this, filterCategoryListArrayList);
                             filter_by_category_recycler_view.setAdapter(quickfilterQuickCuisionAdapters);
 
+
                         } else {
 
                         }
@@ -390,6 +406,43 @@ public class StoreFilterActivity extends LocalizationActivity implements View.On
                 } catch (Exception e) {
 //                    Log.e("exception error", e.getMessage());
                 }
+            }
+
+            private void mSetSingletonData() {
+                //Check Order by
+                if (CuisinesSingleton.Companion.getOrderBy().equals("asc")) {
+                    store_filter_asc_radio_btn.setChecked(true);
+                } else {
+                    store_filter_asc_radio_btn.setChecked(false);
+                }
+
+                //Check Sort By
+                if (CuisinesSingleton.Companion.getSortBy().equalsIgnoreCase("rating")) {
+                    store_filter_rating_radio_btn.setChecked(true);
+                } else if (CuisinesSingleton.Companion.getSortBy().equalsIgnoreCase("delivery_time")) {
+                    store_filter_deli_time_radio_btn.setChecked(true);
+                } else if (CuisinesSingleton.Companion.getSortBy().equalsIgnoreCase("minimum_order_amount")) {
+                    store_filter_deli_prize_radio_btn.setChecked(true);
+                } else {
+                    store_filter_rating_radio_btn.setChecked(false);
+                    store_filter_deli_time_radio_btn.setChecked(false);
+                    store_filter_deli_prize_radio_btn.setChecked(false);
+                }
+
+                //check pahymnt by
+                if (CuisinesSingleton.Companion.getPaymentBy().equalsIgnoreCase("3")) {
+                    store_filter_pay_meth_all_radio_btn.setChecked(true);
+                } else if (CuisinesSingleton.Companion.getPaymentBy().equalsIgnoreCase("1")) {
+                    store_filter_pay_meth_cash_radio_btn.setChecked(true);
+                } else if (CuisinesSingleton.Companion.getPaymentBy().equalsIgnoreCase("2")) {
+                    store_filter_pay_meth_card_radio_btn.setChecked(true);
+                } else {
+                    store_filter_pay_meth_all_radio_btn.setChecked(false);
+                    store_filter_pay_meth_cash_radio_btn.setChecked(false);
+                    store_filter_pay_meth_card_radio_btn.setChecked(false);
+                }
+
+
             }
 
             @Override
@@ -404,14 +457,14 @@ public class StoreFilterActivity extends LocalizationActivity implements View.On
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 
-        TextView tv = new TextView(this);
-        tv.setText(getString(R.string.filter_menu_clear_all_txt) + "  ");
-        tv.setTextColor(Color.parseColor(loginPrefManager.getThemeFontColor()));
-        tv.setOnClickListener(this);
-        tv.setPadding(5, 0, 5, 0);
-        tv.setTypeface(null, Typeface.NORMAL);
-        tv.setTextSize(16);
-        menu.add(0, FILTER_ID, 1, "" + getString(R.string.filter_menu_clear_all_txt)).setActionView(tv).setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
+        resetTxt = new TextView(this);
+        resetTxt.setText(getString(R.string.filter_menu_clear_all_txt) + "  ");
+        resetTxt.setTextColor(Color.parseColor(loginPrefManager.getThemeFontColor()));
+        resetTxt.setOnClickListener(this);
+        resetTxt.setPadding(5, 0, 5, 0);
+        resetTxt.setTypeface(null, Typeface.NORMAL);
+        resetTxt.setTextSize(16);
+        menu.add(0, FILTER_ID, 1, "" + getString(R.string.filter_menu_clear_all_txt)).setActionView(resetTxt).setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
 
         return true;
     }
@@ -422,7 +475,15 @@ public class StoreFilterActivity extends LocalizationActivity implements View.On
     }
 
     private void clearAllFilterData() {
+
         cuisinesSingleton.mRemoveAll();
+        cuisinesSingleton.mRemoveAllFilter();
+        CuisinesSingleton.Companion.setSortBy("");
+        CuisinesSingleton.Companion.setPaymentBy("");
+        CuisinesSingleton.Companion.setOrderBy("");
+
+        //quickfilterQuickCuisionAdapters.notifyDataSetChanged();
+        filterSettingsData();
 
         quickfilterQuickCuisionAdapters.clearHashMapCategory();
 
@@ -432,9 +493,9 @@ public class StoreFilterActivity extends LocalizationActivity implements View.On
         store_filter_rat_deli_time_radio_group.clearCheck();
 
         store_filter_pay_method_radio_group.clearCheck();
+        store_filter_order_by_radio_group.clearCheck();
 
-
-        store_filter_asc_radio_btn.setChecked(true);
+        //store_filter_asc_radio_btn.setChecked(false);
 
         store_filter_pay_meth_all_radio_btn.setChecked(false);
 
@@ -447,7 +508,7 @@ public class StoreFilterActivity extends LocalizationActivity implements View.On
         } else if (checkedId == R.id.store_filter_deli_time_radio_btn) {
             rat_time_value = "delivery_time";
         } else if (checkedId == R.id.store_filter_asc_radio_btn) {
-            relvence_value = "desc";
+            relvence_value = "asc";
         } else {
             rat_time_value = "minimum_order_amount";
         }

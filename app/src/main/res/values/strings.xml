@@ -322,6 +322,7 @@
     <string name="filter_sort_by_txt">Sort by</string>
     <string name="filter_relev_txt">Recommended</string>
     <string name="filter_decn_txt">Decending</string>
+    <string name="filter_ascen_txt">Ascending</string>
     <string name="filter_ratting_txt">Rating</string>
     <string name="filter_deliver_pick_up_time_txt">Delivery / Pickup \n time</string>
     <string name="filter_deliver_min_ord_txt">Minimum order</string>

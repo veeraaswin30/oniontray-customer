@@ -10,6 +10,8 @@ class CuisinesSingleton() {
     private var mCuisinelist: ArrayList<String> = arrayListOf()
     private var mfilterList: ArrayList<String> = arrayListOf()
 
+
+
     companion object {
         var mInstance: CuisinesSingleton? = null
 
@@ -19,6 +21,23 @@ class CuisinesSingleton() {
 
             return mInstance!!
         }
+
+
+         var orderBy: String? = ""
+            get() = field
+            set(value) {
+                field = value
+            }
+         var SortBy: String? = ""
+            get() = field
+            set(value) {
+                field = value
+            }
+         var paymentBy : String = ""
+            get() = field
+            set(value) {
+                field = value
+            }
 
     }
 
@@ -58,6 +77,8 @@ class CuisinesSingleton() {
     fun mRemoveAllFilter() {
         mfilterList.clear()
     }
+
+
 
 
 }
