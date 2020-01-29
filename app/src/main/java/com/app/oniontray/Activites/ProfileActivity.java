@@ -53,6 +53,7 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.google.i18n.phonenumbers.NumberParseException;
 import com.google.i18n.phonenumbers.PhoneNumberUtil;
 import com.google.i18n.phonenumbers.Phonenumber;
+import com.hbb20.CountryCodePicker;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -97,7 +98,7 @@ public class ProfileActivity extends LocalizationActivity {
 
     private Button prof_change_pass_btn;
     private Button prof_update_btn;
-
+    private CountryCodePicker ccpSignup;
 
     protected String mLastEnteredPhone;
     protected Spinner mSpinner;
@@ -276,6 +277,10 @@ public class ProfileActivity extends LocalizationActivity {
         prof_update_btn.setBackgroundColor(Color.parseColor(loginPrefManager.getThemeFontColor()));
         prof_update_btn.setTextColor(Color.parseColor(loginPrefManager.getThemeColor()));
 
+        ccpSignup = findViewById(R.id.ccpSignup);
+        ccpSignup.registerCarrierNumberEditText(prof_mobile_edt_txt);
+
+
         prof_change_pass_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -307,7 +312,7 @@ public class ProfileActivity extends LocalizationActivity {
         mSpinner.setAdapter(mAdapter);
         mSpinner.setOnItemSelectedListener(mOnItemSelectedListener);
 
-        initCodes(ProfileActivity.this);
+        //initCodes(ProfileActivity.this);
 
         prof_mobile_edt_txt.addTextChangedListener(new CustomPhoneNumberFormattingTextWatcher(mOnPhoneChangedListener));
         InputFilter filter = new InputFilter() {
@@ -800,7 +805,7 @@ public class ProfileActivity extends LocalizationActivity {
     }
 
 
-    protected void initCodes(Context context) {
+   /* protected void initCodes(Context context) {
         new AsyncPhoneInitTask(context).execute();
     }
 
@@ -882,7 +887,7 @@ public class ProfileActivity extends LocalizationActivity {
 //            Log.e("ARABIC_COUNTRY_NAME", "-" + ARABIC_COUNTRY_NAME.size());
 
         }
-    }
+    }*/
 
 
     private void requestFocus(View view) {

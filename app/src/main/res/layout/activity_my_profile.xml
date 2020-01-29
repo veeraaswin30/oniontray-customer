@@ -182,7 +182,15 @@
                             android:layout_width="wrap_content"
                             android:layout_height="41dp"
                             android:background="@drawable/edit_box_drop_selector"
-                            android:dropDownWidth="200dp" />
+                            android:dropDownWidth="200dp"
+                            android:visibility="gone"/>
+
+                        <com.hbb20.CountryCodePicker
+                            android:id="@+id/ccpSignup"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:ccp_defaultNameCode="IN"
+                            app:ccp_showFlag="true"/>
 
                         <com.google.android.material.textfield.TextInputLayout
                             android:id="@+id/prof_mobile_txt_in_lay"
