@@ -10,13 +10,17 @@ import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
+
 import com.google.android.material.textfield.TextInputLayout;
+
 import androidx.appcompat.widget.Toolbar;
+
 import android.text.Editable;
 import android.text.InputFilter;
 import android.text.Spanned;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.util.SparseArray;
 import android.view.View;
 import android.view.WindowManager;
@@ -216,7 +220,7 @@ public class ProfileActivity extends LocalizationActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayUseLogoEnabled(true);
 
-           String language = String.valueOf(LanguageSetting.getLanguage(ProfileActivity.this));
+        String language = String.valueOf(LanguageSetting.getLanguage(ProfileActivity.this));
 
 
         if (language.equals("en")) {
@@ -547,7 +551,7 @@ public class ProfileActivity extends LocalizationActivity {
         APIService apiService = Webdata.getRetrofit().create(APIService.class);
         apiService.update_profile("" + loginPrefManager.getStringValue("user_id"),
                 "" + prof_name_edt_txt.getText().toString(), "" + lastName,
-                "" + prof_mobile_edt_txt.getText().toString().replaceAll("\\s+", ""), "" + gender,
+                "" + ccpSignup.getFullNumberWithPlus(), "" + gender,
                 "" + loginPrefManager.getStringValue("device_id"),
                 "" + loginPrefManager.getStringValue("device_token"), "" + loginPrefManager.getStringValue("Lang_code"),
                 "" + email, "" + loginPrefManager.getStringValue("user_token")).enqueue(new Callback<ProfUpdResponse>() {
@@ -743,7 +747,12 @@ public class ProfileActivity extends LocalizationActivity {
 
     private boolean validateMobileNumber() {
 
-        if (prof_mobile_edt_txt.getText().toString().trim().length() < 7) {
+       // Log.e("MobileNum", prof_mobile_edt_txt.getText().toString() + " " + prof_mobile_edt_txt.getText().toString().replace(" ", "").length());
+        if (prof_mobile_edt_txt.getText().toString().replace(" ", "").trim().length() < 10) {
+            prof_mobile_txt_in_lay.setError(getString(R.string.err_msg_mobile));
+            requestFocus(prof_mobile_edt_txt);
+            return false;
+        } else if (prof_mobile_edt_txt.getText().toString().replace(" ", "").trim().length() > 10) {
             prof_mobile_txt_in_lay.setError(getString(R.string.err_msg_mobile));
             requestFocus(prof_mobile_edt_txt);
             return false;

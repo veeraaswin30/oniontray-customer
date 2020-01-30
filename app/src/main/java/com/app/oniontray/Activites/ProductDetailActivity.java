@@ -12,12 +12,14 @@ import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
 import android.os.Bundle;
+
 import androidx.annotation.Nullable;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import androidx.core.widget.NestedScrollView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.appcompat.widget.Toolbar;
+
 import android.text.Html;
 import android.util.Log;
 import android.view.View;
@@ -108,7 +110,7 @@ public class ProductDetailActivity extends LocalizationActivity implements Produ
     TextView prod_details_desc_data_txt;
 
 
-//    VectorMasterView input_plus;
+    //    VectorMasterView input_plus;
 //    VectorMasterView input_minus;
     private Float product_price_to_float = 0f;
 
@@ -129,7 +131,7 @@ public class ProductDetailActivity extends LocalizationActivity implements Produ
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayUseLogoEnabled(true);
 
-           String language = String.valueOf(LanguageSetting.getLanguage(ProductDetailActivity.this));
+        String language = String.valueOf(LanguageSetting.getLanguage(ProductDetailActivity.this));
 
 
         if (language.equals("en")) {
@@ -189,9 +191,7 @@ public class ProductDetailActivity extends LocalizationActivity implements Produ
 //        outline.setFillColor(Color.parseColor(loginPrefManager.getThemeColor()));
 
 
-
         prod_detail_nested_scroll_view = (NestedScrollView) findViewById(R.id.prod_detail_nested_scroll_view);
-
 
 
         prod_details_deliv_by_txt = (TextView) findViewById(R.id.prod_details_deliv_by_txt);
@@ -220,7 +220,7 @@ public class ProductDetailActivity extends LocalizationActivity implements Produ
         view_cart = findViewById(R.id.view_cart);
         view_cart.setBackgroundColor(Color.parseColor(loginPrefManager.getThemeFontColor()));
 
-       // input_plus = findViewById(R.id.product_detail_plus_image);
+        // input_plus = findViewById(R.id.product_detail_plus_image);
         VectorMasterView input_plus = (VectorMasterView) findViewById(R.id.product_detail_plus_image);
         PathModel plus = input_plus.getPathModelByName("outline");
 
@@ -229,7 +229,6 @@ public class ProductDetailActivity extends LocalizationActivity implements Produ
 
 // set the fill color (if fill color is not set or is TRANSPARENT, then no fill is drawn)
         plus.setFillColor(Color.parseColor(loginPrefManager.getThemeFontColor()));
-
 
 
         //input_minus =  findViewById(R.id.product_detail_minus_image);
@@ -243,7 +242,6 @@ public class ProductDetailActivity extends LocalizationActivity implements Produ
         minus.setFillColor(Color.parseColor(loginPrefManager.getThemeFontColor()));
 
 
-
         VectorMasterView dynamic_cart = (VectorMasterView) findViewById(R.id.dynamic_cart);
         PathModel outline = dynamic_cart.getPathModelByName("outline");
 
@@ -252,9 +250,6 @@ public class ProductDetailActivity extends LocalizationActivity implements Produ
 
 // set the fill color (if fill color is not set or is TRANSPARENT, then no fill is drawn)
         outline.setFillColor(Color.parseColor(loginPrefManager.getThemeColor()));
-
-
-
 
 
         Input_quantity = (TextView) findViewById(R.id.product_detail_quantity);
@@ -273,9 +268,9 @@ public class ProductDetailActivity extends LocalizationActivity implements Produ
 
         pro_name.setText(product_name);
 
-       // pro_price.setText(loginPrefManager.getFormatCurrencyValue(loginPrefManager.GetEngDecimalFormatValues(Float.valueOf(discount_price))));
+        // pro_price.setText(loginPrefManager.getFormatCurrencyValue(loginPrefManager.GetEngDecimalFormatValues(Float.valueOf(discount_price))));
 
-        pro_price.setText(Html.fromHtml(loginPrefManager.getCurrecncyWithDynamicColor(loginPrefManager.getThemeColor(),loginPrefManager.GetEngDecimalFormatValues( Float.valueOf(Float.valueOf(discount_price))))));
+        pro_price.setText(Html.fromHtml(loginPrefManager.getCurrecncyWithDynamicColor(loginPrefManager.getThemeColor(), loginPrefManager.GetEngDecimalFormatValues(Float.valueOf(Float.valueOf(discount_price))))));
 
         prod_list_quentity_txt_view.setText("" + Weight + "" + unit);
 
@@ -317,19 +312,19 @@ public class ProductDetailActivity extends LocalizationActivity implements Produ
             @Override
             public void onClick(View view) {
 
-                if (ProductMenuItemListWithDynamicTabs.productActivity != null) {
+               /* if (ProductMenuItemListWithDynamicTabs.productActivity != null) {
                     ProductMenuItemListWithDynamicTabs.productActivity.finish();
                 }
-
-                Intent intent = new Intent(ProductDetailActivity.this, BaseMenuTabActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+*/
+                Intent intent = new Intent(ProductDetailActivity.this, CartViewActivity.class);
+                // intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                 startActivity(intent);
 
-                Intent intent_rece = new Intent("base_activity_receiver");
+               /* Intent intent_rece = new Intent("base_activity_receiver");
                 intent_rece.putExtra("page_name", "1");
                 LocalBroadcastManager.getInstance(ProductDetailActivity.this).sendBroadcast(intent_rece);
-
-                finish();
+*/
+                //finish();
 
             }
         });
@@ -418,18 +413,17 @@ public class ProductDetailActivity extends LocalizationActivity implements Produ
 
         Input_quantity.setText(String.valueOf(quantity));
 
-        float quantity_convert = Float.parseFloat(loginPrefManager.GetEngDecimalFormatValues(Float.parseFloat(""+quantity)));
+        float quantity_convert = Float.parseFloat(loginPrefManager.GetEngDecimalFormatValues(Float.parseFloat("" + quantity)));
 
 
-
-        Log.e("product_price",""+product_price_to_float);
-        Log.e("priceValue",""+priceValue);
-        Log.e("quantity_convert",""+quantity_convert);
+        Log.e("product_price", "" + product_price_to_float);
+        Log.e("priceValue", "" + priceValue);
+        Log.e("quantity_convert", "" + quantity_convert);
 
 
         float total = (product_price_to_float + priceValue);
 
-        float overall_total=total*quantity_convert;
+        float overall_total = total * quantity_convert;
 
         total_price.setText(loginPrefManager.getFormatCurrencyValue(loginPrefManager.GetEngDecimalFormatValues(overall_total)));
         prod_detail_ingridient_total_txt_view.setText(loginPrefManager.getFormatCurrencyValue((loginPrefManager.GetEngDecimalFormatValues(priceValue))));
@@ -442,7 +436,7 @@ public class ProductDetailActivity extends LocalizationActivity implements Produ
 
     private void CreateIngredientAdapter(ArrayList<IngredTypeList> ingredTypeLists) {
 
-        prodDetailIngredientAdapter = new ProdDetailIngredientAdapter(ProductDetailActivity.this, ingredTypeLists,loginPrefManager);
+        prodDetailIngredientAdapter = new ProdDetailIngredientAdapter(ProductDetailActivity.this, ingredTypeLists, loginPrefManager);
         prod_detail_ingridient_recycler_view.setAdapter(prodDetailIngredientAdapter);
 
 // Log.e("getIngredTypeList", " - " + ingredTypeLists.size());
@@ -666,7 +660,7 @@ public class ProductDetailActivity extends LocalizationActivity implements Produ
 
         total_price.setText(loginPrefManager.getFormatCurrencyValue(loginPrefManager.GetEngDecimalFormatValues(totalPrice * quantity_convert)));
 
-        AddProductIntoDB(productList_data, quantity,  ""+loginPrefManager.GetEngDecimalFormatValues(totalPrice), vendor_id, count);
+        AddProductIntoDB(productList_data, quantity, "" + loginPrefManager.GetEngDecimalFormatValues(totalPrice), vendor_id, count);
 
 
     }

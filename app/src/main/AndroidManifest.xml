@@ -333,6 +333,12 @@
             android:windowSoftInputMode="adjustResize|stateAlwaysHidden" />
 
         <activity
+            android:name="com.app.oniontray.Activites.CartViewActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppNoActionBar"
+            android:windowSoftInputMode="adjustResize|stateAlwaysHidden" />
+
+        <activity
             android:name="com.app.oniontray.Activites.PickMyLocationActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
