@@ -248,6 +248,7 @@
 
     <!--sign in-->
     <string name="sign_in">تسجيل الدخول</string>
+    <string name="Login_Otp">تسجيل الدخول عبر Otp</string>
     <string name="hint_email">البريد الإلكتروني</string>
     <string name="hint_password">كلمه السر</string>
     <string name="hint_show_password">تبين</string>

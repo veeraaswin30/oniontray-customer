@@ -29,7 +29,7 @@
     <string name="android_user_login_type">2</string>
 
 
-    <string name="app_name">OnionTray</string>
+    <string name="app_name">Sabrosa</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
 
 
@@ -116,6 +116,7 @@
     <!--sign in-->
     <string name="get_started">Getting started</string>
     <string name="sign_in">Sign In</string>
+    <string name="Login_Otp">Login via Otp</string>
     <string name="hint_email">Email</string>
     <string name="hint_password">Password</string>
     <string name="hint_show_password">Show</string>
@@ -747,7 +748,7 @@
 
 
     <!--welcome location page-->
-    <string name="welcomename">Welcome to OnionTray</string>
+    <string name="welcomename">Welcome to Sabrosa</string>
     <string name="welcome_text">Set your location to start exploring \n restaurants around you.</string>
     <string name="auto_detect_btn">Use GPS location</string>
     <string name="or">or</string>

@@ -5,8 +5,12 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
+
+import com.app.oniontray.RequestModels.Login;
 import com.google.android.material.textfield.TextInputLayout;
+
 import androidx.appcompat.app.AlertDialog;
+
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
@@ -177,10 +181,9 @@ public class RegOTPDialogView extends Dialog {
             Log.e("temp_user_id", "" + loginManager.getStringValue("temp_user_id"));
             Log.e("phone_no", "" + phone_no);
 
-            apiService.RegReSendOTPReq(loginManager.getStringValue("Lang_code"),
-                    loginManager.getStringValue("temp_user_id"), phone_no).enqueue(new Callback<RegNewOTPReq>() {
+            apiService.mLoginSendOtp(loginManager.getStringValue("temp_user_id"), loginManager.getStringValue("Lang_code")).enqueue(new Callback<SendOTP>() {
                 @Override
-                public void onResponse(Call<RegNewOTPReq> call, Response<RegNewOTPReq> response) {
+                public void onResponse(Call<SendOTP> call, Response<SendOTP> response) {
 
                     try {
 
@@ -208,7 +211,7 @@ public class RegOTPDialogView extends Dialog {
                 }
 
                 @Override
-                public void onFailure(Call<RegNewOTPReq> call, Throwable t) {
+                public void onFailure(Call<SendOTP> call, Throwable t) {
                     progressBarDialog.dismiss();
                 }
             });
@@ -293,10 +296,11 @@ public class RegOTPDialogView extends Dialog {
                 progressBarDialog.show();
             }
 
-            apiService.RegOTPVerifyReq(loginManager.getStringValue("Lang_code"), loginManager.getStringValue("temp_user_id"),
-                    phone_no, "1", "" + password, reg_otp_edt_txt_view.getText().toString().trim()).enqueue(new Callback<SendOTP>() {
+            apiService.mLoginVerifyOtp(reg_otp_edt_txt_view.getText().toString(), loginManager.getStringValue("device_token"),
+                    loginManager.getStringValue("temp_user_id"), "1",
+                    loginManager.getStringValue("Lang_code")).enqueue(new Callback<Login>() {
                 @Override
-                public void onResponse(Call<SendOTP> call, Response<SendOTP> response) {
+                public void onResponse(Call<Login> call, Response<Login> response) {
 
                     try {
 
@@ -329,7 +333,7 @@ public class RegOTPDialogView extends Dialog {
                 }
 
                 @Override
-                public void onFailure(Call<SendOTP> call, Throwable t) {
+                public void onFailure(Call<Login> call, Throwable t) {
                     Log.e("onFailure", "" + t.getMessage());
                     progressBarDialog.dismiss();
                 }

@@ -236,7 +236,7 @@ public interface APIService {
     Call<StoProdVendorInfo> get_store_Prod_VenderInfo(@Field("language") String language,
                                                       @Field("outlet_id") String store_id,
                                                       @Field("city") String city,
-                                                          @Field("location") String location,
+                                                      @Field("location") String location,
                                                       @Field("user_id") String user_id,
                                                       @Field("token") String token);
 
@@ -705,6 +705,19 @@ public interface APIService {
 
 
     @FormUrlEncoded
+    @POST("reg-send-otp")
+    Call<SendOTP> mLoginSendOtp(@Field("user_id") String user_id, @Field("language") String language);
+
+    @FormUrlEncoded
+    @POST("check-otp-registration")
+    Call<Login> mLoginVerifyOtp(@Field("otp") String otp,
+                                       @Field("token") String token,
+                                       @Field("user_id") String user_id,
+                                       @Field("register") String register,
+                                       @Field("language") String language);
+
+
+    @FormUrlEncoded
     @POST("send-otp-profile")
     Call<RegNewOTPReq> ProfEditReSendOTPReq(@Field("language") String language,
                                             @Field("user_id") String user_id,
@@ -788,6 +801,7 @@ public interface APIService {
                                                 @Field("device_token") String device_token,
                                                 @Field("payment_array") String paymentArray,
                                                 @Field("payment_params") String payment_params);
+
     @FormUrlEncoded
     @POST("guest_send_otp")
     Call<OtpReq> guestOtpRequset(@Field("language") String language,

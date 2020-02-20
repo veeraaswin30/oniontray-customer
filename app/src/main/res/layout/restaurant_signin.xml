@@ -164,6 +164,54 @@
                 android:textAllCaps="false"
                 android:textColor="@android:color/white" />
 
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_margin="@dimen/activity_horizontal_margin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <View
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="@dimen/big_margin"
+                    android:layout_marginStart="@dimen/activity_horizontal_margin"
+                    android:layout_marginEnd="@dimen/activity_horizontal_margin"
+                    android:background="@color/disable_txt_color"/>
+                <TextView
+                    android:layout_weight="0.2"
+                    android:layout_width="0dp"
+                    android:textDirection="locale"
+                    android:layout_height="wrap_content"
+                    android:text="@string/or"
+                    android:textAllCaps="true"
+                    android:gravity="center_horizontal|top"
+                    android:textAppearance="?android:attr/textAppearanceMedium"/>
+
+                <View
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_marginStart="@dimen/activity_horizontal_margin"
+                    android:layout_marginEnd="@dimen/activity_horizontal_margin"
+                    android:layout_marginTop="@dimen/big_margin"
+                    android:background="@color/disable_txt_color"/>
+
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/mSignInOtpBtn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:layout_margin="@dimen/activity_vertical_margin"
+                android:background="@drawable/signin_rounded_rectangle"
+                android:padding="@dimen/big_margin"
+                android:text="@string/Login_Otp"
+                android:textAllCaps="false"
+                android:textColor="@android:color/white" />
+
+
             <TextView
                 android:id="@+id/sign_in_condition"
                 android:layout_width="match_parent"

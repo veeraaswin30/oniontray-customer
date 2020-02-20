@@ -32,11 +32,12 @@ public class Webdata {
 
 
     //    public static String BaseUrl = "http://192.168.1.43:1016/api/";
-    public static String MainUrl = "http://oniontray.nbtdemo.com/";
+   // public static String MainUrl = "http://oniontray.nbtdemo.com/";
     //private static String MainUrl = "http://192.168.1.110:1009/";
+    private static String MainUrl = "http://192.168.1.111:8096/";
     public static String BaseUrl = MainUrl + "api/";
     //    private static String NbtBaseUrl = "http://192.168.1.43:1016/api/";
-    private static String NbtBaseUrl = MainUrl + "api/";
+    private static String NbtBaseUrl = MainUrl + "api/  ";
 
     public static final String helpandSuppord_Url = MainUrl + "mob-cms/faq";
     public static final String aboutUS_Url = MainUrl + "mob-cms/about-us";

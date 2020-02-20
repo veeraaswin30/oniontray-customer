@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layoutDirection="locale"
-    android:background="@drawable/loc_selec_bg_without_logo"
+    android:background="@drawable/location_bg"
     android:fillViewport="true"
     android:orientation="vertical"
     android:scrollbars="none">

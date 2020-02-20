@@ -1,19 +1,33 @@
 package com.app.oniontray.Fragments;
 
+import android.annotation.SuppressLint;
+import android.app.Activity;
+import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
+
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
+
+import com.app.oniontray.Activites.BaseMenuTabActivity;
+import com.app.oniontray.CustomViews.RegOTPDialogView;
+import com.app.oniontray.Interface.RegOTPInterface;
+import com.app.oniontray.RequestModels.RegNewOTPReq;
+import com.app.oniontray.RequestModels.SendOTP;
+import com.app.oniontray.RequestModels.SignUpresponse;
 import com.google.android.material.textfield.TextInputLayout;
 
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import androidx.core.graphics.drawable.DrawableCompat;
+
 import android.text.Editable;
 import android.text.Html;
 import android.text.InputFilter;
@@ -31,6 +45,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
@@ -56,6 +71,7 @@ import com.app.oniontray.Utils.LoginPrefManager;
 import com.app.oniontray.WebService.APIService;
 import com.app.oniontray.WebService.Webdata;
 import com.facebook.CallbackManager;
+import com.hbb20.CountryCodePicker;
 
 import java.util.ArrayList;
 
@@ -88,7 +104,7 @@ public class SignInFragment extends Fragment implements SignInVerifyDialog.SignI
     private boolean myCart;
     private boolean myAccount;
 
-    private Button signInButtonGplus, btnSignInWithFacebook;
+    private Button signInButtonGplus, btnSignInWithFacebook, mSignInOtpBtn;
 
     private LinearLayout expressCheckoutLayout;
 
@@ -103,7 +119,21 @@ public class SignInFragment extends Fragment implements SignInVerifyDialog.SignI
 
     private SignInOTPDialogView signInOTPDialogView;
 
+    private SignUpFragment.SignUpInterface signUpInterface;
 
+
+    private String mMob_num = "";
+    private String mOtp = "";
+    private String mUserId = "";
+
+    private CountryCodePicker ccpSignup;
+    private Dialog mviaOtpDialog;
+    private EditText fb_mobile_det_txt;
+    private Button mCancelBtn, mDoneBtn;
+    private TextInputLayout fb_mobile_input_Layout;
+
+
+    @SuppressLint("ResourceAsColor")
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Nullable
     @Override
@@ -149,6 +179,7 @@ public class SignInFragment extends Fragment implements SignInVerifyDialog.SignI
         sign_in_btn.setBackgroundColor(Color.parseColor(loginPrefMananger.getThemeFontColor()));
         sign_in_btn.setTextColor(Color.parseColor(loginPrefMananger.getThemeColor()));
         express_checkout_btn = (Button) rootView.findViewById(R.id.express_checkout_btn);
+        mSignInOtpBtn = rootView.findViewById(R.id.mSignInOtpBtn);
 
         showPassword = (CheckBox) rootView.findViewById(R.id.show_password);
 
@@ -165,6 +196,31 @@ public class SignInFragment extends Fragment implements SignInVerifyDialog.SignI
         input_email.addTextChangedListener(new MyTextWatcher(input_email));
         input_password.addTextChangedListener(new MyTextWatcher(input_password));
 
+        mviaOtpDialog = new Dialog(context);
+        fb_mobile_det_txt = mviaOtpDialog.findViewById(R.id.fb_mobile_det_txt);
+        fb_mobile_input_Layout = mviaOtpDialog.findViewById(R.id.fb_mobile_input_Layout);
+        mCancelBtn = mviaOtpDialog.findViewById(R.id.mCancelBtn);
+        mDoneBtn = mviaOtpDialog.findViewById(R.id.mDoneBtn);
+        ccpSignup = mviaOtpDialog.findViewById(R.id.ccpSignup);
+        ccpSignup.registerCarrierNumberEditText(fb_mobile_det_txt);
+
+        mCancelBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mviaOtpDialog.dismiss();
+            }
+        });
+
+        mDoneBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (!validateMobileNumber()) {
+                    return;
+                }
+
+
+            }
+        });
 
 
 //        input_layout_email.getEditText().getBackground().mutate().setColorFilter(Color.parseColor(loginPrefMananger.getThemeColor())), PorterDuff.Mode.SRC_ATOP));
@@ -215,16 +271,18 @@ public class SignInFragment extends Fragment implements SignInVerifyDialog.SignI
 //        });
 
 
-
         // Set the dimensions of the sign-in button.
         signInButtonGplus = (Button) rootView.findViewById(R.id.btnGooglePlus);
         // Facebook button
         btnSignInWithFacebook = (Button) rootView.findViewById(R.id.btnFacebookLogin);
 
 
-        input_email.setFilters(new InputFilter[] { new InputFilter.AllCaps() {
-            @Override public CharSequence filter(CharSequence source, int start, int end, Spanned dest, int dstart, int dend) {
-                return String.valueOf(source).toLowerCase(); } } });
+        input_email.setFilters(new InputFilter[]{new InputFilter.AllCaps() {
+            @Override
+            public CharSequence filter(CharSequence source, int start, int end, Spanned dest, int dstart, int dend) {
+                return String.valueOf(source).toLowerCase();
+            }
+        }});
 
 
         sign_in_btn.setOnClickListener(new View.OnClickListener() {
@@ -233,6 +291,15 @@ public class SignInFragment extends Fragment implements SignInVerifyDialog.SignI
                 ForSignInRequest();
             }
         });
+
+        mSignInOtpBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mviaOtpDialog.show();
+                //VerifyOTPDialogMethod(response.body().getResponse());
+            }
+        });
+
 
         express_checkout_btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -320,7 +387,7 @@ public class SignInFragment extends Fragment implements SignInVerifyDialog.SignI
             }
         };
 
-           String language = String.valueOf(LanguageSetting.getLanguage(getContext()));
+        String language = String.valueOf(LanguageSetting.getLanguage(getContext()));
 
 
         if (language.equals("en")) {
@@ -447,31 +514,6 @@ public class SignInFragment extends Fragment implements SignInVerifyDialog.SignI
 
     private void APIRequestForSignIn() {
 
-//        {
-//            "response": {
-//            "httpCode": 400,
-//                    "status": false,
-//                    "Message": "Please confirm you mail to activation."
-//        }
-//        }
-
-//        {
-//            "response": {
-//            "httpCode": 200,
-//                    "status": true,
-//                    "Message": "User logged-in successfully",
-//                    "user_id": 209,
-//                    "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjIwMDAwMDAwMDAwMCwic3ViIjoyMDksImlzcyI6Imh0dHA6XC9cL2RlbW8zLm5idGRlbW8uY29tXC9hcGlcL2xvZ2luX3VzZXIiLCJpYXQiOjE0ODczNTk4MjMsIm5iZiI6MTQ4NzM1OTgyMywianRpIjoiMTk0NTQ4NDU4ZjY5MTE2ZTVhZTBjODcxNWUxOTRhZjgifQ.BTiov4AW7jWvMLorYxg55IZeeGllgfy2y1XWYlkdENo",
-//                    "email": "senthilkumar.a@nextbrainitech.com",
-//                    "name": "senthil kumar",
-//                    "social_title": "Mr.",
-//                    "first_name": "senthil",
-//                    "last_name": "kumar",
-//                    "image": "",
-//                    "facebook_id": ""
-//        }
-//        }
-
         APIService apiService = Webdata.getRetrofit().create(APIService.class);
 
         try {
@@ -504,6 +546,137 @@ public class SignInFragment extends Fragment implements SignInVerifyDialog.SignI
                         if (response.body().getResponse().getHttpCode() == 200) {
 
                             loginPrefMananger.setStringValue("login_email", "" + input_email.getText().toString());
+                            loginPrefMananger.setStringValue("login_password", "" + input_password.getText().toString());
+
+                            loginPrefMananger.setStringValue("user_id", "" + response.body().getResponse().getUserId());
+                            loginPrefMananger.setStringValue("user_token", "" + response.body().getResponse().getToken());
+                            loginPrefMananger.setStringValue("user_email", "" + response.body().getResponse().getEmail());
+                            loginPrefMananger.setStringValue("user_name", "" + response.body().getResponse().getName());
+                            loginPrefMananger.setStringValue("user_first_name", "" + response.body().getResponse().getFirstName());
+                            loginPrefMananger.setStringValue("user_last_name", "" + response.body().getResponse().getLastName());
+                            loginPrefMananger.setStringValue("user_mobile", "" + response.body().getResponse().getMobile());
+                            loginPrefMananger.setStringValue("user_type", "" + getString(R.string.user_type_normal));
+                            loginPrefMananger.setStringValue("login_type", "" + getString(R.string.sign_up_login));
+
+                            mUserId = response.body().getResponse().getUserId().toString();
+                            //ApiRequestForSendOtp(response.body().getResponse().getUserId().toString());
+
+
+                            if (proc_to_check) {
+
+                                if (signInInterface != null) {
+                                    signInInterface.ProcedToCheck();
+                                }
+
+                            } else {
+
+                                if (signInInterface != null) {
+                                    signInInterface.UpdateSignInMethod(1);
+                                }
+
+                                if (myAccount)
+                                    LocalBroadcastManager.getInstance(context).sendBroadcast(new Intent("base_activity_receiver").putExtra("page_name", "2"));
+
+                            }
+
+                        } else {
+
+                            if (response.body().getResponse().getPhoneVerify() == 0) {
+
+                                if (response.body().getResponse().getUserId() != 0) {
+                                    signInVerifyDialog = new SignInVerifyDialog(getContext(), response.body().getResponse());
+                                    signInVerifyDialog.CallSignInVerifyInterface(SignInFragment.this);
+                                    signInVerifyDialog.show();
+                                } else {
+                                    Toast.makeText(context, "" + response.body().getResponse().getMessage(), Toast.LENGTH_SHORT).show();
+                                }
+
+                            } else {
+                                Toast.makeText(context, "" + response.body().getResponse().getMessage(), Toast.LENGTH_SHORT).show();
+                            }
+
+                        }
+
+                    } catch (Exception e) {
+//                        Log.e("Exception", e.getMessage());
+
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<Login> call, Throwable t) {
+                    progressDialog.dismiss();
+                }
+            });
+
+
+        } catch (Exception e) {
+//            Log.e("Exception", e.getMessage());
+        }
+    }
+
+
+    /*RequestForSendOtp*/
+    private void ApiRequestForSendOtp(String userId) {
+        APIService apiService = Webdata.getRetrofit().create(APIService.class);
+
+        if (progressDialog != null) {
+            progressDialog.show();
+        }
+
+        apiService.mLoginSendOtp(userId, loginPrefMananger.getStringValue("Lang_code")).enqueue(new Callback<SendOTP>() {
+            @Override
+            public void onResponse(Call<SendOTP> call, Response<SendOTP> response) {
+
+                try {
+                    progressDialog.dismiss();
+
+                    if (response.body().getResponse().getHttpCode() == 200) {
+                        Toast.makeText(context, response.body().getResponse().getMessage(), Toast.LENGTH_LONG).show();
+                        //mMob_num = response.body().getResponse().ge();
+                        /// mOtp = response.body().getResponse().getOtp();
+                    } else {
+                        Toast.makeText(context, response.body().getResponse().getMessage(), Toast.LENGTH_LONG).show();
+
+                    }
+
+                } catch (Exception e) {
+//                        Log.e("Exception", e.getMessage());
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<SendOTP> call, Throwable t) {
+                progressDialog.dismiss();
+            }
+        });
+
+    }
+
+    private void mApiVerifyLoginOtp(String mMob_num, String mOtp) {
+        APIService apiService = Webdata.getRetrofit().create(APIService.class);
+        try {
+
+            if (progressDialog != null) {
+                progressDialog.show();
+            }
+
+            apiService.mLoginVerifyOtp(mOtp, loginPrefMananger.getStringValue("device_token"),
+                    loginPrefMananger.getStringValue("user_id"), "1",
+                    loginPrefMananger.getStringValue("Lang_code")
+            ).enqueue(new Callback<Login>() {
+                @Override
+                public void onResponse(Call<Login> call, Response<Login> response) {
+
+                    try {
+
+                        progressDialog.dismiss();
+
+//                        Log.e("login_user", "" + response.raw().toString());
+
+                        if (response.body().getResponse().getHttpCode() == 200) {
+                            loginPrefMananger.setStringValue("login_email", response.body().getResponse().getEmail());
                             loginPrefMananger.setStringValue("login_password", "" + input_password.getText().toString());
 
                             loginPrefMananger.setStringValue("user_id", "" + response.body().getResponse().getUserId());
@@ -567,22 +740,51 @@ public class SignInFragment extends Fragment implements SignInVerifyDialog.SignI
         } catch (Exception e) {
 //            Log.e("Exception", e.getMessage());
         }
+
     }
 
+    private void VerifyOTPDialogMethod(final LoginResponse signUpresponse) {
 
-//    private boolean validateEmail() {
-//        String email = input_email.getText().toString().trim();
-//
-//        if (email.isEmpty() || !isValidEmail(email)) {
-//            input_layout_email.setError(getString(R.string.err_msg_email));
-//            requestFocus(input_email);
-//            return false;
-//        } else {
-//            input_layout_email.setErrorEnabled(false);
-//        }
-//
-//        return true;
-//    }
+        RegOTPDialogView regOTPDialogView = new RegOTPDialogView(getContext(),
+                "" + input_email.getText().toString().replaceAll("\\s+", ""),
+                "" + input_password.getText().toString().trim(), 0, new RegOTPInterface() {
+            @Override
+            public void RegOTPReSendMethod() {
+            }
+
+            @Override
+            public void RegOTPVerifyMethod(String message) {
+
+                if (signUpresponse != null) {
+
+                    loginPrefMananger.setStringValue("login_email", "" + input_email.getText().toString());
+                    loginPrefMananger.setStringValue("login_password", "" + input_password.getText().toString());
+
+                    loginPrefMananger.setStringValue("user_id", "" + signUpresponse.getUserId());
+                    loginPrefMananger.setStringValue("user_token", "" + signUpresponse.getToken());
+                    loginPrefMananger.setStringValue("user_email", "" + signUpresponse.getEmail());
+                    loginPrefMananger.setStringValue("user_name", "" + signUpresponse.getName());
+                    loginPrefMananger.setStringValue("user_first_name", "" + signUpresponse.getFirstName());
+                    loginPrefMananger.setStringValue("user_last_name", "" + signUpresponse.getLastName());
+                    loginPrefMananger.setStringValue("user_mobile", "" + signUpresponse.getMobile());
+                    loginPrefMananger.setStringValue("user_type", "" + getString(R.string.user_type_normal));
+                    loginPrefMananger.setStringValue("login_type", "" + getString(R.string.sign_up_login));
+
+                    //showToast(message);
+
+                    Toast.makeText(context, message, Toast.LENGTH_LONG).show();
+
+                    Intent intent = new Intent(context, BaseMenuTabActivity.class);
+                    context.startActivity(intent);
+                    getActivity().finish();
+
+                }
+
+            }
+        });
+        regOTPDialogView.show();
+
+    }
 
 
     private boolean validateEmail() {
@@ -720,17 +922,33 @@ public class SignInFragment extends Fragment implements SignInVerifyDialog.SignI
 
 
     public void setStyleForTextForAutoComplete(int color) {
-        Drawable wrappedDrawable =     DrawableCompat.wrap(input_password.getBackground());
+        Drawable wrappedDrawable = DrawableCompat.wrap(input_password.getBackground());
         DrawableCompat.setTint(wrappedDrawable, color);
         input_password.setBackgroundDrawable(wrappedDrawable);
     }
 
     public void setStyleForemailTextForAutoComplete(int color) {
-        Drawable wrappedDrawable =     DrawableCompat.wrap(input_email.getBackground());
+        Drawable wrappedDrawable = DrawableCompat.wrap(input_email.getBackground());
         DrawableCompat.setTint(wrappedDrawable, color);
         input_email.setBackgroundDrawable(wrappedDrawable);
     }
 
+    private boolean validateMobileNumber() {
+
+        if (fb_mobile_det_txt.getText().toString().trim().length() < 10) {
+            fb_mobile_input_Layout.setError(getString(R.string.err_msg_mobile));
+            requestFocus(fb_mobile_det_txt);
+            return false;
+        } else if (fb_mobile_det_txt.getText().toString().trim().length() > 10) {
+            fb_mobile_input_Layout.setError(getString(R.string.err_msg_mobile));
+            requestFocus(fb_mobile_det_txt);
+            return false;
+        } else {
+            fb_mobile_input_Layout.setErrorEnabled(false);
+        }
+
+        return true;
+    }
 
 
 }

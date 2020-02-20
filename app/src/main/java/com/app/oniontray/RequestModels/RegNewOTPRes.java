@@ -19,6 +19,19 @@ public class RegNewOTPRes {
     @Expose
     private String mobileNumber;
 
+    @SerializedName("otp")
+    @Expose
+    private String otp;
+
+
+    public String getOtp() {
+        return otp;
+    }
+
+    public void setOtp(String otp) {
+        this.otp = otp;
+    }
+
     public Integer getHttpCode() {
         return httpCode;
     }

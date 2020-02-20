@@ -10,10 +10,13 @@ import android.os.Bundle;
 
 import androidx.annotation.Nullable;
 
+import com.app.oniontray.Activites.RestaurantSignInSignUpActivity;
 import com.google.android.material.textfield.TextInputLayout;
 
 import androidx.fragment.app.Fragment;
 import androidx.core.graphics.drawable.DrawableCompat;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.text.Editable;
 import android.text.Html;
@@ -113,6 +116,10 @@ public class SignUpFragment extends Fragment {
     protected SparseArray<ArrayList<Country>> mCountriesMap = new SparseArray<ArrayList<Country>>();
     protected CountryAdapter mAdapter;
     private CountryCodePicker ccpSignup;
+    private FragmentManager fragmentManager = null;
+    private boolean proc_to_check = false;
+    private boolean mycart = false;
+    private boolean myAccount = false;
 
 
     protected static final TreeSet<String> CANADA_CODES = new TreeSet<String>();
@@ -551,6 +558,18 @@ public class SignUpFragment extends Fragment {
         loginPrefMananger = new LoginPrefManager(context);
         progressDialog = Webdata.getProgressBarDialog(context);
 
+        Bundle bundle = getArguments();
+        if (bundle != null) {
+
+            if (bundle.containsKey("proc_to_check")) {
+                proc_to_check = bundle.getBoolean("proc_to_check");
+            }
+
+            mycart = bundle.getBoolean("FromMycart");
+            if (bundle.containsKey("myAccount"))
+                myAccount = bundle.getBoolean("myAccount");
+        }
+
         /*mSpinner = (Spinner) rootView.findViewById(R.id.spinner);
         mAdapter = new CountryAdapter(getActivity());
         mSpinner.setAdapter(mAdapter);
@@ -589,6 +608,7 @@ public class SignUpFragment extends Fragment {
 
         ccpSignup = rootView.findViewById(R.id.ccpSignup);
         ccpSignup.registerCarrierNumberEditText(input_phone);
+
 
 
         input_email.addTextChangedListener(new MyTextWatcher(input_email));
@@ -1035,12 +1055,24 @@ public class SignUpFragment extends Fragment {
                         if (response.body().getResponse().getHttpCode() == 200) {
 
                             signUpresponse = response.body().getResponse();
-
-//                            Log.e("getUserId", "" + response.body().getResponse().getUserId());
-
                             loginPrefMananger.setStringValue("temp_user_id", "" + response.body().getResponse().getUserId());
 
-                            VerifyOTPDialogMethod(response.body().getResponse());
+
+//                            Log.e("getUserId", "" + response.body().getResponse().getUserId());
+                            showToast(response.body().getResponse().getMessage());
+                            SignInFragment signInFragment = new SignInFragment();
+                            Bundle args = new Bundle();
+                            args.putBoolean("proc_to_check", proc_to_check);
+                            args.putBoolean("FromMycart", mycart);
+                            args.putBoolean("myAccount", myAccount);
+//        Log.e("myCart", "" + mycart);
+//        Log.e("myCart", "" + myAccount);
+                            signInFragment.setArguments(args);
+                            //signInFragment.UpdateSignInCallMethod(context);
+                            getFragment(signInFragment);
+
+
+                            // VerifyOTPDialogMethod(response.body().getResponse());
 
                         } else {
                             showToast(response.body().getResponse().getMessage());
@@ -1303,6 +1335,13 @@ public class SignUpFragment extends Fragment {
         Drawable wrappedDrawable = DrawableCompat.wrap(input_phone.getBackground());
         DrawableCompat.setTint(wrappedDrawable, color);
         input_phone.setBackgroundDrawable(wrappedDrawable);
+    }
+
+    public void getFragment(Fragment currentFragment) {
+        fragmentManager.beginTransaction()
+                .replace(R.id.frameContainer, currentFragment)
+                .setTransitionStyle(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+                .disallowAddToBackStack().commit();
     }
 
 
