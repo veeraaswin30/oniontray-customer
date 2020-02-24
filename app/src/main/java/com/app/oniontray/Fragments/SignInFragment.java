@@ -197,6 +197,9 @@ public class SignInFragment extends Fragment implements SignInVerifyDialog.SignI
         input_password.addTextChangedListener(new MyTextWatcher(input_password));
 
         mviaOtpDialog = new Dialog(context);
+        mviaOtpDialog.setContentView(R.layout.dialog_login_via_otp);
+        mviaOtpDialog.getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
+        mviaOtpDialog.setCancelable(false);
         fb_mobile_det_txt = mviaOtpDialog.findViewById(R.id.fb_mobile_det_txt);
         fb_mobile_input_Layout = mviaOtpDialog.findViewById(R.id.fb_mobile_input_Layout);
         mCancelBtn = mviaOtpDialog.findViewById(R.id.mCancelBtn);
@@ -214,8 +217,10 @@ public class SignInFragment extends Fragment implements SignInVerifyDialog.SignI
         mDoneBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!validateMobileNumber()) {
+                if (!isValidPhoneNumber(fb_mobile_det_txt.getText().toString().trim().replace(" ", ""))) {
                     return;
+                } else {
+                    ApiRequestForSendOtp(fb_mobile_det_txt.getText().toString().trim().replace(" ", ""));
                 }
 
 
@@ -617,24 +622,29 @@ public class SignInFragment extends Fragment implements SignInVerifyDialog.SignI
 
 
     /*RequestForSendOtp*/
-    private void ApiRequestForSendOtp(String userId) {
+    private void ApiRequestForSendOtp(String mobile) {
         APIService apiService = Webdata.getRetrofit().create(APIService.class);
 
         if (progressDialog != null) {
             progressDialog.show();
         }
 
-        apiService.mLoginSendOtp(userId, loginPrefMananger.getStringValue("Lang_code")).enqueue(new Callback<SendOTP>() {
+        apiService.login_Via_Otp(ccpSignup.getFullNumberWithPlus(),
+                "" + getString(R.string.login_type), getString(R.string.user_type_normal),
+                loginPrefMananger.getStringValue("device_id"), loginPrefMananger.getStringValue("device_token"),
+                loginPrefMananger.getStringValue("Lang_code")).enqueue(new Callback<Login>() {
             @Override
-            public void onResponse(Call<SendOTP> call, Response<SendOTP> response) {
+            public void onResponse(Call<Login> call, Response<Login> response) {
 
                 try {
                     progressDialog.dismiss();
 
                     if (response.body().getResponse().getHttpCode() == 200) {
+                        mviaOtpDialog.dismiss();
                         Toast.makeText(context, response.body().getResponse().getMessage(), Toast.LENGTH_LONG).show();
                         //mMob_num = response.body().getResponse().ge();
                         /// mOtp = response.body().getResponse().getOtp();
+                        VerifyOTPDialogMethod(response.body().getResponse());
                     } else {
                         Toast.makeText(context, response.body().getResponse().getMessage(), Toast.LENGTH_LONG).show();
 
@@ -647,7 +657,7 @@ public class SignInFragment extends Fragment implements SignInVerifyDialog.SignI
             }
 
             @Override
-            public void onFailure(Call<SendOTP> call, Throwable t) {
+            public void onFailure(Call<Login> call, Throwable t) {
                 progressDialog.dismiss();
             }
         });
@@ -815,7 +825,9 @@ public class SignInFragment extends Fragment implements SignInVerifyDialog.SignI
 
     private boolean isValidPhoneNumber(CharSequence phoneNumber) {
 
-        if (phoneNumber.toString().trim().length() < 5) {
+        if (phoneNumber.toString().trim().length() < 10) {
+            return false;
+        } else if (phoneNumber.toString().trim().length() > 10) {
             return false;
         } else if (!TextUtils.isEmpty(phoneNumber)) {
             return Patterns.PHONE.matcher(phoneNumber).matches();

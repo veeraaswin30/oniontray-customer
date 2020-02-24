@@ -31,7 +31,8 @@
 
         <com.hbb20.CountryCodePicker
             android:id="@+id/ccpSignup"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="0.2"
             android:layout_height="wrap_content"
             app:ccp_defaultNameCode="IN"
             app:ccp_showFlag="true" />
@@ -39,7 +40,8 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/fb_mobile_input_Layout"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
+            android:layout_weight="0.8"
             android:layout_height="wrap_content"
             android:textColor="@android:color/white"
             app:errorTextAppearance="@style/error_appearance">
@@ -95,7 +97,7 @@
             android:layout_marginLeft="@dimen/smal_margin"
             android:layout_weight="1"
             android:background="@drawable/signin_rounded_rectangle"
-            android:text="@string/done_btn_txt"
+            android:text="@string/send_otp"
             android:textColor="@color/white_color" />
 
     </LinearLayout>

@@ -137,6 +137,15 @@ public interface APIService {
                            @Field("device_token") String token,
                            @Field("language") String lang_code);
 
+    @FormUrlEncoded
+    @POST("login_user_viaotp")
+    Call<Login> login_Via_Otp(@Field("mobile") String email,
+                           @Field("login_type") String login_type,
+                           @Field("user_type") String user_type,
+                           @Field("device_id") String deviceid,
+                           @Field("device_token") String token,
+                           @Field("language") String lang_code);
+
 
     @FormUrlEncoded
     @POST("signup_fb_user")
