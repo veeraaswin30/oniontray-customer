@@ -1057,7 +1057,12 @@ public class SignUpFragment extends Fragment {
                             signUpresponse = response.body().getResponse();
                             loginPrefMananger.setStringValue("temp_user_id", "" + response.body().getResponse().getUserId());
 
-
+                            input_first_name.setText("");
+                            input_last_name.setText("");
+                            input_email.setText("");
+                            input_password.setText("");
+                            input_phone.setText("");
+                            gender_value="";
 //                            Log.e("getUserId", "" + response.body().getResponse().getUserId());
                             showToast(response.body().getResponse().getMessage());
                             SignInFragment signInFragment = new SignInFragment();
