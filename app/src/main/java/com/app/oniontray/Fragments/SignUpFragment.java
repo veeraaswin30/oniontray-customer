@@ -3,9 +3,12 @@ package com.app.oniontray.Fragments;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
+import android.graphics.drawable.GradientDrawable;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
@@ -13,6 +16,7 @@ import androidx.annotation.Nullable;
 import com.app.oniontray.Activites.RestaurantSignInSignUpActivity;
 import com.google.android.material.textfield.TextInputLayout;
 
+import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 import androidx.core.graphics.drawable.DrawableCompat;
 import androidx.fragment.app.FragmentManager;
@@ -81,6 +85,9 @@ import java.util.TreeSet;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+
+import static com.app.oniontray.Activites.RestaurantSignInSignUpActivity.login_btn;
+import static com.app.oniontray.Activites.RestaurantSignInSignUpActivity.sign_btn;
 
 /**
  * Created by nextbrain on 2/17/2017.
@@ -610,7 +617,6 @@ public class SignUpFragment extends Fragment {
         ccpSignup.registerCarrierNumberEditText(input_phone);
 
 
-
         input_email.addTextChangedListener(new MyTextWatcher(input_email));
         input_password.addTextChangedListener(new MyTextWatcher(input_password));
 //        input_phone.addTextChangedListener(new MyTextWatcher(input_phone));
@@ -1043,6 +1049,7 @@ public class SignUpFragment extends Fragment {
                     gender_value, "1", getString(R.string.login_type), loginPrefMananger.getStringValue("Lang_code"), "0",
                     "" + getString(R.string.user_type_normal), loginPrefMananger.getStringValue("device_id"),
                     loginPrefMananger.getStringValue("device_token")).enqueue(new Callback<Signup>() {
+                @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
                 @Override
                 public void onResponse(Call<Signup> call, final Response<Signup> response) {
 
@@ -1062,10 +1069,15 @@ public class SignUpFragment extends Fragment {
                             input_email.setText("");
                             input_password.setText("");
                             input_phone.setText("");
-                            gender_value="";
+                            gender_value = "";
 //                            Log.e("getUserId", "" + response.body().getResponse().getUserId());
                             showToast(response.body().getResponse().getMessage());
-                            SignInFragment signInFragment = new SignInFragment();
+
+
+                            mSetLoginFragment();
+
+
+                           /* SignInFragment signInFragment = new SignInFragment();
                             Bundle args = new Bundle();
                             args.putBoolean("proc_to_check", proc_to_check);
                             args.putBoolean("FromMycart", mycart);
@@ -1074,7 +1086,7 @@ public class SignUpFragment extends Fragment {
 //        Log.e("myCart", "" + myAccount);
                             signInFragment.setArguments(args);
                             //signInFragment.UpdateSignInCallMethod(context);
-                            getFragment(signInFragment);
+                            getFragment(signInFragment);*/
 
 
                             // VerifyOTPDialogMethod(response.body().getResponse());
@@ -1086,6 +1098,37 @@ public class SignUpFragment extends Fragment {
                     } catch (Exception e) {
 //                        Log.e("errorResponse", e.getMessage());
                     }
+                }
+
+                @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+                private void mSetLoginFragment() {
+                    ColorStateList colorStateList = new ColorStateList(
+                            new int[][]{
+                                    new int[]{-android.R.attr.state_enabled}, //disabled
+                                    new int[]{android.R.attr.state_enabled} //enabled
+                            },
+                            new int[]{
+                                    Color.BLACK //disabled
+                                    , Color.parseColor(loginPrefMananger.getThemeFontColor()) //enabled
+                            });
+                    login_btn.setButtonTintList(colorStateList);
+                    sign_btn.setChecked(false);
+                    login_btn.setTextColor(Color.parseColor(loginPrefMananger.getThemeColor()));
+                    sign_btn.setTextColor(Color.parseColor(loginPrefMananger.getThemeFontColor()));
+                    login_btn.setBackgroundColor(Color.parseColor(loginPrefMananger.getThemeFontColor()));
+//                    sign_btn.setTextColor(Color.BLACK);
+//                    sign_btn.setBackgroundColor(Color.WHITE);
+                    sign_btn.setBackgroundResource(R.drawable.btn_selector_for_sign_up);
+                    GradientDrawable gradientDrawable = (GradientDrawable) sign_btn.getBackground().getCurrent();
+//gradientDrawable.setColor(Color.parseColor(loginPrefManager.getThemeColor()));
+                    gradientDrawable.setStroke(2, Color.parseColor(loginPrefMananger.getThemeFontColor()));
+
+                    Fragment fragment = new SignInFragment();
+                    FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                    fragmentTransaction.replace(R.id.frameContainer, fragment);
+                    fragmentTransaction.addToBackStack(null);
+                    fragmentTransaction.commit();
                 }
 
                 @Override
@@ -1145,7 +1188,7 @@ public class SignUpFragment extends Fragment {
 
 
     private void showToast(String message) {
-        Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+        Toast.makeText(context, message, Toast.LENGTH_LONG).show();
     }
 
     private class MyTextWatcher implements TextWatcher {

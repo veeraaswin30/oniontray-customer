@@ -7,8 +7,10 @@ import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
+import android.os.Build;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -71,8 +73,8 @@ public class RestaurantSignInSignUpActivity extends LocalizationActivity impleme
 
     private Toolbar sign_in_toolbar;
 
-    private RadioGroup radio_group;
-    private RadioButton login_btn, sign_btn;
+    public static RadioGroup radio_group;
+    public static RadioButton login_btn, sign_btn;
 
     private FragmentManager fragmentManager = null;
     private FragmentTransaction fragmentTransaction = null;
@@ -251,6 +253,7 @@ public class RestaurantSignInSignUpActivity extends LocalizationActivity impleme
         }
 
         radio_group.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 if (checkedId == R.id.login_btn) {
@@ -314,11 +317,10 @@ public class RestaurantSignInSignUpActivity extends LocalizationActivity impleme
     // Express Checkout Click Event interface
     @Override
     public void ExpressCheckOut() {
-
-        /*Intent exp_Intent = new Intent(RestaurantSignInSignUpActivity.this, ExpressCheckoutActivity.class);
+        Intent exp_Intent = new Intent(RestaurantSignInSignUpActivity.this, ExpressCheckoutActivity.class);
         exp_Intent.putExtra("outlet_details", outletDetails);
         exp_Intent.putExtra("vendor_id", vendor_id);
-        startActivity(exp_Intent);*/
+        startActivity(exp_Intent);
         finish();
 
     }

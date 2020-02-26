@@ -1,33 +1,13 @@
 package com.app.oniontray.Fragments;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
-
-import androidx.annotation.Nullable;
-import androidx.annotation.RequiresApi;
-
-import com.app.oniontray.Activites.BaseMenuTabActivity;
-import com.app.oniontray.CustomViews.RegOTPDialogView;
-import com.app.oniontray.Interface.RegOTPInterface;
-import com.app.oniontray.RequestModels.RegNewOTPReq;
-import com.app.oniontray.RequestModels.SendOTP;
-import com.app.oniontray.RequestModels.SignUpresponse;
-import com.google.android.material.textfield.TextInputLayout;
-
-
-import androidx.appcompat.app.AlertDialog;
-import androidx.fragment.app.Fragment;
-import androidx.localbroadcastmanager.content.LocalBroadcastManager;
-import androidx.core.graphics.drawable.DrawableCompat;
-
 import android.text.Editable;
 import android.text.Html;
 import android.text.InputFilter;
@@ -45,7 +25,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
@@ -54,14 +33,21 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.app.oniontray.Activites.ForgotPassowordActivity;
+import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
+import androidx.core.graphics.drawable.DrawableCompat;
+import androidx.fragment.app.Fragment;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
+import com.app.oniontray.Activites.ForgotPassowordActivity;
 import com.app.oniontray.Activites.PrivacyPolicyActivity;
 import com.app.oniontray.Activites.TermsAndConditionsActivity;
+import com.app.oniontray.CustomViews.RegOTPDialogView;
 import com.app.oniontray.CustomViews.SignInOTPDialogView;
 import com.app.oniontray.CustomViews.SignInVerifyDialog;
 import com.app.oniontray.DB.ProductRespository;
 import com.app.oniontray.DotsProgressBar.DDProgressBarDialog;
+import com.app.oniontray.Interface.RegOTPInterface;
 import com.app.oniontray.LocalizationActivity.LanguageSetting;
 import com.app.oniontray.R;
 import com.app.oniontray.RequestModels.Login;
@@ -71,6 +57,7 @@ import com.app.oniontray.Utils.LoginPrefManager;
 import com.app.oniontray.WebService.APIService;
 import com.app.oniontray.WebService.Webdata;
 import com.facebook.CallbackManager;
+import com.google.android.material.textfield.TextInputLayout;
 import com.hbb20.CountryCodePicker;
 
 import java.util.ArrayList;
@@ -129,6 +116,7 @@ public class SignInFragment extends Fragment implements SignInVerifyDialog.SignI
     private CountryCodePicker ccpSignup;
     private Dialog mviaOtpDialog;
     private EditText fb_mobile_det_txt;
+    private TextView fb_gp_dialog_tit_txt_view;
     private Button mCancelBtn, mDoneBtn;
     private TextInputLayout fb_mobile_input_Layout;
 
@@ -200,13 +188,14 @@ public class SignInFragment extends Fragment implements SignInVerifyDialog.SignI
         mviaOtpDialog.setContentView(R.layout.dialog_login_via_otp);
         mviaOtpDialog.getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
         mviaOtpDialog.setCancelable(false);
+        fb_gp_dialog_tit_txt_view = mviaOtpDialog.findViewById(R.id.fb_gp_dialog_tit_txt_view);
         fb_mobile_det_txt = mviaOtpDialog.findViewById(R.id.fb_mobile_det_txt);
         fb_mobile_input_Layout = mviaOtpDialog.findViewById(R.id.fb_mobile_input_Layout);
         mCancelBtn = mviaOtpDialog.findViewById(R.id.mCancelBtn);
         mDoneBtn = mviaOtpDialog.findViewById(R.id.mDoneBtn);
         ccpSignup = mviaOtpDialog.findViewById(R.id.ccpSignup);
         ccpSignup.registerCarrierNumberEditText(fb_mobile_det_txt);
-
+        fb_gp_dialog_tit_txt_view.setText("Login Via OTP");
         mCancelBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -218,8 +207,11 @@ public class SignInFragment extends Fragment implements SignInVerifyDialog.SignI
             @Override
             public void onClick(View v) {
                 if (!isValidPhoneNumber(fb_mobile_det_txt.getText().toString().trim().replace(" ", ""))) {
+                    fb_mobile_input_Layout.setErrorEnabled(true);
+                    fb_mobile_input_Layout.setError(getString(R.string.err_msg_valid_mobile));
                     return;
                 } else {
+                    fb_mobile_input_Layout.setErrorEnabled(false);
                     ApiRequestForSendOtp(fb_mobile_det_txt.getText().toString().trim().replace(" ", ""));
                 }
 
@@ -784,9 +776,27 @@ public class SignInFragment extends Fragment implements SignInVerifyDialog.SignI
 
                     Toast.makeText(context, message, Toast.LENGTH_LONG).show();
 
-                    Intent intent = new Intent(context, BaseMenuTabActivity.class);
+                    if (proc_to_check) {
+
+                        if (signInInterface != null) {
+                            signInInterface.ProcedToCheck();
+                        }
+
+                    } else {
+
+                        if (signInInterface != null) {
+                            signInInterface.UpdateSignInMethod(1);
+                        }
+
+                        if (myAccount)
+                            LocalBroadcastManager.getInstance(context).sendBroadcast(new Intent("base_activity_receiver").putExtra("page_name", "2"));
+
+                    }
+
+
+                    /*Intent intent = new Intent(context, BaseMenuTabActivity.class);
                     context.startActivity(intent);
-                    getActivity().finish();
+                    getActivity().finish();*/
 
                 }
 

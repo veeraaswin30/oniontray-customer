@@ -22,9 +22,9 @@
         android:id="@+id/input_phone_no_lay"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_marginLeft="5dp"
         android:layout_marginTop="@dimen/small_margin"
-        android:layout_marginRight="@dimen/activity_horizontal_margin"
+        android:layout_marginRight="5dp"
         android:layout_marginBottom="@dimen/small_margin"
         android:gravity="center_vertical"
         android:orientation="horizontal">
@@ -32,16 +32,19 @@
         <com.hbb20.CountryCodePicker
             android:id="@+id/ccpSignup"
             android:layout_width="0dp"
-            android:layout_weight="0.2"
+            android:layout_weight="0.25"
+            android:layout_gravity="center"
+            android:gravity="center"
             android:layout_height="wrap_content"
             app:ccp_defaultNameCode="IN"
-            app:ccp_showFlag="true" />
+            app:ccp_textSize="14sp"
+            app:ccp_showFlag="false" />
 
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/fb_mobile_input_Layout"
             android:layout_width="0dp"
-            android:layout_weight="0.8"
+            android:layout_weight="0.75"
             android:layout_height="wrap_content"
             android:textColor="@android:color/white"
             app:errorTextAppearance="@style/error_appearance">

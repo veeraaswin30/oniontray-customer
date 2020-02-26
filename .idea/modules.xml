@@ -2,10 +2,10 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/OnionTray-oniontray-customer.iml" filepath="$PROJECT_DIR$/OnionTray-oniontray-customer.iml" />
+      <module fileurl="file://$PROJECT_DIR$/OnionTray-oniontray-customer.iml" filepath="$PROJECT_DIR$/OnionTray-oniontray-customer.iml" group="oniontray-customer" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/oniontray-customer.iml" filepath="$PROJECT_DIR$/oniontray-customer.iml" />
-      <module fileurl="file://$PROJECT_DIR$/app/oniontray-customer-app.iml" filepath="$PROJECT_DIR$/app/oniontray-customer-app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/oniontray-customer-app.iml" filepath="$PROJECT_DIR$/app/oniontray-customer-app.iml" group="oniontray-customer/app" />
     </modules>
   </component>
 </project>
