@@ -314,6 +314,28 @@
 
                     </TableRow>
 
+                    <TableRow android:layout_marginTop="@dimen/big_margin">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="@string/mGstTxt"
+                            android:textDirection="locale" />
+
+                        <TextView
+                            android:id="@+id/mGstTxt"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="end"
+                            android:singleLine="false"
+                            android:textColor="@color/colorPrimary"
+                            android:textDirection="locale" />
+
+                    </TableRow>
+
+                    <!--GST-->
+
 
                     <!--<TableRow-->
                     <!--android:id="@+id/ec_p_to_c_del_promo_code_apply_tr"-->

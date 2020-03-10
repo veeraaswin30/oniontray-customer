@@ -381,12 +381,12 @@ public class StoreFilterActivity extends LocalizationActivity implements View.On
                             filterCategoryListForOffers.setUrlKey(getString(R.string.filter_key_offer));
 
                             FilterCategoryList filterCategoryList = new FilterCategoryList();
-                            filterCategoryList.setId(1);
+                            filterCategoryList.setId(2);
                             filterCategoryList.setName(getString(R.string.filter_open_restaurant));
                             filterCategoryList.setUrlKey(getString(R.string.filter_key_open_restaurant));
 
                             FilterCategoryList filterFreeList = new FilterCategoryList();
-                            filterFreeList.setId(1);
+                            filterFreeList.setId(3);
                             filterFreeList.setName(getString(R.string.filter_free_delivery));
                             filterFreeList.setUrlKey(getString(R.string.filter_key_free_delivery));
 

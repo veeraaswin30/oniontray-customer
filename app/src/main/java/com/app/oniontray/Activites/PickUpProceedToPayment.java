@@ -328,6 +328,7 @@ public class PickUpProceedToPayment extends LocalizationActivity implements TabL
             parent.put("contact_address", "" + outletDetails.getContactAddress());
             parent.put("contact_email", "" + outletDetails.getContactEmail());
             parent.put("outlet_name", "" + outletDetails.getOutletName());
+            parent.put("gst",outletDetails.getGst());
 
             if (outletDetails.getTaxType() == 2) {
                 parent.put("service_tax", "" + outletDetails.getServiceTax());

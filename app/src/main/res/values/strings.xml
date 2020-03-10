@@ -570,6 +570,7 @@
     <string name="proc_to_chec_sub_total_txt">Sub Total</string>
     <string name="proc_to_chec_service_tax_txt">Service Tax</string>
     <string name="proc_to_chec_deliv_chargs">Delivery charges</string>
+    <string name="mGstTxt">GST</string>
     <string name="platform_charge">Platform charges</string>
     <string name="proc_to_chec_apply_coupon_txt">Apply promo code</string>
     <string name="proc_to_chec_apply_txt">Apply</string>

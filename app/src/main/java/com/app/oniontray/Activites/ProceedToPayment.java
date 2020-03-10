@@ -7,14 +7,17 @@ import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
+
 import androidx.annotation.Nullable;
 
 import com.app.oniontray.Fragments.RazorPayFragment;
 import com.google.android.material.tabs.TabLayout;
+
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.appcompat.widget.Toolbar;
+
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -99,8 +102,6 @@ public class ProceedToPayment extends LocalizationActivity implements TabLayout.
     private String KEY_SDK_TOKEN = "sdk_token";
 
 
-
-
     private IPaymentRequestCallBack iPaymentRequestCallBack;
     private Gson gson;
     private JSONObject parent;
@@ -109,7 +110,7 @@ public class ProceedToPayment extends LocalizationActivity implements TabLayout.
 
 
     private JSONObject payment_signature;
-    private String TAG= ProceedToPayment.class.getSimpleName();
+    private String TAG = ProceedToPayment.class.getSimpleName();
 
 
     @Override
@@ -122,7 +123,7 @@ public class ProceedToPayment extends LocalizationActivity implements TabLayout.
 
         pro_pay_toolbar_id = (Toolbar) findViewById(R.id.pro_pay_toolbar_id);
         pro_pay_toolbar_id.setTitle("");
-     //   pro_pay_toolbar_id.setTitleTextColor(getResources().getColor(R.color.colorPrimary));
+        //   pro_pay_toolbar_id.setTitleTextColor(getResources().getColor(R.color.colorPrimary));
         pro_pay_toolbar_id.setTitleTextColor(Color.parseColor(loginPrefManager.getThemeFontColor()));
         pro_pay_toolbar_id.setBackgroundColor(Color.parseColor(loginPrefManager.getThemeColor()));
 
@@ -130,16 +131,16 @@ public class ProceedToPayment extends LocalizationActivity implements TabLayout.
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-           String language = String.valueOf(LanguageSetting.getLanguage(ProceedToPayment.this));
+        String language = String.valueOf(LanguageSetting.getLanguage(ProceedToPayment.this));
 
 
         if (language.equals("en")) {
-           // getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_action_bar_en_back_ic);
+            // getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_action_bar_en_back_ic);
             final Drawable upArrow = getResources().getDrawable(R.drawable.ic_action_bar_en_back_ic);
             upArrow.setColorFilter(Color.parseColor(loginPrefManager.getThemeFontColor()), PorterDuff.Mode.SRC_ATOP);
             getSupportActionBar().setHomeAsUpIndicator(upArrow);
         } else {
-           // getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_action_bar_en_back_ic);
+            // getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_action_bar_en_back_ic);
             final Drawable upArrow = getResources().getDrawable(R.drawable.ic_action_bar_en_back_ic);
             upArrow.setColorFilter(Color.parseColor(loginPrefManager.getThemeFontColor()), PorterDuff.Mode.SRC_ATOP);
             getSupportActionBar().setHomeAsUpIndicator(upArrow);
@@ -176,7 +177,7 @@ public class ProceedToPayment extends LocalizationActivity implements TabLayout.
         cashonDeliverFragment.setArguments(bundle);
 //        walletFragment.setArguments(bundle);
 
-        TextView  pay_title = (TextView) findViewById(R.id.pay_title);
+        TextView pay_title = (TextView) findViewById(R.id.pay_title);
         pay_title.setTextColor(Color.parseColor(loginPrefManager.getThemeFontColor()));
         TextView pay_opt_tit_tax_text = (TextView) findViewById(R.id.pay_opt_tit_tax_text);
         TextView pay_opt_tit_amount_txt = (TextView) findViewById(R.id.pay_opt_tit_amount_txt);
@@ -208,8 +209,8 @@ public class ProceedToPayment extends LocalizationActivity implements TabLayout.
 
         //Initializing viewPager
         pay_opt_view_pager = (CustomViewPager) findViewById(R.id.pay_opt_view_pager);
-       // pay_opt_view_pager.settextco(Color.parseColor(loginPrefManager.getThemeFontColor()));
-       // pay_opt_view_pager.setBackgroundColor(Color.parseColor(loginPrefManager.getThemeColor()));
+        // pay_opt_view_pager.settextco(Color.parseColor(loginPrefManager.getThemeFontColor()));
+        // pay_opt_view_pager.setBackgroundColor(Color.parseColor(loginPrefManager.getThemeColor()));
         setupViewPager();
         pay_opt_tabLayout.setupWithViewPager(pay_opt_view_pager);
 
@@ -248,7 +249,6 @@ public class ProceedToPayment extends LocalizationActivity implements TabLayout.
 
 
     }
-
 
 
     @Override
@@ -301,7 +301,6 @@ public class ProceedToPayment extends LocalizationActivity implements TabLayout.
                 return super.onOptionsItemSelected(item);
         }
     }
-
 
 
     class ViewPagerAdapter extends FragmentPagerAdapter {
@@ -357,6 +356,7 @@ public class ProceedToPayment extends LocalizationActivity implements TabLayout.
             parent.put("contact_address", "" + outletDetails.getContactAddress());
             parent.put("contact_email", "" + outletDetails.getContactEmail());
             parent.put("outlet_name", "" + outletDetails.getOutletName());
+            parent.put("gst",outletDetails.getGst());
 
             if (outletDetails.getTaxType() == 2) {
                 parent.put("service_tax", "" + outletDetails.getServiceTax());
@@ -394,11 +394,11 @@ public class ProceedToPayment extends LocalizationActivity implements TabLayout.
             parent.put("delivery_instructions", "" + outletDetails.getDeliveryInstruction().trim());
 
 
-            Log.e("delivery_date","-----" +outletDetails.getDeliveryDate());
-            parent.put("delivery_date", "" +outletDetails.getDeliveryDate());
-            outletDetails.setDeliveryTime("" +outletDetails.getDeliveryDate());
+            Log.e("delivery_date", "-----" + outletDetails.getDeliveryDate());
+            parent.put("delivery_date", "" + outletDetails.getDeliveryDate());
+            outletDetails.setDeliveryTime("" + outletDetails.getDeliveryDate());
 
-            if (outletDetails.getPaymentOption()==1) {
+            if (outletDetails.getPaymentOption() == 1) {
                 parent.put("delivery_address", "" + outletDetails.getDeliveryAddressID());
 //            parent.put("delivery_slot", "1"); //static
                 parent.put("delivery_cost", "0");
@@ -413,7 +413,7 @@ public class ProceedToPayment extends LocalizationActivity implements TabLayout.
 
 
                 parent.put("order_type", "1");
-            }else{
+            } else {
                 parent.put("delivery_address", "0");
 //            parent.put("delivery_slot", "1"); //static
                 parent.put("delivery_charge", "0");
@@ -487,11 +487,11 @@ public class ProceedToPayment extends LocalizationActivity implements TabLayout.
                     ingredientMainObject.put("ingredient_names", str);
 
 
-                    Float total_price=Float.parseFloat(""+productRespository.getCartProductList().get(i).getTotal());
-                    Log.e("total_price",""+(total_price-price));
+                    Float total_price = Float.parseFloat("" + productRespository.getCartProductList().get(i).getTotal());
+                    Log.e("total_price", "" + (total_price - price));
 
 
-                    productJsonObject.put("discount_price", ""+(total_price - price));
+                    productJsonObject.put("discount_price", "" + (total_price - price));
                     productJsonObject.put("ingredients", ingredientMainObject);
                     productJsonObject.put("item_offer", "0");
 
@@ -588,10 +588,10 @@ public class ProceedToPayment extends LocalizationActivity implements TabLayout.
 
             JSONObject options = new JSONObject();
 
-            Log.e("amout","" + Math.round(Float.parseFloat(outletDetails.getGrandTotal())) * 100);
+            Log.e("amout", "" + Math.round(Float.parseFloat(outletDetails.getGrandTotal())) * 100);
             Float amount = (Float.parseFloat(outletDetails.getGrandTotal())) * 100;
             options.put("name", "" + outletDetails.getOutletName());
-            options.put("amount",  amount);
+            options.put("amount", amount);
 
             /*
           You need to pass current activity in order to let Razorpay create CheckoutActivity
@@ -680,10 +680,10 @@ public class ProceedToPayment extends LocalizationActivity implements TabLayout.
             parent.put("payment_status", "0");  //static
             int commission_one;
             if (!loginPrefManager.getStringValue("Razor_Commision").isEmpty()) {
-                 commission_one = ((Math.round(Float.parseFloat("" + outletDetails.getSubTotal())) *
+                commission_one = ((Math.round(Float.parseFloat("" + outletDetails.getSubTotal())) *
                         Math.round(Float.parseFloat("" + loginPrefManager.getStringValue("Razor_Commision"))) / 100));
-            }else{
-                 commission_one=0;
+            } else {
+                commission_one = 0;
             }
             int admin_commision = (((commission_one) + Math.round(Float.parseFloat("" + outletDetails.getServiceTax()))) +
                     Math.round(Float.parseFloat("" + outletDetails.getDeliveryCost())));
@@ -696,14 +696,14 @@ public class ProceedToPayment extends LocalizationActivity implements TabLayout.
             parent.put("payment_gateway_commission", "" + loginPrefManager.getStringValue("Razor_Commision"));
             parent.put("delivery_instructions", "" + outletDetails.getDeliveryInstruction().trim());
 
-            Log.e("delivery_date","-----" +outletDetails.getDeliveryDate());
-            parent.put("delivery_date", "" +outletDetails.getDeliveryDate());
-            outletDetails.setDeliveryTime("" +outletDetails.getDeliveryDate());
+            Log.e("delivery_date", "-----" + outletDetails.getDeliveryDate());
+            parent.put("delivery_date", "" + outletDetails.getDeliveryDate());
+            outletDetails.setDeliveryTime("" + outletDetails.getDeliveryDate());
 
-            if (outletDetails.getPaymentOption()==1) {
+            if (outletDetails.getPaymentOption() == 1) {
                 parent.put("delivery_address", "" + outletDetails.getDeliveryAddressID());
 //            parent.put("delivery_slot", "1"); //static
-                parent.put("delivery_cost", ""+outletDetails.getDeliveryCost());
+                parent.put("delivery_cost", "" + outletDetails.getDeliveryCost());
 
                 SimpleDateFormat curr_format = new SimpleDateFormat("yyyy-MM-dd");
 
@@ -715,7 +715,7 @@ public class ProceedToPayment extends LocalizationActivity implements TabLayout.
 
 
                 parent.put("order_type", "1");
-            }else{
+            } else {
                 parent.put("delivery_address", "");
 //            parent.put("delivery_slot", "1"); //static
                 parent.put("delivery_charge", "0");

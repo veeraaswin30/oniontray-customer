@@ -39,6 +39,7 @@ import androidx.core.graphics.drawable.DrawableCompat;
 import androidx.fragment.app.Fragment;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
+import com.app.oniontray.Activites.BaseMenuTabActivity;
 import com.app.oniontray.Activites.ForgotPassowordActivity;
 import com.app.oniontray.Activites.PrivacyPolicyActivity;
 import com.app.oniontray.Activites.TermsAndConditionsActivity;
@@ -557,6 +558,10 @@ public class SignInFragment extends Fragment implements SignInVerifyDialog.SignI
 
                             mUserId = response.body().getResponse().getUserId().toString();
                             //ApiRequestForSendOtp(response.body().getResponse().getUserId().toString());
+
+                            Intent intent = new Intent(context, BaseMenuTabActivity.class);
+                            context.startActivity(intent);
+                            getActivity().finish();
 
 
                             if (proc_to_check) {

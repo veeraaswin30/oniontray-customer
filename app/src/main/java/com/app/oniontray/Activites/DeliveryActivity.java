@@ -172,7 +172,7 @@ public class DeliveryActivity extends LocalizationActivity implements ProcExpand
     private ProductRespository productRespository;
 
     private OutletDetails outletDetails;
-    private TextView ed_date, ed_time;
+    private TextView ed_date, ed_time,mGstTxt;;
 
     private DatePickerDialog dpd;
     private TimePickerDialog tpd;
@@ -255,6 +255,7 @@ public class DeliveryActivity extends LocalizationActivity implements ProcExpand
         proc_to_check_coupon_edt_txt_view.setFilters(new InputFilter[]{new InputFilter.AllCaps()});
         proc_to_check_coupon_apply_btn = findViewById(R.id.proc_to_check_coupon_apply_btn);
         copoun_code_err_msg_txt = findViewById(R.id.copoun_code_err_msg_txt);
+        mGstTxt= findViewById(R.id.mGstTxt);
 
         proc_to_check_coupon_edt_txt_view.addTextChangedListener(new TextWatcher() {
             @Override
@@ -358,7 +359,7 @@ public class DeliveryActivity extends LocalizationActivity implements ProcExpand
         }
 
         sub_total_txt.setText(prefManager.getFormatCurrencyValue(prefManager.GetEngDecimalFormatValues((Float.parseFloat(productRespository.totalPrice())))));
-
+        mGstTxt.setText(prefManager.getFormatCurrencyValue(prefManager.GetEngDecimalFormatValues(Float.parseFloat(outletDetails.getGst()))));
         add_address.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -513,21 +514,21 @@ public class DeliveryActivity extends LocalizationActivity implements ProcExpand
         } else if (outletDetails.getDeliveryType() == 2) {
 
             if (outletDetails.getTaxType() == 2) {
-                grand_total_txt.setText(prefManager.getFormatCurrencyValue(prefManager.GetEngDecimalFormatValues(Float.parseFloat(String.valueOf((Float.parseFloat(productRespository.totalPrice()) + (Float.parseFloat(outletDetails.getDeliveryCostFixed()))))))));
-                grand_total_at = String.valueOf(Float.parseFloat(productRespository.totalPrice()) + setServiceTaxAmount() + (Float.parseFloat(outletDetails.getDeliveryCostFixed())));
+                grand_total_txt.setText(prefManager.getFormatCurrencyValue(prefManager.GetEngDecimalFormatValues(Float.parseFloat(String.valueOf((Float.parseFloat(productRespository.totalPrice()) + (Float.parseFloat(outletDetails.getDeliveryCostFixed()))+(Float.parseFloat(outletDetails.getGst()))))))));
+                grand_total_at = String.valueOf(Float.parseFloat(productRespository.totalPrice()) + setServiceTaxAmount() + (Float.parseFloat(outletDetails.getDeliveryCostFixed()))+(Float.parseFloat(outletDetails.getGst())));
             } else {
-                grand_total_txt.setText(prefManager.getFormatCurrencyValue(prefManager.GetEngDecimalFormatValues(Float.parseFloat(String.valueOf(Float.parseFloat(productRespository.totalPrice()) + setServiceTaxAmount() + (Float.parseFloat(outletDetails.getDeliveryCostFixed())))))));
-                grand_total_at = String.valueOf(Float.parseFloat(productRespository.totalPrice()) + setServiceTaxAmount() + (Float.parseFloat(outletDetails.getDeliveryCostFixed())));
+                grand_total_txt.setText(prefManager.getFormatCurrencyValue(prefManager.GetEngDecimalFormatValues(Float.parseFloat(String.valueOf(Float.parseFloat(productRespository.totalPrice()) + setServiceTaxAmount() + (Float.parseFloat(outletDetails.getDeliveryCostFixed()))+(Float.parseFloat(outletDetails.getGst())))))));
+                grand_total_at = String.valueOf(Float.parseFloat(productRespository.totalPrice()) + setServiceTaxAmount() + (Float.parseFloat(outletDetails.getDeliveryCostFixed()))+(Float.parseFloat(outletDetails.getGst())));
             }
 
         } else if (outletDetails.getDeliveryType() == 3) {
 
             if (outletDetails.getTaxType() == 2) {
-                grand_total_txt.setText(prefManager.getFormatCurrencyValue(prefManager.GetEngDecimalFormatValues((Float.parseFloat(productRespository.totalPrice()) + (Float.parseFloat(outletDetails.getDeliveryCostFixed()))))));
-                grand_total_at = String.valueOf(Float.parseFloat(productRespository.totalPrice()) + setServiceTaxAmount() + (Float.parseFloat(outletDetails.getDeliveryCostFixed())));
+                grand_total_txt.setText(prefManager.getFormatCurrencyValue(prefManager.GetEngDecimalFormatValues((Float.parseFloat(productRespository.totalPrice()) + (Float.parseFloat(outletDetails.getDeliveryCostFixed()))+(Float.parseFloat(outletDetails.getGst()))))));
+                grand_total_at = String.valueOf(Float.parseFloat(productRespository.totalPrice()) + setServiceTaxAmount() + (Float.parseFloat(outletDetails.getDeliveryCostFixed()))+(Float.parseFloat(outletDetails.getGst())));
             } else {
-                grand_total_txt.setText(prefManager.getFormatCurrencyValue(prefManager.GetEngDecimalFormatValues(Float.parseFloat(productRespository.totalPrice()) + setServiceTaxAmount() + (Float.parseFloat(outletDetails.getDeliveryCostFixed())))));
-                grand_total_at = String.valueOf(Float.parseFloat(productRespository.totalPrice()) + setServiceTaxAmount() + (Float.parseFloat(outletDetails.getDeliveryCostFixed())));
+                grand_total_txt.setText(prefManager.getFormatCurrencyValue(prefManager.GetEngDecimalFormatValues(Float.parseFloat(productRespository.totalPrice()) + setServiceTaxAmount() + (Float.parseFloat(outletDetails.getDeliveryCostFixed()))+(Float.parseFloat(outletDetails.getGst())))));
+                grand_total_at = String.valueOf(Float.parseFloat(productRespository.totalPrice()) + setServiceTaxAmount() + (Float.parseFloat(outletDetails.getDeliveryCostFixed()))+(Float.parseFloat(outletDetails.getGst())));
             }
 
         }

@@ -5,10 +5,13 @@ import android.content.Intent;
 
 import android.location.Location;
 import android.os.Bundle;
+
 import com.google.android.material.textfield.TextInputLayout;
+
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
 import android.text.Editable;
 import android.text.InputFilter;
 import android.text.TextWatcher;
@@ -71,7 +74,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 
-public class  DeliveryFragment extends Fragment implements ProcExpandDeliveryAdapter.deliveryChargeUpdateInterface, DelivFragDeliveryAddressAdapter.deliveryChargeUpdateInterface, DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener {
+public class DeliveryFragment extends Fragment implements ProcExpandDeliveryAdapter.deliveryChargeUpdateInterface, DelivFragDeliveryAddressAdapter.deliveryChargeUpdateInterface, DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener {
 
     private View deliFragView;
 
@@ -108,7 +111,7 @@ public class  DeliveryFragment extends Fragment implements ProcExpandDeliveryAda
 
     private TableRow proc_to_check_coupon_amt_pay_table_lay;
     private TextView proc_to_chec_amt_pay_holder_txt_view;
-    private TextView proc_to_chec_amt_pay_txt_view;
+    private TextView proc_to_chec_amt_pay_txt_view, mGstTxt;
 
 
     private DeliveryAdapter deliveradapter;
@@ -170,6 +173,7 @@ public class  DeliveryFragment extends Fragment implements ProcExpandDeliveryAda
 
     private DatePickerDialog dpd;
     private com.wdullaer.materialdatetimepicker.time.TimePickerDialog tpd;
+
     public DeliveryFragment() {
     }
 
@@ -287,6 +291,7 @@ public class  DeliveryFragment extends Fragment implements ProcExpandDeliveryAda
         proc_to_check_coupon_amt_pay_table_lay = (TableRow) deliFragView.findViewById(R.id.proc_to_check_coupon_amt_pay_table_lay);
         proc_to_chec_amt_pay_holder_txt_view = (TextView) deliFragView.findViewById(R.id.proc_to_chec_amt_pay_holder_txt_view);
         proc_to_chec_amt_pay_txt_view = (TextView) deliFragView.findViewById(R.id.proc_to_chec_amt_pay_txt_view);
+        mGstTxt = (TextView) deliFragView.findViewById(R.id.mGstTxt);
 
 
         sub_total_txt = (TextView) deliFragView.findViewById(R.id.sub_total_txt);
@@ -335,7 +340,7 @@ public class  DeliveryFragment extends Fragment implements ProcExpandDeliveryAda
         }
 
         sub_total_txt.setText(prefManager.getFormatCurrencyValue(prefManager.GetEngDecimalFormatValues((Float.parseFloat(productRespository.totalPrice())))));
-
+        mGstTxt.setText(prefManager.getFormatCurrencyValue(prefManager.GetEngDecimalFormatValues(Float.parseFloat(outletDetails.getGst()))));
         add_address.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -358,10 +363,10 @@ public class  DeliveryFragment extends Fragment implements ProcExpandDeliveryAda
         proceed_payment_but.setOnClickListener(v -> submit());
 
         Calendar currentDate = Calendar.getInstance();
-        String fDate = new SimpleDateFormat("yyyy-MM-dd",Locale.US).format(currentDate.getTime());
+        String fDate = new SimpleDateFormat("yyyy-MM-dd", Locale.US).format(currentDate.getTime());
         ed_date.setText(fDate);
 
-        String fTime = new SimpleDateFormat("hh:mm a",Locale.US).format(currentDate.getTime());
+        String fTime = new SimpleDateFormat("hh:mm a", Locale.US).format(currentDate.getTime());
         ed_time.setText(fTime);
 
         ed_date.setOnClickListener(v -> {
@@ -383,7 +388,7 @@ public class  DeliveryFragment extends Fragment implements ProcExpandDeliveryAda
             }
 
             Calendar ThreedaysAdded = Calendar.getInstance();
-            ThreedaysAdded.add(Calendar.DAY_OF_MONTH,2);
+            ThreedaysAdded.add(Calendar.DAY_OF_MONTH, 2);
 
 
             dpd.setMinDate(now);
@@ -395,7 +400,7 @@ public class  DeliveryFragment extends Fragment implements ProcExpandDeliveryAda
 
         ed_time.setOnClickListener(v -> {
 
-            if (ed_date.getText().toString().isEmpty()){
+            if (ed_date.getText().toString().isEmpty()) {
                 Toast.makeText(getActivity(), getString(R.string.please_select_date), Toast.LENGTH_SHORT).show();
                 return;
             }
@@ -406,7 +411,7 @@ public class  DeliveryFragment extends Fragment implements ProcExpandDeliveryAda
                 tpd = TimePickerDialog.newInstance(
                         DeliveryFragment.this,
                         now.get(Calendar.HOUR_OF_DAY),
-                        now.get(Calendar.MINUTE),false);
+                        now.get(Calendar.MINUTE), false);
 
             } else {
                 tpd.initialize(
@@ -414,15 +419,15 @@ public class  DeliveryFragment extends Fragment implements ProcExpandDeliveryAda
                         now.get(Calendar.HOUR_OF_DAY),
                         now.get(Calendar.MINUTE),
                         now.get(Calendar.SECOND),
-                       false
+                        false
                 );
             }
 
-            int hr =  now.get(Calendar.HOUR_OF_DAY);
-            int min =  now.get(Calendar.MINUTE);
-            int sec =  now.get(Calendar.SECOND);
+            int hr = now.get(Calendar.HOUR_OF_DAY);
+            int min = now.get(Calendar.MINUTE);
+            int sec = now.get(Calendar.SECOND);
 
-             //for today date only need to set min time
+            //for today date only need to set min time
             String date = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH).format(new Date());
 
             if (ed_date.getText().toString().equals(date)) {
@@ -434,30 +439,28 @@ public class  DeliveryFragment extends Fragment implements ProcExpandDeliveryAda
         });
 
 
-
-
         return deliFragView;
     }
 
     @Override
     public void onDateSet(DatePickerDialog view, int year, int monthOfYear, int dayOfMonth) {
-        String date = year+"-"+(++monthOfYear)+"-"+dayOfMonth;
+        String date = year + "-" + (++monthOfYear) + "-" + dayOfMonth;
         ed_date.setText(date);
         dpd = null;
     }
 
     @Override
     public void onTimeSet(TimePickerDialog view, int hourOfDay, int minute, int second) {
-        String hourString = hourOfDay < 10 ? "0"+hourOfDay : ""+hourOfDay;
-        String minuteString = minute < 10 ? "0"+minute : ""+minute;
-        String secondString = second < 10 ? "0"+second : ""+second;
-        String time = hourString+":"+minuteString;
+        String hourString = hourOfDay < 10 ? "0" + hourOfDay : "" + hourOfDay;
+        String minuteString = minute < 10 ? "0" + minute : "" + minute;
+        String secondString = second < 10 ? "0" + second : "" + second;
+        String time = hourString + ":" + minuteString;
 
-        SimpleDateFormat simpleDateFormat =new SimpleDateFormat("HH:mm", Locale.ENGLISH);
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HH:mm", Locale.ENGLISH);
         SimpleDateFormat convertedFormat = new SimpleDateFormat("hh:mm a", Locale.ENGLISH);
 
         try {
-            time= convertedFormat.format(simpleDateFormat.parse(time));
+            time = convertedFormat.format(simpleDateFormat.parse(time));
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -517,8 +520,6 @@ public class  DeliveryFragment extends Fragment implements ProcExpandDeliveryAda
     }
 
 
-
-
     private float setServiceTaxAmount() {
 
         float serviceTax = 0;
@@ -550,13 +551,13 @@ public class  DeliveryFragment extends Fragment implements ProcExpandDeliveryAda
 
     private void submit() {
 
-        if (ed_date.getText().toString().isEmpty()){
-            Toast.makeText(getContext(), ""+getString(R.string.please_select_date), Toast.LENGTH_SHORT).show();
+        if (ed_date.getText().toString().isEmpty()) {
+            Toast.makeText(getContext(), "" + getString(R.string.please_select_date), Toast.LENGTH_SHORT).show();
             return;
         }
 
-        if (ed_time.getText().toString().isEmpty()){
-            Toast.makeText(getContext(), ""+getString(R.string.please_select_time), Toast.LENGTH_SHORT).show();
+        if (ed_time.getText().toString().isEmpty()) {
+            Toast.makeText(getContext(), "" + getString(R.string.please_select_time), Toast.LENGTH_SHORT).show();
             return;
         }
 
@@ -585,7 +586,7 @@ public class  DeliveryFragment extends Fragment implements ProcExpandDeliveryAda
         }
 
         outletDetails.setSubTotal("" + productRespository.totalPrice());
-        outletDetails.setDeliveryDate(ed_date.getText().toString().trim()+" "+ed_time.getText().toString().trim());
+        outletDetails.setDeliveryDate(ed_date.getText().toString().trim() + " " + ed_time.getText().toString().trim());
         outletDetails.setPaymentOption(1);
         Intent place_order = new Intent(getContext(), ProceedToPayment.class);
         place_order.putExtra("outlet_details", outletDetails);
@@ -638,7 +639,7 @@ public class  DeliveryFragment extends Fragment implements ProcExpandDeliveryAda
                         service_tax_txt.setText(prefManager.getFormatCurrencyValue("" + response.body().getResponse().getTax()));
 
                         delivery_charges_txt.setText(prefManager.getFormatCurrencyValue("" + response.body().getResponse().getDeliveryCost()));
-
+                        // mGstTxt.setText(prefManager.getFormatCurrencyValue("" + response.body().getResponse().gets));
                         grand_total_at = "" + response.body().getResponse().getTotal();
 
                         grand_total_txt.setText(prefManager.getFormatCurrencyValue("" + response.body().getResponse().getTotal()));
@@ -1050,7 +1051,7 @@ public class  DeliveryFragment extends Fragment implements ProcExpandDeliveryAda
 
 //        To check whether the delivery is available for the specific location
 
-        checkDeliveryAddress(""+delivFragDeliveryAddressAdapter.getItem(position).getAddressId(),
+        checkDeliveryAddress("" + delivFragDeliveryAddressAdapter.getItem(position).getAddressId(),
                 delivFragDeliveryAddressAdapter.getItem(position).getUserAddressLatitude(),
                 delivFragDeliveryAddressAdapter.getItem(position).getUserAddressLongtitude());
 
@@ -1142,7 +1143,7 @@ public class  DeliveryFragment extends Fragment implements ProcExpandDeliveryAda
                 int deliveryCharge = (Integer.parseInt(prefManager.getStringValue("delivery_cost_fixed")) + Integer.parseInt(prefManager.getStringValue("delivery_km_fixed")) * count);
                 delivery_charges_txt.setText(prefManager.getFormatCurrencyValue("" + (Integer.parseInt(prefManager.getStringValue("delivery_cost_fixed")) +
                         Integer.parseInt(prefManager.getStringValue("delivery_km_fixed")) * count)));
-                float total = Float.parseFloat(productRespository.totalPrice())+ setServiceTaxAmount() + deliveryCharge;
+                float total = Float.parseFloat(productRespository.totalPrice()) + setServiceTaxAmount() + deliveryCharge;
                 grand_total_at = "" + total;
                 grand_total_txt.setText(prefManager.getFormatCurrencyValue("" + total));
             }
@@ -1154,7 +1155,6 @@ public class  DeliveryFragment extends Fragment implements ProcExpandDeliveryAda
     private void showToast(String message) {
         Toast.makeText(getContext(), message, Toast.LENGTH_LONG).show();
     }
-
 
 
     private class MyTextWatcher implements TextWatcher {

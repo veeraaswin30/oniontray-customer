@@ -93,6 +93,19 @@ public class OutletDetails implements Serializable {
     @Expose
     private String platformCharge;
 
+    @SerializedName("gst")
+    @Expose
+    private String gst;
+
+
+    public String getGst() {
+        return gst;
+    }
+
+    public void setGst(String gst) {
+        this.gst = gst;
+    }
+
     public String getPlatformCharge() {
         return platformCharge;
     }

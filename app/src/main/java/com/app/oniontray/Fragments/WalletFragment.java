@@ -277,7 +277,7 @@ public class WalletFragment extends Fragment {
             parent.put("vendor_key", "" + outletDetails.getOutletName());
             parent.put("total", "" + outletDetails.getGrandTotal());
             parent.put("sub_total", "" + outletDetails.getSubTotal());
-
+            parent.put("gst",outletDetails.getGst());
             parent.put("contact_address", "" + outletDetails.getContactAddress());
             parent.put("contact_email", "" + outletDetails.getContactEmail());
             parent.put("outlet_name", "" + outletDetails.getOutletName());

@@ -853,6 +853,7 @@ public class ExpressCheckoutActivity extends LocalizationActivity implements Goo
 
             payment_object.put("total", "" + outletDetails.getGrandTotal());
             payment_object.put("sub_total", "" + outletDetails.getSubTotal());
+            payment_object.put("gst", "" + outletDetails.getGst());
 
 
             if (outletDetails.getTaxType() == 2) {
@@ -1022,7 +1023,8 @@ public class ExpressCheckoutActivity extends LocalizationActivity implements Goo
                     "" + expr_check_land_mark_edt_txt_view.getText().toString(), "" + latitude, "" + longitude,
                     "" + getString(R.string.expr_check_addr_type_value), "" + payment_array, "" + getString(R.string.expr_check_guest_type), "" + getString(R.string.expr_check_login_type),
                     "" + loginPrefManager.getStringValue("device_id"),
-                    "" + loginPrefManager.getStringValue("device_token")).enqueue(new Callback<GustCheckOutReq>() {
+                    "" + loginPrefManager.getStringValue("device_token")
+                    ).enqueue(new Callback<GustCheckOutReq>() {
 
                 @Override
                 public void onResponse(Call<GustCheckOutReq> call, Response<GustCheckOutReq> response) {

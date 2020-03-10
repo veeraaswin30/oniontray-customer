@@ -135,7 +135,7 @@ public class PickUpActivity extends LocalizationActivity implements TimePickerDi
 
     String time_and_sec;
     String date_and_time;
-    private TextView ed_date, ed_time;
+    private TextView ed_date, ed_time,mGstTxt;
     private DatePickerDialog dpd;
     private TimePickerDialog tpd;
     public PickUpActivity() {
@@ -196,6 +196,7 @@ public class PickUpActivity extends LocalizationActivity implements TimePickerDi
         coupon_code_edt_txt.setFilters(new InputFilter[]{new InputFilter.AllCaps()});
         proc_to_check_service_tax_label = findViewById(R.id.service_tax_label);
         platformChargesText = findViewById(R.id.delivery_charges_txt);
+        mGstTxt= findViewById(R.id.mGstTxt);
 
 
         proc_to_check_coupon_apply_table_lay = findViewById(R.id.proc_to_check_coupon_apply_table_lay);
@@ -295,7 +296,7 @@ public class PickUpActivity extends LocalizationActivity implements TimePickerDi
 
 
         sub_total_txt.setText(prefManager.getFormatCurrencyValue(prefManager.GetEngDecimalFormatValues(Float.parseFloat(productRespository.totalPrice()))));
-
+        mGstTxt.setText(prefManager.getFormatCurrencyValue(prefManager.GetEngDecimalFormatValues(Float.parseFloat(outletDetails.getGst()))));
 
 
 
@@ -445,14 +446,14 @@ public class PickUpActivity extends LocalizationActivity implements TimePickerDi
 
             if (outletDetails.getTaxType() == 2) {
 
-                grand_total_txt.setText(prefManager.getFormatCurrencyValue(prefManager.GetEngDecimalFormatValues(Float.parseFloat(productRespository.totalPrice())+PlatFormCharge())));
-                grand_total_at = "" + (Float.parseFloat(productRespository.totalPrice()) + PlatFormCharge());
+                grand_total_txt.setText(prefManager.getFormatCurrencyValue(prefManager.GetEngDecimalFormatValues(Float.parseFloat(productRespository.totalPrice())+PlatFormCharge()+(Float.parseFloat(outletDetails.getGst())))));
+                grand_total_at = "" + (Float.parseFloat(productRespository.totalPrice()) + PlatFormCharge()+(Float.parseFloat(outletDetails.getGst())));
 
 
             } else {
 
-                grand_total_txt.setText(prefManager.getFormatCurrencyValue(prefManager.GetEngDecimalFormatValues(Float.parseFloat(productRespository.totalPrice())+ setServiceTaxAmount()+PlatFormCharge())));
-                grand_total_at = "" + (Float.parseFloat(productRespository.totalPrice()) + setServiceTaxAmount()+PlatFormCharge());
+                grand_total_txt.setText(prefManager.getFormatCurrencyValue(prefManager.GetEngDecimalFormatValues(Float.parseFloat(productRespository.totalPrice())+ setServiceTaxAmount()+PlatFormCharge()+(Float.parseFloat(outletDetails.getGst())))));
+                grand_total_at = "" + (Float.parseFloat(productRespository.totalPrice()) + setServiceTaxAmount()+PlatFormCharge()+(Float.parseFloat(outletDetails.getGst())));
 
             }
 
@@ -460,13 +461,13 @@ public class PickUpActivity extends LocalizationActivity implements TimePickerDi
 
             if (outletDetails.getTaxType() == 2) {
 
-                grand_total_txt.setText(prefManager.getFormatCurrencyValue(prefManager.GetEngDecimalFormatValues(Float.parseFloat(productRespository.totalPrice() )+PlatFormCharge())));
+                grand_total_txt.setText(prefManager.getFormatCurrencyValue(prefManager.GetEngDecimalFormatValues(Float.parseFloat(productRespository.totalPrice() )+PlatFormCharge()+(Float.parseFloat(outletDetails.getGst())))));
                 grand_total_at = String.valueOf(Float.parseFloat(productRespository.totalPrice())+ setServiceTaxAmount()+PlatFormCharge());
 
             } else {
 
-                grand_total_txt.setText(prefManager.getFormatCurrencyValue(prefManager.GetEngDecimalFormatValues(Float.parseFloat(productRespository.totalPrice()) + setServiceTaxAmount()+PlatFormCharge() )));
-                grand_total_at = String.valueOf(Float.parseFloat(productRespository.totalPrice()) + setServiceTaxAmount()+PlatFormCharge());
+                grand_total_txt.setText(prefManager.getFormatCurrencyValue(prefManager.GetEngDecimalFormatValues(Float.parseFloat(productRespository.totalPrice()) + setServiceTaxAmount()+PlatFormCharge()+(Float.parseFloat(outletDetails.getGst())))));
+                grand_total_at = String.valueOf(Float.parseFloat(productRespository.totalPrice()) + setServiceTaxAmount()+PlatFormCharge()+(Float.parseFloat(outletDetails.getGst())));
 
             }
 

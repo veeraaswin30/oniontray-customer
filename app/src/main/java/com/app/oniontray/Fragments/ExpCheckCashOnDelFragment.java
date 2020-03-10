@@ -205,7 +205,7 @@ public class ExpCheckCashOnDelFragment extends Fragment {
             parent.put("vendor_key", "" + outletDetails.getOutletName());
             parent.put("total", "" + loginManager.GetEngDecimalFormatValues(Float.valueOf(outletDetails.getGrandTotal())));
             parent.put("sub_total", "" + loginManager.GetEngDecimalFormatValues(Float.valueOf(outletDetails.getSubTotal())));
-
+            parent.put("gst",outletDetails.getGst());
 
             int commission_one = ((Math.round(Float.parseFloat("" + outletDetails.getSubTotal())) *
                     Math.round(Float.parseFloat(outletDetails.getCommissionAmount())) / 100));
